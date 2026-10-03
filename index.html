@@ -58,8 +58,8 @@
       --heat-4: #218342;
 
       --radius: 6px;
-      --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     }
 
     [data-theme="dark"] {
@@ -191,6 +191,10 @@
       background: var(--tag-green-bg);
       color: var(--tag-green-color);
       font-weight: 600;
+    }
+    .leech-nav-badge {
+      background: var(--tag-red-bg);
+      color: var(--tag-red-color);
     }
 
     /* Main Container */
@@ -455,12 +459,28 @@
       color: var(--text-muted);
       font-family: var(--font-mono);
     }
+    .card-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .card-unit-label {
       background: var(--surface-subtle);
       padding: 1px 6px;
       border-radius: 3px;
       border: 1px solid var(--border);
       color: var(--text-sub);
+    }
+    .card-leech-label {
+      background: var(--tag-red-bg);
+      color: var(--tag-red-color);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      display: none;
+    }
+    .card-leech-label.active {
+      display: inline-block;
     }
 
     .word-text {
@@ -556,8 +576,31 @@
       font-size: 18px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
+    
+    /* 难词/水蛭词专项拆解 Callout (Notion Style) */
+    .root-box {
+      font-size: 12.5px;
+      color: var(--tag-blue-color);
+      background: var(--tag-blue-bg);
+      border: 1px solid rgba(24, 92, 136, 0.2);
+      border-radius: 4px;
+      padding: 7px 12px;
+      text-align: left;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .root-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+      display: block;
+      opacity: 0.85;
+    }
+
     .phrase-box {
       font-size: 13px;
       color: var(--text-sub);
@@ -721,7 +764,7 @@
     /* ==========================================================================
        Achievement System Styles (Notion Gallery View)
        ========================================================================== */
-    .achievements-container {
+    .achievements-container, .leech-container {
       display: none;
       flex-direction: column;
       gap: 16px;
@@ -853,6 +896,17 @@
       margin-top: 4px;
     }
 
+    /* Leech Ward View */
+    .leech-empty-box {
+      text-align: center;
+      padding: 32px;
+      color: var(--text-muted);
+      font-size: 13px;
+      background: var(--surface-subtle);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
     /* Notion Toast Notification (Achievement Unlock) */
     .notion-toast {
       position: fixed;
@@ -971,6 +1025,10 @@
     </div>
     <div class="header-nav">
       <button class="nav-btn active" id="tabReciteBtn">背诵卡片</button>
+      <button class="nav-btn" id="tabLeechBtn" title="高频难记词库（遗忘达到阈值触发诊断拆解）">
+        <span>难词特训</span>
+        <span class="nav-badge leech-nav-badge" id="navLeechBadge">0</span>
+      </button>
       <button class="nav-btn" id="tabAchievementsBtn">
         <span>成就勋章</span>
         <span class="nav-badge" id="navAchieveBadge">0/10</span>
@@ -1027,6 +1085,7 @@
             <option value="batch15">固定词量 (15词)</option>
             <option value="batch20">固定词量 (20词)</option>
             <option value="due">SM2到期复习</option>
+            <option value="leech">高频难词特训 (Leech Ward)</option>
           </select>
           <label class="notion-toggle">
             <input type="checkbox" id="autoPronounceToggle" checked>
@@ -1065,7 +1124,10 @@
     <div class="flashcard-wrapper">
       <div class="flashcard" id="flashcard">
         <div class="card-meta-bar">
-          <span class="card-unit-label" id="cardUnitTag">Unit 1</span>
+          <div class="card-meta-left">
+            <span class="card-unit-label" id="cardUnitTag">Unit 1</span>
+            <span class="card-leech-label" id="cardLeechTag">LEECH 难词</span>
+          </div>
           <span id="cardSm2Tag">已记:0次 · 间隔:0天 · EF:2.5</span>
         </div>
 
@@ -1085,6 +1147,13 @@
 
         <div class="meaning-block" id="meaningBlock">
           <div class="meaning-text" id="meaningText">友谊；朋友关系</div>
+          
+          <!-- 认知拆解助记框 (防死记硬背与防Leech) -->
+          <div class="root-box" id="rootBox">
+            <span class="root-title">形态与认知拆解助记</span>
+            <span id="rootText">词根拆解：friend (朋友) + -ship (名词后缀，表关系/状态) -> 朋友之间的亲密情谊</span>
+          </div>
+
           <div class="phrase-box" id="phraseBox">
             <span class="phrase-title">核心考点与搭配</span>
             <span id="phraseText">close friendship (亲密友谊) / make friends (交朋友)</span>
@@ -1139,6 +1208,44 @@
       <span class="kbd">3</span> 良好 · 
       <span class="kbd">4</span> 简单 · 
       <span class="kbd">P</span> 发音
+    </div>
+  </div>
+
+  <!-- 高频难词特训视图 (Leech Ward View) -->
+  <div class="leech-container" id="leechView">
+    <div class="achievement-overview-card">
+      <div class="achieve-progress-box">
+        <div class="achieve-progress-header">
+          <span style="font-weight: 600; color: var(--text);">高频难词隔离库 (Leech Ward)</span>
+          <span id="leechCountOverview">0 词处于顽固期</span>
+        </div>
+        <div style="font-size: 12px; color: var(--text-sub); line-height: 1.5; margin-top: 4px;">
+          当某张单词卡片累计遗忘达到 <strong>4 次及以上</strong> 时，SM2 系统会自动将其判定为“难记词 (Leech)”。系统自动降低其 EF 递增权重并强化形态词根拆解，避免陷入盲目机械按键的记忆沼泽。
+        </div>
+      </div>
+      <div>
+        <button class="action-btn" id="startLeechSessionBtn">启动难词攻坚特训</button>
+      </div>
+    </div>
+
+    <div style="overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px;">
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th style="width: 40px;">#</th>
+            <th style="width: 140px;">Word</th>
+            <th style="width: 120px;">Phonetic</th>
+            <th>中文释义与形态认知拆解</th>
+            <th style="width: 90px;">遗忘次数</th>
+            <th style="width: 80px;">简易度 (EF)</th>
+            <th style="width: 70px;">操作</th>
+          </tr>
+        </thead>
+        <tbody id="leechTableBody"></tbody>
+      </table>
+      <div class="leech-empty-box" id="leechEmptyBox" style="display: none;">
+        当前尚未出现高频遗忘词汇（Lapses ≥ 4），记忆状态健康！
+      </div>
     </div>
   </div>
 
@@ -1200,7 +1307,7 @@
 
 <script>
 // 基础词汇数据
-const VOCAB_DATABASE = [{"id": "u1_1", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "friendship", "phonetic": "/ˈfrendʃɪp/", "pos": "n.", "meaning": "友谊；朋友关系", "phrase": "close friendship (亲密友谊) / make friends (交朋友)"}, {"id": "u1_2", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "honest", "phonetic": "/ˈɒnɪst/", "pos": "adj.", "meaning": "诚实的；正直的", "phrase": "to be honest (老实说) / an honest boy (诚实的男孩)"}, {"id": "u1_3", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "patient", "phonetic": "/ˈpeɪʃnt/", "pos": "adj.", "meaning": "有耐心的；能忍受的", "phrase": "be patient with sb. (对某人有耐心)"}, {"id": "u1_4", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "confident", "phonetic": "/ˈkɒnfɪdənt/", "pos": "adj.", "meaning": "自信的；有信心的", "phrase": "be confident about (对...有信心)"}, {"id": "u1_5", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "courage", "phonetic": "/ˈkʌrɪdʒ/", "pos": "n.", "meaning": "勇气；胆量", "phrase": "have the courage to do sth. (有勇气做某事)"}, {"id": "u1_6", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "admiration", "phonetic": "/ˌædməˈreɪʃn/", "pos": "n.", "meaning": "钦佩；赞赏", "phrase": "with admiration (钦佩地) / express admiration (表达钦佩)"}, {"id": "u1_7", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "respect", "phonetic": "/rɪˈspekt/", "pos": "n. / v.", "meaning": "尊敬；尊重", "phrase": "show respect for (尊重...) / respect each other (互相尊重)"}, {"id": "u1_8", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "support", "phonetic": "/səˈpɔːt/", "pos": "n. / v.", "meaning": "支持；鼓励；拥护", "phrase": "support each other (相互支持) / in support of (支持)"}, {"id": "u1_9", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "trust", "phonetic": "/trʌst/", "pos": "n. / v.", "meaning": "信任；信赖", "phrase": "trust in sb. (信任某人) / gain sb's trust (赢得信任)"}, {"id": "u1_10", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "caring", "phonetic": "/ˈkeərɪŋ/", "pos": "adj.", "meaning": "体贴的；关心他人的", "phrase": "a caring friend (体贴的朋友) / caring attitude (关怀态度)"}, {"id": "u1_11", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "quality", "phonetic": "/ˈkwɒləti/", "pos": "n.", "meaning": "品质；品德；质量", "phrase": "personal qualities (个人品质) / good quality (优良品质)"}, {"id": "u1_12", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "personal", "phonetic": "/ˈpɜːsənl/", "pos": "adj.", "meaning": "个人的；私人的", "phrase": "personal information (个人信息) / personal life (个人生活)"}, {"id": "u1_13", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "describe", "phonetic": "/dɪˈskraɪb/", "pos": "v.", "meaning": "描述；形容", "phrase": "describe sb. as ... (将某人描述为...)"}, {"id": "u1_14", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "appearance", "phonetic": "/əˈpɪərəns/", "pos": "n.", "meaning": "外貌；外观；出现", "phrase": "physical appearance (外表外貌)"}, {"id": "u1_15", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "survey", "phonetic": "/ˈsɜːveɪ/", "pos": "n. / v.", "meaning": "调查；测验", "phrase": "do a survey (开展调查) / survey results (调查结果)"}, {"id": "u1_16", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "basic", "phonetic": "/ˈbeɪsɪk/", "pos": "adj.", "meaning": "基本的；基础的", "phrase": "basic skills (基础技能) / basic knowledge (基础知识)"}, {"id": "u1_17", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "thought", "phonetic": "/θɔːt/", "pos": "n.", "meaning": "想法；心意；思考", "phrase": "deep thoughts (深思) / second thoughts (重新考虑)"}, {"id": "u1_18", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "however", "phonetic": "/haʊˈevə(r)/", "pos": "adv.", "meaning": "然而；不过", "phrase": "however, ... (置于句首或句中逗号隔开)"}, {"id": "u1_19", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "improve", "phonetic": "/ɪmˈpruːv/", "pos": "v.", "meaning": "改善；改进；提高", "phrase": "improve English (提高英语) / improve memory (改善记忆)"}, {"id": "u1_20", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "glad", "phonetic": "/ɡlæd/", "pos": "adj.", "meaning": "高兴的；乐意的", "phrase": "be glad to do sth. (很高兴做某事)"}, {"id": "u1_21", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "straight", "phonetic": "/streɪt/", "pos": "adj.", "meaning": "直的；笔直的", "phrase": "straight hair (直发) / straight line (直线)"}, {"id": "u1_22", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "dark", "phonetic": "/dɑːk/", "pos": "adj.", "meaning": "（发色/肤色）深色的；黑暗的", "phrase": "dark hair (黑头发) / dark eyes (黑眼睛)"}, {"id": "u1_23", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "guitar", "phonetic": "/ɡɪˈtɑː(r)/", "pos": "n.", "meaning": "吉他", "phrase": "play the guitar (弹吉他)"}, {"id": "u1_24", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "stranger", "phonetic": "/ˈstreɪndʒə(r)/", "pos": "n.", "meaning": "陌生人", "phrase": "a stranger to ... (对...不熟悉的人)"}, {"id": "u1_25", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "secret", "phonetic": "/ˈsiːkrət/", "pos": "n. / adj.", "meaning": "秘密 / 秘密的", "phrase": "keep a secret (保守秘密) / tell a secret (倾吐秘密)"}, {"id": "u1_26", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "smile", "phonetic": "/smaɪl/", "pos": "v. / n.", "meaning": "微笑", "phrase": "smile at sb. (朝某人微笑) / with a smile (带着微笑)"}, {"id": "u1_27", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "cheer", "phonetic": "/tʃɪə(r)/", "pos": "v. / n.", "meaning": "欢呼；使振奋", "phrase": "cheer sb. up (使某人振作起来) / cheer for (为...喝彩)"}, {"id": "u2_1", "unit": 2, "unitTitle": "Unit 2 School life", "word": "daily", "phonetic": "/ˈdeɪli/", "pos": "adj. / adv.", "meaning": "每日的；日常的 / 每日", "phrase": "daily routine (日常作息) / daily life (日常生活)"}, {"id": "u2_2", "unit": 2, "unitTitle": "Unit 2 School life", "word": "routine", "phonetic": "/ruːˈtiːn/", "pos": "n.", "meaning": "常规；日常事务", "phrase": "daily routine (日常惯例) / break the routine (打破常规)"}, {"id": "u2_3", "unit": 2, "unitTitle": "Unit 2 School life", "word": "schedule", "phonetic": "/ˈʃedjuːl/", "pos": "n.", "meaning": "时间表；日程安排", "phrase": "on schedule (按时) / busy schedule (紧凑日程)"}, {"id": "u2_4", "unit": 2, "unitTitle": "Unit 2 School life", "word": "subject", "phonetic": "/ˈsʌbdʒɪkt/", "pos": "n.", "meaning": "学科；科目；主题", "phrase": "favourite subject (最喜爱的学科)"}, {"id": "u2_5", "unit": 2, "unitTitle": "Unit 2 School life", "word": "geography", "phonetic": "/dʒiˈɒɡrəfi/", "pos": "n.", "meaning": "地理（学）", "phrase": "geography lesson (地理课)"}, {"id": "u2_6", "unit": 2, "unitTitle": "Unit 2 School life", "word": "history", "phonetic": "/ˈhɪstri/", "pos": "n.", "meaning": "历史（学）", "phrase": "history of China (中国历史) / world history (世界史)"}, {"id": "u2_7", "unit": 2, "unitTitle": "Unit 2 School life", "word": "biology", "phonetic": "/baɪˈɒlədʒi/", "pos": "n.", "meaning": "生物（学）", "phrase": "biology teacher (生物老师)"}, {"id": "u2_8", "unit": 2, "unitTitle": "Unit 2 School life", "word": "break", "phonetic": "/breɪk/", "pos": "n. / v.", "meaning": "课间休息 / 打破；弄碎", "phrase": "have a break (休息片刻) / lunch break (午休)"}, {"id": "u2_9", "unit": 2, "unitTitle": "Unit 2 School life", "word": "bell", "phonetic": "/bel/", "pos": "n.", "meaning": "钟；铃", "phrase": "the bell rings (铃声响起)"}, {"id": "u2_10", "unit": 2, "unitTitle": "Unit 2 School life", "word": "ring", "phonetic": "/rɪŋ/", "pos": "v. / n.", "meaning": "（铃）鸣响 / 戒指", "phrase": "ring the bell (按铃/摇铃)"}, {"id": "u2_11", "unit": 2, "unitTitle": "Unit 2 School life", "word": "practice", "phonetic": "/ˈpræktɪs/", "pos": "n. / v.", "meaning": "练习；实践", "phrase": "practice doing sth. (练习做某事)"}, {"id": "u2_12", "unit": 2, "unitTitle": "Unit 2 School life", "word": "band", "phonetic": "/bænd/", "pos": "n.", "meaning": "乐队；乐团", "phrase": "school band (校园乐队) / rock band (摇滚乐队)"}, {"id": "u2_13", "unit": 2, "unitTitle": "Unit 2 School life", "word": "activity", "phonetic": "/ækˈtɪvəti/", "pos": "n.", "meaning": "活动", "phrase": "after-school activity (课外活动)"}, {"id": "u2_14", "unit": 2, "unitTitle": "Unit 2 School life", "word": "club", "phonetic": "/klʌb/", "pos": "n.", "meaning": "社团；俱乐部", "phrase": "join a club (加入社团) / club activities (社团活动)"}, {"id": "u2_15", "unit": 2, "unitTitle": "Unit 2 School life", "word": "solve", "phonetic": "/sɒlv/", "pos": "v.", "meaning": "解答；解决（难题）", "phrase": "solve math problems (解数学题)"}, {"id": "u2_16", "unit": 2, "unitTitle": "Unit 2 School life", "word": "develop", "phonetic": "/dɪˈveləp/", "pos": "v.", "meaning": "发展；培养；养成", "phrase": "develop good habits (养成良好习惯)"}, {"id": "u2_17", "unit": 2, "unitTitle": "Unit 2 School life", "word": "skill", "phonetic": "/skɪl/", "pos": "n.", "meaning": "技巧；技能", "phrase": "life skills (生活技能) / learning skills (学习技能)"}, {"id": "u2_18", "unit": 2, "unitTitle": "Unit 2 School life", "word": "magazine", "phonetic": "/ˌmæɡəˈziːn/", "pos": "n.", "meaning": "杂志；期刊", "phrase": "read magazines (读杂志)"}, {"id": "u2_19", "unit": 2, "unitTitle": "Unit 2 School life", "word": "teenager", "phonetic": "/ˈtiːneɪdʒə(r)/", "pos": "n.", "meaning": "青少年（13至19岁）", "phrase": "teenagers' life (青少年生活)"}, {"id": "u2_20", "unit": 2, "unitTitle": "Unit 2 School life", "word": "diary", "phonetic": "/ˈdaɪəri/", "pos": "n.", "meaning": "日记；日记簿", "phrase": "keep a diary (写日记)"}, {"id": "u2_21", "unit": 2, "unitTitle": "Unit 2 School life", "word": "project", "phonetic": "/ˈprɒdʒekt/", "pos": "n.", "meaning": "课题；探究项目；工程", "phrase": "work on a project (做项目研究)"}, {"id": "u2_22", "unit": 2, "unitTitle": "Unit 2 School life", "word": "poster", "phonetic": "/ˈpəʊstə(r)/", "pos": "n.", "meaning": "海报；招贴画", "phrase": "make a poster (制作海报)"}, {"id": "u2_23", "unit": 2, "unitTitle": "Unit 2 School life", "word": "sundial", "phonetic": "/ˈsʌndaɪəl/", "pos": "n.", "meaning": "日晷；古代测时日规", "phrase": "tell time with a sundial (用日晷测时间)"}, {"id": "u2_24", "unit": 2, "unitTitle": "Unit 2 School life", "word": "presentation", "phonetic": "/ˌpreznˈteɪʃn/", "pos": "n.", "meaning": "口头汇报；演示；展示", "phrase": "give a presentation (做汇报展示)"}, {"id": "u2_25", "unit": 2, "unitTitle": "Unit 2 School life", "word": "celebrate", "phonetic": "/ˈselɪbreɪt/", "pos": "v.", "meaning": "庆祝；祝贺", "phrase": "celebrate the festival (庆祝节日)"}, {"id": "u2_26", "unit": 2, "unitTitle": "Unit 2 School life", "word": "success", "phonetic": "/səkˈses/", "pos": "n.", "meaning": "成功；胜利", "phrase": "achieve success (获得成功)"}, {"id": "u3_1", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "season", "phonetic": "/ˈsiːzn/", "pos": "n.", "meaning": "季节；时节", "phrase": "the four seasons (四季)"}, {"id": "u3_2", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "spring", "phonetic": "/sprɪŋ/", "pos": "n.", "meaning": "春天；春季", "phrase": "in spring (在春天)"}, {"id": "u3_3", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "summer", "phonetic": "/ˈsʌmə(r)/", "pos": "n.", "meaning": "夏天；夏季", "phrase": "in hot summer (在炎炎夏日)"}, {"id": "u3_4", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "autumn", "phonetic": "/ˈɔːtəm/", "pos": "n.", "meaning": "秋天；秋季", "phrase": "in golden autumn (在金秋)"}, {"id": "u3_5", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "winter", "phonetic": "/ˈwɪntə(r)/", "pos": "n.", "meaning": "冬天；冬季", "phrase": "in cold winter (在寒冬)"}, {"id": "u3_6", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "weather", "phonetic": "/ˈweðə(r)/", "pos": "n.", "meaning": "天气；气候", "phrase": "nice weather (好天气) / bad weather (坏天气)"}, {"id": "u3_7", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "temperature", "phonetic": "/ˈtemprətʃə(r)/", "pos": "n.", "meaning": "温度；气温", "phrase": "high temperature (高温) / drop in temperature (降温)"}, {"id": "u3_8", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "degree", "phonetic": "/dɪˈɡriː/", "pos": "n.", "meaning": "度；度数（°C）", "phrase": "30 degrees (30度)"}, {"id": "u3_9", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "warm", "phonetic": "/wɔːm/", "pos": "adj.", "meaning": "温暖的；暖和的", "phrase": "warm sunshine (温暖阳光) / keep warm (保暖)"}, {"id": "u3_10", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "cool", "phonetic": "/kuːl/", "pos": "adj.", "meaning": "凉爽的；冷静的", "phrase": "cool wind (凉爽的风) / cool down (降温/冷静)"}, {"id": "u3_11", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "shine", "phonetic": "/ʃaɪn/", "pos": "v.", "meaning": "照耀；发光", "phrase": "sun shines brightly (阳光明媚)"}, {"id": "u3_12", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "brightly", "phonetic": "/ˈbraɪtli/", "pos": "adv.", "meaning": "明亮地；耀眼地", "phrase": "shine brightly (明媚照耀)"}, {"id": "u3_13", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "dry", "phonetic": "/draɪ/", "pos": "adj. / v.", "meaning": "干燥的 / 弄干", "phrase": "dry climate (干燥气候) / dry season (旱季)"}, {"id": "u3_14", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "wet", "phonetic": "/wet/", "pos": "adj.", "meaning": "湿的；潮湿的", "phrase": "wet floor (湿滑地面) / wet season (雨季)"}, {"id": "u3_15", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "windy", "phonetic": "/ˈwɪndi/", "pos": "adj.", "meaning": "多风的；风大的", "phrase": "a windy afternoon (多风的下午)"}, {"id": "u3_16", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "snowy", "phonetic": "/ˈsnəʊi/", "pos": "adj.", "meaning": "下雪的；积雪的", "phrase": "a snowy day (下雪天)"}, {"id": "u3_17", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "picnic", "phonetic": "/ˈpɪknɪk/", "pos": "n.", "meaning": "野餐", "phrase": "go on a picnic (去野餐) / have a picnic (吃野餐)"}, {"id": "u3_18", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "kick", "phonetic": "/kɪk/", "pos": "v.", "meaning": "踢；蹬", "phrase": "kick a football (踢足球)"}, {"id": "u3_19", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "puddle", "phonetic": "/ˈpʌdl/", "pos": "n.", "meaning": "水坑；小泥潭", "phrase": "jump into puddles (跳进水洼)"}, {"id": "u3_20", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "footprint", "phonetic": "/ˈfʊtprɪnt/", "pos": "n.", "meaning": "脚印；足迹", "phrase": "leave footprints (留下脚印)"}, {"id": "u3_21", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "blow", "phonetic": "/bləʊ/", "pos": "v.", "meaning": "吹；刮风（过去式blew）", "phrase": "wind blows hard (风猛烈吹)"}, {"id": "u3_22", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "solar", "phonetic": "/ˈsəʊlə(r)/", "pos": "adj.", "meaning": "太阳的；太阳能的", "phrase": "solar terms (二十四节气) / solar power (太阳能)"}, {"id": "u3_23", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "harvest", "phonetic": "/ˈhɑːvɪst/", "pos": "n. / v.", "meaning": "收获；收割", "phrase": "bumper harvest (大丰收)"}, {"id": "u3_24", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "leaf", "phonetic": "/liːf/", "pos": "n.", "meaning": "树叶（复数leaves）", "phrase": "green leaves (绿叶) / fallen leaves (落叶)"}, {"id": "u4_1", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "earth", "phonetic": "/ɜːθ/", "pos": "n.", "meaning": "地球；陆地；泥土", "phrase": "protect the Earth (保护地球) / on Earth (在世上)"}, {"id": "u4_2", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "planet", "phonetic": "/ˈplænɪt/", "pos": "n.", "meaning": "行星", "phrase": "our planet (我们的星球)"}, {"id": "u4_3", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "amazing", "phonetic": "/əˈmeɪzɪŋ/", "pos": "adj.", "meaning": "令人惊叹的；神奇的", "phrase": "amazing world (奇妙世界)"}, {"id": "u4_4", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "ocean", "phonetic": "/ˈəʊʃn/", "pos": "n.", "meaning": "海洋；大洋", "phrase": "ocean pollution (海洋污染)"}, {"id": "u4_5", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "billion", "phonetic": "/ˈbɪljən/ ", "pos": "num.", "meaning": "十亿", "phrase": "billions of people (数十亿人)"}, {"id": "u4_6", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "cover", "phonetic": "/ˈkʌvə(r)/", "pos": "v. / n.", "meaning": "覆盖；遮蔽 / 封面", "phrase": "be covered with water (被水覆盖)"}, {"id": "u4_7", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "area", "phonetic": "/ˈeəriə/", "pos": "n.", "meaning": "面积；地区；区域", "phrase": "land area (陆地面积)"}, {"id": "u4_8", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "desert", "phonetic": "/ˈdezət/", "pos": "n.", "meaning": "沙漠；荒原", "phrase": "cross the desert (穿过沙漠)"}, {"id": "u4_9", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "freezing", "phonetic": "/ˈfriːzɪŋ/", "pos": "adj.", "meaning": "极冷的；冰冻的", "phrase": "freezing point (冰点) / freezing cold (刺骨寒冷)"}, {"id": "u4_10", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "pole", "phonetic": "/pəʊl/", "pos": "n.", "meaning": "（地球的）极；极地", "phrase": "North Pole (北极) / South Pole (南极)"}, {"id": "u4_11", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "protect", "phonetic": "/prəˈtekt/", "pos": "v.", "meaning": "保护；防卫", "phrase": "protect the environment (保护环境)"}, {"id": "u4_12", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "pollution", "phonetic": "/pəˈluːʃn/", "pos": "n.", "meaning": "污染；污染物", "phrase": "stop pollution (制止污染)"}, {"id": "u4_13", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "energy", "phonetic": "/ˈenədʒi/", "pos": "n.", "meaning": "能源；能量；精力", "phrase": "clean energy (清洁能源) / save energy (节能)"}, {"id": "u4_14", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "ground", "phonetic": "/ɡraʊnd/", "pos": "n.", "meaning": "地面；土地", "phrase": "fall to the ground (落到地上)"}, {"id": "u4_15", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "burn", "phonetic": "/bɜːn/", "pos": "v.", "meaning": "燃烧；烧毁", "phrase": "burn coal (燃煤)"}, {"id": "u4_16", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "rubbish", "phonetic": "/ˈrʌbɪʃ/", "pos": "n.", "meaning": "垃圾；废物", "phrase": "sort rubbish (垃圾分类) / throw rubbish (扔垃圾)"}, {"id": "u4_17", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "recycle", "phonetic": "/ˌriːˈsaɪkl/", "pos": "v.", "meaning": "回收利用；循环利用", "phrase": "recycle plastic (塑料再利用)"}, {"id": "u4_18", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "provide", "phonetic": "/prəˈvaɪd/", "pos": "v.", "meaning": "提供；供给", "phrase": "provide sb. with sth. (为某人提供某物)"}, {"id": "u4_19", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "problem", "phonetic": "/ˈprɒbləm/", "pos": "n.", "meaning": "问题；难题", "phrase": "environmental problems (环境问题)"}, {"id": "u5_1", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "space", "phonetic": "/speɪs/", "pos": "n.", "meaning": "太空；宇宙；空间", "phrase": "in outer space (在外太空) / space station (空间站)"}, {"id": "u5_2", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "flight", "phonetic": "/flaɪt/", "pos": "n.", "meaning": "飞行；航班；航程", "phrase": "space flight (太空飞行) / take a flight (乘飞机)"}, {"id": "u5_3", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "astronaut", "phonetic": "/ˈæstrənɔːt/", "pos": "n.", "meaning": "宇航员；航天员", "phrase": "become an astronaut (成为宇航员)"}, {"id": "u5_4", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "rocket", "phonetic": "/ˈrɒkɪt/", "pos": "n.", "meaning": "火箭", "phrase": "rocket launch (火箭发射)"}, {"id": "u5_5", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "spaceship", "phonetic": "/ˈspeɪsʃɪp/", "pos": "n.", "meaning": "宇宙飞船", "phrase": "fly a spaceship (驾驶宇宙飞船)"}, {"id": "u5_6", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "spacesuit", "phonetic": "/ˈspeɪssuːt/", "pos": "n.", "meaning": "航天服；宇航服", "phrase": "put on a spacesuit (穿上宇航服)"}, {"id": "u5_7", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "gravity", "phonetic": "/ˈɡrævəti/", "pos": "n.", "meaning": "重力；地心引力", "phrase": "zero gravity (零重力状态)"}, {"id": "u5_8", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "float", "phonetic": "/fləʊt/", "pos": "v.", "meaning": "漂浮；浮动", "phrase": "float in space (在太空中漂浮)"}, {"id": "u5_9", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "weightless", "phonetic": "/ˈweɪtləs/", "pos": "adj.", "meaning": "失重的；无重力的", "phrase": "weightless state (失重状态)"}, {"id": "u5_10", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "surface", "phonetic": "/ˈsɜːfɪs/", "pos": "n.", "meaning": "表面；表层", "phrase": "the surface of the Moon (月球表面)"}, {"id": "u5_11", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "crater", "phonetic": "/ˈkreɪtə(r)/", "pos": "n.", "meaning": "环形山；火山口", "phrase": "lunar crater (月球环形坑)"}, {"id": "u5_12", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "explore", "phonetic": "/ɪkˈsplɔː(r)/", "pos": "v.", "meaning": "探索；探险；探测", "phrase": "explore the unknown (探索未知)"}, {"id": "u5_13", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "Mars", "phonetic": "/mɑːz/", "pos": "n.", "meaning": "火星", "phrase": "mission to Mars (火星探测任务)"}, {"id": "u5_14", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "satellite", "phonetic": "/ˈsætəlaɪt/", "pos": "n.", "meaning": "人造卫星；卫星", "phrase": "launch a satellite (发射卫星)"}, {"id": "u5_15", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "telescope", "phonetic": "/ˈtelɪskəʊp/", "pos": "n.", "meaning": "望远镜", "phrase": "look through a telescope (通过望远镜观察)"}, {"id": "u5_16", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "universe", "phonetic": "/ˈjuːnɪvɜːs/", "pos": "n.", "meaning": "宇宙；万物", "phrase": "explore the universe (探索宇宙)"}, {"id": "u5_17", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "hotel", "phonetic": "/həʊˈtel/", "pos": "n.", "meaning": "旅馆；酒店", "phrase": "stay in a hotel (住旅馆)"}, {"id": "u5_18", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "nervous", "phonetic": "/ˈnɜːvəs/", "pos": "adj.", "meaning": "紧张的；担心的", "phrase": "feel nervous (感到紧张不安)"}, {"id": "u5_19", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "breathe", "phonetic": "/briːð/", "pos": "v.", "meaning": "呼吸", "phrase": "breathe oxygen (呼吸氧气)"}, {"id": "u6_1", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "Asia", "phonetic": "/ˈeɪʒə/", "pos": "n.", "meaning": "亚洲", "phrase": "in Asia (在亚洲)"}, {"id": "u6_2", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "Asian", "phonetic": "/ˈeɪʒn/", "pos": "adj. / n.", "meaning": "亚洲的 / 亚洲人", "phrase": "Asian games (亚运会)"}, {"id": "u6_3", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "guide", "phonetic": "/ɡaɪd/", "pos": "n. / v.", "meaning": "导游；旅行指南 / 引领", "phrase": "tour guide (导游) / guidebook (旅行指南)"}, {"id": "u6_4", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "tourist", "phonetic": "/ˈtʊərɪst/", "pos": "n.", "meaning": "游客；观光客", "phrase": "foreign tourists (外国游客)"}, {"id": "u6_5", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "capital", "phonetic": "/ˈkæpɪtl/", "pos": "n.", "meaning": "首都；省会；资金", "phrase": "capital city (首都城市)"}, {"id": "u6_6", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "famous", "phonetic": "/ˈfeɪməs/", "pos": "adj.", "meaning": "著名的；知名的", "phrase": "be famous for (因...而闻名)"}, {"id": "u6_7", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "heritage", "phonetic": "/ˈherɪtɪdʒ/", "pos": "n.", "meaning": "遗产（文化/历史）", "phrase": "World Heritage Site (世界遗产地)"}, {"id": "u6_8", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "site", "phonetic": "/saɪt/", "pos": "n.", "meaning": "地点；遗址；场所", "phrase": "historic site (历史遗址)"}, {"id": "u6_9", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "modern", "phonetic": "/ˈmɒdn/", "pos": "adj.", "meaning": "现代的；新式的", "phrase": "modern city (现代化都市)"}, {"id": "u6_10", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "traditional", "phonetic": "/trəˈdɪʃənl/", "pos": "adj.", "meaning": "传统的；习俗的", "phrase": "traditional culture (传统文化)"}, {"id": "u6_11", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "square", "phonetic": "/skweə(r)/", "pos": "n.", "meaning": "广场；正方形", "phrase": "city square (城市广场)"}, {"id": "u6_12", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "fountain", "phonetic": "/ˈfaʊntn/", "pos": "n.", "meaning": "喷泉；人工喷水池", "phrase": "music fountain (音乐喷泉)"}, {"id": "u6_13", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "compass", "phonetic": "/ˈkʌmpəs/", "pos": "n.", "meaning": "指南针；罗盘", "phrase": "use a compass (使用指南针)"}, {"id": "u6_14", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "direction", "phonetic": "/daɪˈrekʃn/", "pos": "n.", "meaning": "方向；方位；指引", "phrase": "in the right direction (朝正确方向)"}, {"id": "u6_15", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "suggest", "phonetic": "/səˈdʒest/", "pos": "v.", "meaning": "建议；提议", "phrase": "suggest doing sth. (提议做某事)"}, {"id": "u6_16", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "recommend", "phonetic": "/ˌrekəˈmend/", "pos": "v.", "meaning": "推荐；介绍", "phrase": "highly recommend (极力推荐)"}, {"id": "u6_17", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "cuisine", "phonetic": "/kwɪˈziːn/", "pos": "n.", "meaning": "菜肴；风味烹饪", "phrase": "local cuisine (地道风味美食)"}, {"id": "u6_18", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "culture", "phonetic": "/ˈkʌltʃə(r)/", "pos": "n.", "meaning": "文化；文明", "phrase": "cultural exchange (文化交流)"}, {"id": "u7_1", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "fair", "phonetic": "/feə(r)/", "pos": "n. / adj.", "meaning": "博览会；集市 / 公平的", "phrase": "Clubs Fair (社团博览会)"}, {"id": "u7_2", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "member", "phonetic": "/ˈmembə(r)/", "pos": "n.", "meaning": "成员；会员", "phrase": "club member (社团成员)"}, {"id": "u7_3", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "join", "phonetic": "/dʒɔɪn/", "pos": "v.", "meaning": "加入；参加（组织社团）", "phrase": "join the art club (加入美术社)"}, {"id": "u7_4", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "attend", "phonetic": "/əˈtend/", "pos": "v.", "meaning": "出席；参加（会议/讲座）", "phrase": "attend a meeting (出席会议)"}, {"id": "u7_5", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "photography", "phonetic": "/fəˈtɒɡrəfi/", "pos": "n.", "meaning": "摄影（术）", "phrase": "learn photography (学摄影)"}, {"id": "u7_6", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "experiment", "phonetic": "/ɪkˈsperɪmənt/", "pos": "n. / v.", "meaning": "实验；试验", "phrase": "science experiment (科学实验)"}, {"id": "u7_7", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "chess", "phonetic": "/tʃes/", "pos": "n.", "meaning": "国际象棋", "phrase": "play chess (下国际象棋)"}, {"id": "u7_8", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "drama", "phonetic": "/ˈdrɑːmə/", "pos": "n.", "meaning": "戏剧；话剧", "phrase": "drama club (戏剧社)"}, {"id": "u7_9", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "outing", "phonetic": "/ˈaʊtɪŋ/", "pos": "n.", "meaning": "远足；郊游；短途旅行", "phrase": "go on a school outing (参加学校郊游)"}, {"id": "u7_10", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "camp", "phonetic": "/kæmp/", "pos": "n. / v.", "meaning": "营地 / 露营；宿营", "phrase": "summer camp (夏令营)"}, {"id": "u7_11", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "perform", "phonetic": "/pəˈfɔːm/", "pos": "v.", "meaning": "表演；演奏；执行", "phrase": "perform on stage (在舞台上表演)"}, {"id": "u7_12", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "excited", "phonetic": "/ɪkˈsaɪtɪd/", "pos": "adj.", "meaning": "兴奋的；激动的（人）", "phrase": "be excited about (对...感到兴奋)"}, {"id": "u7_13", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "exciting", "phonetic": "/ɪkˈsaɪtɪŋ/", "pos": "adj.", "meaning": "令人兴奋的（事）", "phrase": "exciting news (令人激动的消息)"}, {"id": "u7_14", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "competition", "phonetic": "/ˌkɒmpəˈtɪʃn/", "pos": "n.", "meaning": "比赛；竞争", "phrase": "win a competition (在比赛中获胜)"}, {"id": "u7_15", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "win", "phonetic": "/wɪn/", "pos": "v.", "meaning": "赢得；获胜（过去式won）", "phrase": "win first prize (赢得一等奖)"}, {"id": "u7_16", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "prize", "phonetic": "/praɪz/", "pos": "n.", "meaning": "奖品；奖项", "phrase": "win a prize (获奖)"}, {"id": "u7_17", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "disappear", "phonetic": "/ˌdɪsəˈpɪə(r)/", "pos": "v.", "meaning": "消失；不见", "phrase": "disappear from sight (从视线中消失)"}, {"id": "u7_18", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "surprised", "phonetic": "/səˈpraɪzd/", "pos": "adj.", "meaning": "感到吃惊的", "phrase": "be surprised at (对...感到吃惊)"}, {"id": "u8_1", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collect", "phonetic": "/kəˈlekt/", "pos": "v.", "meaning": "收集；收藏；聚集", "phrase": "collect stamps (集邮) / collect coins (集硬币)"}, {"id": "u8_2", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collection", "phonetic": "/kəˈlekʃn/", "pos": "n.", "meaning": "收藏品；收集物", "phrase": "have a large collection (拥有大量收藏)"}, {"id": "u8_3", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collector", "phonetic": "/kəˈlektə(r)/", "pos": "n.", "meaning": "收藏家；收集者", "phrase": "stamp collector (集邮家)"}, {"id": "u8_4", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "stamp", "phonetic": "/stæmp/", "pos": "n.", "meaning": "邮票；印花；印章", "phrase": "postage stamp (邮票)"}, {"id": "u8_5", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "coin", "phonetic": "/kɔɪn/", "pos": "n.", "meaning": "硬币；钱币", "phrase": "flip a coin (抛硬币)"}, {"id": "u8_6", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "postcard", "phonetic": "/ˈpəʊstkɑːd/", "pos": "n.", "meaning": "明信片", "phrase": "send a postcard (寄明信片)"}, {"id": "u8_7", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "model", "phonetic": "/ˈmɒdl/", "pos": "n.", "meaning": "模型；模特；榜样", "phrase": "model plane (飞机模型) / role model (榜样)"}, {"id": "u8_8", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "item", "phonetic": "/ˈaɪtəm/", "pos": "n.", "meaning": "单件物品；项目", "phrase": "collector's item (珍贵收藏物)"}, {"id": "u8_9", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "valuable", "phonetic": "/ˈvæljuəbl/", "pos": "adj.", "meaning": "有价值的；贵重的", "phrase": "valuable collection (珍贵收藏)"}, {"id": "u8_10", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "memory", "phonetic": "/ˈmeməri/", "pos": "n.", "meaning": "回忆；记忆（复数memories）", "phrase": "good memories (美好回忆)"}, {"id": "u8_11", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "album", "phonetic": "/ˈælbəm/", "pos": "n.", "meaning": "集邮册；相册；唱片", "phrase": "stamp album (集邮簿) / photo album (影集)"}, {"id": "u8_12", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "exchange", "phonetic": "/ɪksˈtʃeɪndʒ/", "pos": "v. / n.", "meaning": "交换；交流", "phrase": "exchange items (交换物品)"}, {"id": "u8_13", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "unusual", "phonetic": "/ʌnˈjuːʒuəl/", "pos": "adj.", "meaning": "不寻常的；独特的", "phrase": "unusual hobby (罕见的爱好)"}, {"id": "u8_14", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "interview", "phonetic": "/ˈɪntəvjuː/", "pos": "n. / v.", "meaning": "采访；面试", "phrase": "do an interview (进行采访)"}, {"id": "u8_15", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "reporter", "phonetic": "/rɪˈpɔːtə(r)/", "pos": "n.", "meaning": "记者", "phrase": "newspaper reporter (报社记者)"}, {"id": "u8_16", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "dollar", "phonetic": "/ˈdɒlə(r)/", "pos": "n.", "meaning": "美元；元", "phrase": "ten dollars (十美元)"}, {"id": "u8_17", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "silver", "phonetic": "/ˈsɪlvə(r)/", "pos": "n. / adj.", "meaning": "银；银器 / 银色的", "phrase": "silver coin (银币)"}, {"id": "u8_18", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "proud", "phonetic": "/praʊd/", "pos": "adj.", "meaning": "骄傲的；自豪的", "phrase": "be proud of (为...感到自豪)"}];
+const VOCAB_DATABASE = [{"id": "u1_1", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "friendship", "phonetic": "/ˈfrendʃɪp/", "pos": "n.", "meaning": "友谊；朋友关系", "phrase": "close friendship (亲密友谊) / make friends (交朋友)", "root": "词根拆解：friend (朋友) + -ship (名词后缀，表关系/状态) -> 朋友之间的亲密情谊"}, {"id": "u1_2", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "honest", "phonetic": "/ˈɒnɪst/", "pos": "adj.", "meaning": "诚实的；正直的", "phrase": "to be honest (老实说) / an honest boy (诚实的男孩)", "root": "词源助记：来自古法语 honeste，拉丁语 honestus (受尊重的、体面的) -> 诚实正直是受人尊重的品格"}, {"id": "u1_3", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "patient", "phonetic": "/ˈpeɪʃnt/", "pos": "adj.", "meaning": "有耐心的；能忍受的", "phrase": "be patient with sb. (对某人有耐心)", "root": "词根拆解：pati- (承受/容忍) + -ent (形容词后缀) -> 能承受痛苦或等待的 -> 有耐心的"}, {"id": "u1_4", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "confident", "phonetic": "/ˈkɒnfɪdənt/", "pos": "adj.", "meaning": "自信的；有信心的", "phrase": "be confident about (对...有信心)", "root": "词根拆解：con- (完全/强调) + fid- (相信/信任) + -ent -> 完全相信自己的 -> 自信的"}, {"id": "u1_5", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "courage", "phonetic": "/ˈkʌrɪdʒ/", "pos": "n.", "meaning": "勇气；胆量", "phrase": "have the courage to do sth. (有勇气做某事)", "root": "词根拆解：cour- / cor- (心/核心) + -age (名词后缀) -> 拥有强大的内心与魄力 -> 勇气"}, {"id": "u1_6", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "admiration", "phonetic": "/ˌædməˈreɪʃn/", "pos": "n.", "meaning": "钦佩；赞赏", "phrase": "with admiration (钦佩地) / express admiration (表达钦佩)", "root": "词根拆解：ad- (去/向) + mir- (惊奇/注视) + -ation -> 怀着惊奇赞叹的眼光注视 -> 钦佩"}, {"id": "u1_7", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "respect", "phonetic": "/rɪˈspekt/", "pos": "n. / v.", "meaning": "尊敬；尊重", "phrase": "show respect for (尊重...) / respect each other (互相尊重)", "root": "词根拆解：re- (再次/回头) + spect- (看/注视) -> 一再回头注目、肃然起敬 -> 尊敬；尊重"}, {"id": "u1_8", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "support", "phonetic": "/səˈpɔːt/", "pos": "n. / v.", "meaning": "支持；鼓励；拥护", "phrase": "support each other (相互支持) / in support of (支持)", "root": "词根拆解：sub- (从下方) + port- (搬运/支撑) -> 从底部支撑托起 -> 支持；援助"}, {"id": "u1_9", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "trust", "phonetic": "/trʌst/", "pos": "n. / v.", "meaning": "信任；信赖", "phrase": "trust in sb. (信任某人) / gain sb's trust (赢得信任)", "root": "词源助记：源自古诺斯语 traust (坚定/坚固)，与 true (真实的) 同源 -> 坚定地相信对方"}, {"id": "u1_10", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "caring", "phonetic": "/ˈkeərɪŋ/", "pos": "adj.", "meaning": "体贴的；关心他人的", "phrase": "a caring friend (体贴的朋友) / caring attitude (关怀态度)", "root": "词根拆解：care (关怀) + -ing (形容词后缀) -> 体贴关心的"}, {"id": "u1_11", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "quality", "phonetic": "/ˈkwɒləti/", "pos": "n.", "meaning": "品质；品德；质量", "phrase": "personal qualities (个人品质) / good quality (优良品质)", "root": "词根拆解：qual- (何种样态) + -ity (性质名词后缀) -> 固有的本质、品德、质量"}, {"id": "u1_12", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "personal", "phonetic": "/ˈpɜːsənl/", "pos": "adj.", "meaning": "个人的；私人的", "phrase": "personal information (个人信息) / personal life (个人生活)", "root": "词根拆解：person (个人/人) + -al (形容词后缀) -> 个人的；私人的"}, {"id": "u1_13", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "describe", "phonetic": "/dɪˈskraɪb/", "pos": "v.", "meaning": "描述；形容", "phrase": "describe sb. as ... (将某人描述为...)", "root": "词根拆解：de- (向下/详尽) + scribe- (写/描摹) -> 详细写下画出 -> 描述；形容"}, {"id": "u1_14", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "appearance", "phonetic": "/əˈpɪərəns/", "pos": "n.", "meaning": "外貌；外观；出现", "phrase": "physical appearance (外表外貌)", "root": "词根拆解：ad- (向) + pear- (显现) + -ance (名词后缀) -> 显现出来的外在样子 -> 外貌；外观"}, {"id": "u1_15", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "survey", "phonetic": "/ˈsɜːveɪ/", "pos": "n. / v.", "meaning": "调查；测验", "phrase": "do a survey (开展调查) / survey results (调查结果)", "root": "词根拆解：sur- (在...之上/从高处) + vey- / view (看) -> 从高处俯瞰全貌 -> 调查；测验"}, {"id": "u1_16", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "basic", "phonetic": "/ˈbeɪsɪk/", "pos": "adj.", "meaning": "基本的；基础的", "phrase": "basic skills (基础技能) / basic knowledge (基础知识)", "root": "词根拆解：base (基础/底部) + -ic (形容词后缀) -> 最底层的 -> 基本的基础的"}, {"id": "u1_17", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "thought", "phonetic": "/θɔːt/", "pos": "n.", "meaning": "想法；心意；思考", "phrase": "deep thoughts (深思) / second thoughts (重新考虑)", "root": "形态助记：think 的动词过去式/分词名物化 -> 经过大脑思考出的产物 -> 想法；思想"}, {"id": "u1_18", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "however", "phonetic": "/haʊˈevə(r)/", "pos": "adv.", "meaning": "然而；不过", "phrase": "however, ... (置于句首或句中逗号隔开)", "root": "词根拆解：how (怎样) + ever (无论) -> 无论怎样转折 -> 然而；不过"}, {"id": "u1_19", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "improve", "phonetic": "/ɪmˈpruːv/", "pos": "v.", "meaning": "改善；改进；提高", "phrase": "improve English (提高英语) / improve memory (改善记忆)", "root": "词根拆解：im- (进入) + prove / preu (有价值) -> 使其变得更有价值和成效 -> 改善；提高"}, {"id": "u1_20", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "glad", "phonetic": "/ɡlæd/", "pos": "adj.", "meaning": "高兴的；乐意的", "phrase": "be glad to do sth. (很高兴做某事)", "root": "词源助记：源自古英语 glæd (光亮的、明媚的) -> 心情如阳光般晴朗明媚 -> 高兴的"}, {"id": "u1_21", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "straight", "phonetic": "/streɪt/", "pos": "adj.", "meaning": "直的；笔直的", "phrase": "straight hair (直发) / straight line (直线)", "root": "词源助记：源自 stretch (伸展) 的古代分词 -> 彻底拉伸拉直的线条 -> 笔直的"}, {"id": "u1_22", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "dark", "phonetic": "/dɑːk/", "pos": "adj.", "meaning": "（发色/肤色）深色的；黑暗的", "phrase": "dark hair (黑头发) / dark eyes (黑眼睛)", "root": "色彩对比：对应 light (明亮)，dark 表示颜色浓厚或缺少光照 -> 深色的；黑暗的"}, {"id": "u1_23", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "guitar", "phonetic": "/ɡɪˈtɑː(r)/", "pos": "n.", "meaning": "吉他", "phrase": "play the guitar (弹吉他)", "root": "词源助记：源自西班牙语 guitarra，追溯至希腊语 kithara (古代七弦琴)"}, {"id": "u1_24", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "stranger", "phonetic": "/ˈstreɪndʒə(r)/", "pos": "n.", "meaning": "陌生人", "phrase": "a stranger to ... (对...不熟悉的人)", "root": "词根拆解：strange (陌生的) + -er (人) -> 陌生人"}, {"id": "u1_25", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "secret", "phonetic": "/ˈsiːkrət/", "pos": "n. / adj.", "meaning": "秘密 / 秘密的", "phrase": "keep a secret (保守秘密) / tell a secret (倾吐秘密)", "root": "词根拆解：se- (分离/隔开) + cret- (分辨/隐藏) -> 与大众隔离开的信息 -> 秘密"}, {"id": "u1_26", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "smile", "phonetic": "/smaɪl/", "pos": "v. / n.", "meaning": "微笑", "phrase": "smile at sb. (朝某人微笑) / with a smile (带着微笑)", "root": "词源助记：源自日耳曼语族表柔和喜悦的声音，嘴角上扬的无声微笑"}, {"id": "u1_27", "unit": 1, "unitTitle": "Unit 1 Friendship", "word": "cheer", "phonetic": "/tʃɪə(r)/", "pos": "v. / n.", "meaning": "欢呼；使振奋", "phrase": "cheer sb. up (使某人振作起来) / cheer for (为...喝彩)", "root": "词源助记：源自古法语 chiere (面容/神采) -> 使人面露喜色 -> 欢呼；使振奋"}, {"id": "u2_1", "unit": 2, "unitTitle": "Unit 2 School life", "word": "daily", "phonetic": "/ˈdeɪli/", "pos": "adj. / adv.", "meaning": "每日的；日常的 / 每日", "phrase": "daily routine (日常作息) / daily life (日常生活)", "root": "词根拆解：day (天) + -ly (形容词/副词后缀) -> 每日的；日常的"}, {"id": "u2_2", "unit": 2, "unitTitle": "Unit 2 School life", "word": "routine", "phonetic": "/ruːˈtiːn/", "pos": "n.", "meaning": "常规；日常事务", "phrase": "daily routine (日常惯例) / break the routine (打破常规)", "root": "词根拆解：route (路线/成规) + -ine (名词后缀) -> 按照既定路线每天重复做的事 -> 常规；日常作息"}, {"id": "u2_3", "unit": 2, "unitTitle": "Unit 2 School life", "word": "schedule", "phonetic": "/ˈʃedjuːl/", "pos": "n.", "meaning": "时间表；日程安排", "phrase": "on schedule (按时) / busy schedule (紧凑日程)", "root": "词源助记：拉丁语 schedula (小纸条/日程清单) -> 安排好的时间表"}, {"id": "u2_4", "unit": 2, "unitTitle": "Unit 2 School life", "word": "subject", "phonetic": "/ˈsʌbdʒɪkt/", "pos": "n.", "meaning": "学科；科目；主题", "phrase": "favourite subject (最喜爱的学科)", "root": "词根拆解：sub- (在...之下) + ject- (投掷/置放) -> 置于研究考察之下的课题 -> 学科；主题"}, {"id": "u2_5", "unit": 2, "unitTitle": "Unit 2 School life", "word": "geography", "phonetic": "/dʒiˈɒɡrəfi/", "pos": "n.", "meaning": "地理（学）", "phrase": "geography lesson (地理课)", "root": "词根拆解：geo- (地球/大地) + -graphy (写/记述之学) -> 记述地球大地的学问 -> 地理学"}, {"id": "u2_6", "unit": 2, "unitTitle": "Unit 2 School life", "word": "history", "phonetic": "/ˈhɪstri/", "pos": "n.", "meaning": "历史（学）", "phrase": "history of China (中国历史) / world history (世界史)", "root": "词源助记：源自希腊语 historia (探求而得的知识/历史)"}, {"id": "u2_7", "unit": 2, "unitTitle": "Unit 2 School life", "word": "biology", "phonetic": "/baɪˈɒlədʒi/", "pos": "n.", "meaning": "生物（学）", "phrase": "biology teacher (生物老师)", "root": "词根拆解：bio- (生命/生物) + -logy (学科/理论) -> 研究生命现象的学科 -> 生物学"}, {"id": "u2_8", "unit": 2, "unitTitle": "Unit 2 School life", "word": "break", "phonetic": "/breɪk/", "pos": "n. / v.", "meaning": "课间休息 / 打破；弄碎", "phrase": "have a break (休息片刻) / lunch break (午休)", "root": "多义联想：打破原有的连续状态 -> 暂停一段时间 -> 课间休息"}, {"id": "u2_9", "unit": 2, "unitTitle": "Unit 2 School life", "word": "bell", "phonetic": "/bel/", "pos": "n.", "meaning": "钟；铃", "phrase": "the bell rings (铃声响起)", "root": "象声联想：金铁碰撞发出的悠扬鸣响 -> 钟；铃"}, {"id": "u2_10", "unit": 2, "unitTitle": "Unit 2 School life", "word": "ring", "phonetic": "/rɪŋ/", "pos": "v. / n.", "meaning": "（铃）鸣响 / 戒指", "phrase": "ring the bell (按铃/摇铃)", "root": "词源联想：环形物体 (戒指) / 环形回荡的声音 (鸣钟)"}, {"id": "u2_11", "unit": 2, "unitTitle": "Unit 2 School life", "word": "practice", "phonetic": "/ˈpræktɪs/", "pos": "n. / v.", "meaning": "练习；实践", "phrase": "practice doing sth. (练习做某事)", "root": "词根拆解：pract- (做/实践) + -ice (名词后缀) -> 不断去实践演练 -> 练习"}, {"id": "u2_12", "unit": 2, "unitTitle": "Unit 2 School life", "word": "band", "phonetic": "/bænd/", "pos": "n.", "meaning": "乐队；乐团", "phrase": "school band (校园乐队) / rock band (摇滚乐队)", "root": "词源助记：源自绑扎在一起的绳带 (bind) -> 聚拢结合在一起演奏的群体 -> 乐队"}, {"id": "u2_13", "unit": 2, "unitTitle": "Unit 2 School life", "word": "activity", "phonetic": "/ækˈtɪvəti/", "pos": "n.", "meaning": "活动", "phrase": "after-school activity (课外活动)", "root": "词根拆解：act- (行动) + -iv- + -ity (性质名词后缀) -> 行动的过程 -> 活动"}, {"id": "u2_14", "unit": 2, "unitTitle": "Unit 2 School life", "word": "club", "phonetic": "/klʌb/", "pos": "n.", "meaning": "社团；俱乐部", "phrase": "join a club (加入社团) / club activities (社团活动)", "root": "词源联想：围坐在一起的紧密组织 -> 社团；俱乐部"}, {"id": "u2_15", "unit": 2, "unitTitle": "Unit 2 School life", "word": "solve", "phonetic": "/sɒlv/", "pos": "v.", "meaning": "解答；解决（难题）", "phrase": "solve math problems (解数学题)", "root": "词根拆解：solv- (松开/解开) -> 把缠绕在一起的疑难结扣解开 -> 解决；解答"}, {"id": "u2_16", "unit": 2, "unitTitle": "Unit 2 School life", "word": "develop", "phonetic": "/dɪˈveləp/", "pos": "v.", "meaning": "发展；培养；养成", "phrase": "develop good habits (养成良好习惯)", "root": "词根拆解：de- (解开) + velop- (包裹) -> 把包裹揭开、展开潜能 -> 发展；培养"}, {"id": "u2_17", "unit": 2, "unitTitle": "Unit 2 School life", "word": "skill", "phonetic": "/skɪl/", "pos": "n.", "meaning": "技巧；技能", "phrase": "life skills (生活技能) / learning skills (学习技能)", "root": "词源助记：源自古诺斯语 skil (辨别能力) -> 熟练区分并解决问题的本领 -> 技能；技巧"}, {"id": "u2_18", "unit": 2, "unitTitle": "Unit 2 School life", "word": "magazine", "phonetic": "/ˌmæɡəˈziːn/", "pos": "n.", "meaning": "杂志；期刊", "phrase": "read magazines (读杂志)", "root": "词源助记：源自阿拉伯语 makhazin (仓库/贮藏所) -> 汇聚各色文章的故事仓库 -> 杂志"}, {"id": "u2_19", "unit": 2, "unitTitle": "Unit 2 School life", "word": "teenager", "phonetic": "/ˈtiːneɪdʒə(r)/", "pos": "n.", "meaning": "青少年（13至19岁）", "phrase": "teenagers' life (青少年生活)", "root": "词根拆解：teen (-teen 年龄段，13~19岁) + age (年龄) + -er (人) -> 青少年"}, {"id": "u2_20", "unit": 2, "unitTitle": "Unit 2 School life", "word": "diary", "phonetic": "/ˈdaɪəri/", "pos": "n.", "meaning": "日记；日记簿", "phrase": "keep a diary (写日记)", "root": "词根拆解：di- (天/日，同 day) + -ary (物/薄册) -> 逐笔记载每一天的册子 -> 日记"}, {"id": "u2_21", "unit": 2, "unitTitle": "Unit 2 School life", "word": "project", "phonetic": "/ˈprɒdʒekt/", "pos": "n.", "meaning": "课题；探究项目；工程", "phrase": "work on a project (做项目研究)", "root": "词根拆解：pro- (向前) + ject- (投射) -> 向前规划投射的宏图规划 -> 课题；探究项目"}, {"id": "u2_22", "unit": 2, "unitTitle": "Unit 2 School life", "word": "poster", "phonetic": "/ˈpəʊstə(r)/", "pos": "n.", "meaning": "海报；招贴画", "phrase": "make a poster (制作海报)", "root": "词根拆解：post (张贴/邮递) + -er -> 张贴在墙面告示栏上的图文 -> 海报"}, {"id": "u2_23", "unit": 2, "unitTitle": "Unit 2 School life", "word": "sundial", "phonetic": "/ˈsʌndaɪəl/", "pos": "n.", "meaning": "日晷；古代测时日规", "phrase": "tell time with a sundial (用日晷测时间)", "root": "词根拆解：sun (太阳) + dial (刻度盘，源自 dies 日) -> 利用日影测时间的日盘 -> 日晷"}, {"id": "u2_24", "unit": 2, "unitTitle": "Unit 2 School life", "word": "presentation", "phonetic": "/ˌpreznˈteɪʃn/", "pos": "n.", "meaning": "口头汇报；演示；展示", "phrase": "give a presentation (做汇报展示)", "root": "词根拆解：pre- (在前面) + sent- (存在/呈递) + -ation -> 在众人面前呈递展示 -> 口头汇报"}, {"id": "u2_25", "unit": 2, "unitTitle": "Unit 2 School life", "word": "celebrate", "phonetic": "/ˈselɪbreɪt/", "pos": "v.", "meaning": "庆祝；祝贺", "phrase": "celebrate the festival (庆祝节日)", "root": "词根拆解：celebr- (隆重/众多) + -ate (动词后缀) -> 众人齐聚隆重纪念 -> 庆祝"}, {"id": "u2_26", "unit": 2, "unitTitle": "Unit 2 School life", "word": "success", "phonetic": "/səkˈses/", "pos": "n.", "meaning": "成功；胜利", "phrase": "achieve success (获得成功)", "root": "词根拆解：sub- (从下而上紧随) + cess- (走/前行) -> 顺理成章走到底得到圆满结果 -> 成功"}, {"id": "u3_1", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "season", "phonetic": "/ˈsiːzn/", "pos": "n.", "meaning": "季节；时节", "phrase": "the four seasons (四季)", "root": "词源助记：源自拉丁语 satio (播种时节) -> 大自然四时轮转的时节 -> 季节"}, {"id": "u3_2", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "spring", "phonetic": "/sprɪŋ/", "pos": "n.", "meaning": "春天；春季", "phrase": "in spring (在春天)", "root": "联想助记：万物复苏、泉水向上涌出 (spring up) 的季节 -> 春天"}, {"id": "u3_3", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "summer", "phonetic": "/ˈsʌmə(r)/", "pos": "n.", "meaning": "夏天；夏季", "phrase": "in hot summer (在炎炎夏日)", "root": "词源助记：古英语 sumor，与梵语 sama (半载/时节) 同源，骄阳如火的时节 -> 夏天"}, {"id": "u3_4", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "autumn", "phonetic": "/ˈɔːtəm/", "pos": "n.", "meaning": "秋天；秋季", "phrase": "in golden autumn (在金秋)", "root": "词源助记：源自拉丁语 autumnus (丰收干燥的时节) -> 秋天"}, {"id": "u3_5", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "winter", "phonetic": "/ˈwɪntə(r)/", "pos": "n.", "meaning": "冬天；冬季", "phrase": "in cold winter (在寒冬)", "root": "词根拆解：与 wet (湿/水) 同源，在欧洲指多雨雪水汽充沛的寒季 -> 冬天"}, {"id": "u3_6", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "weather", "phonetic": "/ˈweðə(r)/", "pos": "n.", "meaning": "天气；气候", "phrase": "nice weather (好天气) / bad weather (坏天气)", "root": "词源助记：源自印欧语 we- (刮风/风吹)，空气流动的整体气候样态 -> 天气"}, {"id": "u3_7", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "temperature", "phonetic": "/ˈtemprətʃə(r)/", "pos": "n.", "meaning": "温度；气温", "phrase": "high temperature (高温) / drop in temperature (降温)", "root": "词根拆解：temper- (调和/冷热适度) + -ature -> 冷热调和的程度指标 -> 温度"}, {"id": "u3_8", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "degree", "phonetic": "/dɪˈɡriː/", "pos": "n.", "meaning": "度；度数（°C）", "phrase": "30 degrees (30度)", "root": "词根拆解：de- (向下) + gree / grad- (台阶/步) -> 梯级刻度上的某一阶 -> 度数"}, {"id": "u3_9", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "warm", "phonetic": "/wɔːm/", "pos": "adj.", "meaning": "温暖的；暖和的", "phrase": "warm sunshine (温暖阳光) / keep warm (保暖)", "root": "词源助记：日耳曼语系同源词，带来如火光般舒适的气息 -> 温暖的"}, {"id": "u3_10", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "cool", "phonetic": "/kuːl/", "pos": "adj.", "meaning": "凉爽的；冷静的", "phrase": "cool wind (凉爽的风) / cool down (降温/冷静)", "root": "词源助记：与 cold 同源但语气柔和 -> 微寒而舒爽 -> 凉爽的"}, {"id": "u3_11", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "shine", "phonetic": "/ʃaɪn/", "pos": "v.", "meaning": "照耀；发光", "phrase": "sun shines brightly (阳光明媚)", "root": "词源助记：古英语 scinan (发光/闪亮)，日光普照 -> 照耀；发光"}, {"id": "u3_12", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "brightly", "phonetic": "/ˈbraɪtli/", "pos": "adv.", "meaning": "明亮地；耀眼地", "phrase": "shine brightly (明媚照耀)", "root": "词根拆解：bright (明亮的) + -ly (副词后缀) -> 明亮地；耀眼地"}, {"id": "u3_13", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "dry", "phonetic": "/draɪ/", "pos": "adj. / v.", "meaning": "干燥的 / 弄干", "phrase": "dry climate (干燥气候) / dry season (旱季)", "root": "词源助记：与 drought (干旱) 同源，缺少水分的状态 -> 干燥的"}, {"id": "u3_14", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "wet", "phonetic": "/wet/", "pos": "adj.", "meaning": "湿的；潮湿的", "phrase": "wet floor (湿滑地面) / wet season (雨季)", "root": "词源助记：与 water (水) 同源，沾满水分的状态 -> 潮湿的"}, {"id": "u3_15", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "windy", "phonetic": "/ˈwɪndi/", "pos": "adj.", "meaning": "多风的；风大的", "phrase": "a windy afternoon (多风的下午)", "root": "词根拆解：wind (风) + -y (多...的形容词后缀) -> 多风的"}, {"id": "u3_16", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "snowy", "phonetic": "/ˈsnəʊi/", "pos": "adj.", "meaning": "下雪的；积雪的", "phrase": "a snowy day (下雪天)", "root": "词根拆解：snow (雪) + -y (形容词后缀) -> 下雪的；积雪的"}, {"id": "u3_17", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "picnic", "phonetic": "/ˈpɪknɪk/", "pos": "n.", "meaning": "野餐", "phrase": "go on a picnic (去野餐) / have a picnic (吃野餐)", "root": "词源助记：源自法语 pique-nique (每个人挑一样零碎小吃凑在一起吃) -> 野餐"}, {"id": "u3_18", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "kick", "phonetic": "/kɪk/", "pos": "v.", "meaning": "踢；蹬", "phrase": "kick a football (踢足球)", "root": "动作象声：单脚迅速向前弹击 -> 踢；蹬"}, {"id": "u3_19", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "puddle", "phonetic": "/ˈpʌdl/", "pos": "n.", "meaning": "水坑；小泥潭", "phrase": "jump into puddles (跳进水洼)", "root": "形态联想：地表洼地聚集的小水坑"}, {"id": "u3_20", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "footprint", "phonetic": "/ˈfʊtprɪnt/", "pos": "n.", "meaning": "脚印；足迹", "phrase": "leave footprints (留下脚印)", "root": "复合词：foot (脚) + print (印记/印痕) -> 脚印；足迹"}, {"id": "u3_21", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "blow", "phonetic": "/bləʊ/", "pos": "v.", "meaning": "吹；刮风（过去式blew）", "phrase": "wind blows hard (风猛烈吹)", "root": "动作象声：从嘴或风中呼出气流 -> 吹；刮风"}, {"id": "u3_22", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "solar", "phonetic": "/ˈsəʊlə(r)/", "pos": "adj.", "meaning": "太阳的；太阳能的", "phrase": "solar terms (二十四节气) / solar power (太阳能)", "root": "词根拆解：sol- (太阳，如 Sun) + -ar (形容词后缀) -> 太阳的；日光的"}, {"id": "u3_23", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "harvest", "phonetic": "/ˈhɑːvɪst/", "pos": "n. / v.", "meaning": "收获；收割", "phrase": "bumper harvest (大丰收)", "root": "词源助记：源自日耳曼语 herbist (秋天/采摘果实的时节) -> 收获；收割"}, {"id": "u3_24", "unit": 3, "unitTitle": "Unit 3 The seasons", "word": "leaf", "phonetic": "/liːf/", "pos": "n.", "meaning": "树叶（复数leaves）", "phrase": "green leaves (绿叶) / fallen leaves (落叶)", "root": "复数变法：复数变为 leaves (f变v加es) -> 树叶"}, {"id": "u4_1", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "earth", "phonetic": "/ɜːθ/", "pos": "n.", "meaning": "地球；陆地；泥土", "phrase": "protect the Earth (保护地球) / on Earth (在世上)", "root": "词源助记：源自日耳曼语 ertha (大地/土地)，大写的 Earth 专指我们居住的地球"}, {"id": "u4_2", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "planet", "phonetic": "/ˈplænɪt/", "pos": "n.", "meaning": "行星", "phrase": "our planet (我们的星球)", "root": "词根拆解：源自希腊语 planetes (漫游者) -> 在星空中漫游穿行的天体 -> 行星"}, {"id": "u4_3", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "amazing", "phonetic": "/əˈmeɪzɪŋ/", "pos": "adj.", "meaning": "令人惊叹的；神奇的", "phrase": "amazing world (奇妙世界)", "root": "词根拆解：a- (使) + maze (迷宫/困惑) + -ing -> 让人宛如走进奇境般赞叹不已 -> 令人惊叹的"}, {"id": "u4_4", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "ocean", "phonetic": "/ˈəʊʃn/", "pos": "n.", "meaning": "海洋；大洋", "phrase": "ocean pollution (海洋污染)", "root": "词源助记：源自希腊神话巨河之神 Oceanus，环绕大地的浩瀚水域 -> 海洋"}, {"id": "u4_5", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "billion", "phonetic": "/ˈbɪljən/ ", "pos": "num.", "meaning": "十亿", "phrase": "billions of people (数十亿人)", "root": "词根拆解：bi- (二/千的二次方进阶) + -illion -> 十亿 (1,000,000,000)"}, {"id": "u4_6", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "cover", "phonetic": "/ˈkʌvə(r)/", "pos": "v. / n.", "meaning": "覆盖；遮蔽 / 封面", "phrase": "be covered with water (被水覆盖)", "root": "词根拆解：源自拉丁语 cooperire (完全遮掩/覆盖) -> 覆盖；遮蔽"}, {"id": "u4_7", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "area", "phonetic": "/ˈeəriə/", "pos": "n.", "meaning": "面积；地区；区域", "phrase": "land area (陆地面积)", "root": "词源助记：拉丁语 area (空地/场院) -> 延展开来的地域或面积"}, {"id": "u4_8", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "desert", "phonetic": "/ˈdezət/", "pos": "n.", "meaning": "沙漠；荒原", "phrase": "cross the desert (穿过沙漠)", "root": "词根拆解：de- (离开/废弃) + sert- (连接) -> 被生命废弃遗忘的干旱之地 -> 沙漠"}, {"id": "u4_9", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "freezing", "phonetic": "/ˈfriːzɪŋ/", "pos": "adj.", "meaning": "极冷的；冰冻的", "phrase": "freezing point (冰点) / freezing cold (刺骨寒冷)", "root": "词根拆解：freeze (结冰) + -ing -> 达到冰点、极度严寒的"}, {"id": "u4_10", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "pole", "phonetic": "/pəʊl/", "pos": "n.", "meaning": "（地球的）极；极地", "phrase": "North Pole (北极) / South Pole (南极)", "root": "词根拆解：源自希腊语 polos (旋转之轴) -> 地球自转轴心穿出的极点 -> 极地；极"}, {"id": "u4_11", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "protect", "phonetic": "/prəˈtekt/", "pos": "v.", "meaning": "保护；防卫", "phrase": "protect the environment (保护环境)", "root": "词根拆解：pro- (在前方) + tect- (遮盖/房顶) -> 在前方设盖遮护 -> 保护；防护"}, {"id": "u4_12", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "pollution", "phonetic": "/pəˈluːʃn/", "pos": "n.", "meaning": "污染；污染物", "phrase": "stop pollution (制止污染)", "root": "词根拆解：pollut- (污染/弄脏) + -ion (名词后缀) -> 污染；污染物"}, {"id": "u4_13", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "energy", "phonetic": "/ˈenədʒi/", "pos": "n.", "meaning": "能源；能量；精力", "phrase": "clean energy (清洁能源) / save energy (节能)", "root": "词根拆解：en- (内部) + erg- (做功/力量) + -y -> 蕴含在系统内部做功的力量 -> 能源；能量"}, {"id": "u4_14", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "ground", "phonetic": "/ɡraʊnd/", "pos": "n.", "meaning": "地面；土地", "phrase": "fall to the ground (落到地上)", "root": "空间联想：我们脚踩踩实的大地表面 -> 地面；土地"}, {"id": "u4_15", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "burn", "phonetic": "/bɜːn/", "pos": "v.", "meaning": "燃烧；烧毁", "phrase": "burn coal (燃煤)", "root": "词源助记：古英语 byrnan (燃烧发热)"}, {"id": "u4_16", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "rubbish", "phonetic": "/ˈrʌbɪʃ/", "pos": "n.", "meaning": "垃圾；废物", "phrase": "sort rubbish (垃圾分类) / throw rubbish (扔垃圾)", "root": "词源助记：源自古诺曼法语 robous (碎石废料) -> 丢弃的无用之物 -> 垃圾"}, {"id": "u4_17", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "recycle", "phonetic": "/ˌriːˈsaɪkl/", "pos": "v.", "meaning": "回收利用；循环利用", "phrase": "recycle plastic (塑料再利用)", "root": "词根拆解：re- (再次/重复) + cycle (圆环/循环周期) -> 重新进入循环利用 -> 回收再利用"}, {"id": "u4_18", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "provide", "phonetic": "/prəˈvaɪd/", "pos": "v.", "meaning": "提供；供给", "phrase": "provide sb. with sth. (为某人提供某物)", "root": "词根拆解：pro- (向前) + vid- (看/预见) -> 提前看清需求并做好准备给对方 -> 提供"}, {"id": "u4_19", "unit": 4, "unitTitle": "Unit 4 The Earth", "word": "problem", "phonetic": "/ˈprɒbləm/", "pos": "n.", "meaning": "问题；难题", "phrase": "environmental problems (环境问题)", "root": "词根拆解：pro- (向前) + blem / ball- (投掷) -> 抛掷在面前需要跨越攻克的难题 -> 难题；问题"}, {"id": "u5_1", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "space", "phonetic": "/speɪs/", "pos": "n.", "meaning": "太空；宇宙；空间", "phrase": "in outer space (在外太空) / space station (空间站)", "root": "词源助记：拉丁语 spatium (延展的广袤空间)，在天文学中指外层太空"}, {"id": "u5_2", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "flight", "phonetic": "/flaɪt/", "pos": "n.", "meaning": "飞行；航班；航程", "phrase": "space flight (太空飞行) / take a flight (乘飞机)", "root": "词根拆解：fly (飞翔) 的抽象名词形态 -> 飞行；航班"}, {"id": "u5_3", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "astronaut", "phonetic": "/ˈæstrənɔːt/", "pos": "n.", "meaning": "宇航员；航天员", "phrase": "become an astronaut (成为宇航员)", "root": "词根拆解：astro- (星星/天体) + naut- (水手/航海家) -> 航行于繁星之间的人 -> 宇航员"}, {"id": "u5_4", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "rocket", "phonetic": "/ˈrɒkɪt/", "pos": "n.", "meaning": "火箭", "phrase": "rocket launch (火箭发射)", "root": "词源助记：源自意大利语 rocchetto (纺锤形线轴，因火箭外形像线轴尖端) -> 火箭"}, {"id": "u5_5", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "spaceship", "phonetic": "/ˈspeɪsʃɪp/", "pos": "n.", "meaning": "宇宙飞船", "phrase": "fly a spaceship (驾驶宇宙飞船)", "root": "复合词：space (太空) + ship (飞船/航船) -> 宇宙飞船"}, {"id": "u5_6", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "spacesuit", "phonetic": "/ˈspeɪssuːt/", "pos": "n.", "meaning": "航天服；宇航服", "phrase": "put on a spacesuit (穿上宇航服)", "root": "复合词：space (太空) + suit (整套服装) -> 宇航服"}, {"id": "u5_7", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "gravity", "phonetic": "/ˈɡrævəti/", "pos": "n.", "meaning": "重力；地心引力", "phrase": "zero gravity (零重力状态)", "root": "词根拆解：grav- (重/沉重) + -ity (名词后缀) -> 地球对物体的向下引力 -> 重力"}, {"id": "u5_8", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "float", "phonetic": "/fləʊt/", "pos": "v.", "meaning": "漂浮；浮动", "phrase": "float in space (在太空中漂浮)", "root": "词源助记：与 fleet (漂流舰队) 同源 -> 悬在流体或无重力中不落 -> 漂浮"}, {"id": "u5_9", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "weightless", "phonetic": "/ˈweɪtləs/", "pos": "adj.", "meaning": "失重的；无重力的", "phrase": "weightless state (失重状态)", "root": "词根拆解：weight (重量) + -less (无...的否定后缀) -> 失去重量感的 -> 失重的"}, {"id": "u5_10", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "surface", "phonetic": "/ˈsɜːfɪs/", "pos": "n.", "meaning": "表面；表层", "phrase": "the surface of the Moon (月球表面)", "root": "词根拆解：sur- (在...之上) + face (面/外表) -> 最上面的那一层表面 -> 表面"}, {"id": "u5_11", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "crater", "phonetic": "/ˈkreɪtə(r)/", "pos": "n.", "meaning": "环形山；火山口", "phrase": "lunar crater (月球环形坑)", "root": "词源助记：希腊语 krater (大碗/调酒钵) -> 外形如巨大碗状凹坑 -> 环形山；火山口"}, {"id": "u5_12", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "explore", "phonetic": "/ɪkˈsplɔː(r)/", "pos": "v.", "meaning": "探索；探险；探测", "phrase": "explore the unknown (探索未知)", "root": "词根拆解：ex- (向外) + plore- (呼喊/寻访猎物) -> 深入未知荒野探访巡查 -> 探索；探测"}, {"id": "u5_13", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "Mars", "phonetic": "/mɑːz/", "pos": "n.", "meaning": "火星", "phrase": "mission to Mars (火星探测任务)", "root": "形态与用法：新牛津 7A 考纲高频核心词汇"}, {"id": "u5_14", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "satellite", "phonetic": "/ˈsætəlaɪt/", "pos": "n.", "meaning": "人造卫星；卫星", "phrase": "launch a satellite (发射卫星)", "root": "词源助记：拉丁语 satelles (卫士/侍从) -> 围绕行星形影不离公转的天体 -> 卫星"}, {"id": "u5_15", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "telescope", "phonetic": "/ˈtelɪskəʊp/", "pos": "n.", "meaning": "望远镜", "phrase": "look through a telescope (通过望远镜观察)", "root": "词根拆解：tele- (远距离) + scope- (观察/镜) -> 观察远距离物体的仪器 -> 望远镜"}, {"id": "u5_16", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "universe", "phonetic": "/ˈjuːnɪvɜːs/", "pos": "n.", "meaning": "宇宙；万物", "phrase": "explore the universe (探索宇宙)", "root": "词根拆解：uni- (合为一) + vers- (旋转) -> 万物汇聚旋转成一个整体的世界 -> 宇宙"}, {"id": "u5_17", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "hotel", "phonetic": "/həʊˈtel/", "pos": "n.", "meaning": "旅馆；酒店", "phrase": "stay in a hotel (住旅馆)", "root": "词源助记：与 hospital (招待所) 同源，源自拉丁语 hospes (客人/招待) -> 旅店"}, {"id": "u5_18", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "nervous", "phonetic": "/ˈnɜːvəs/", "pos": "adj.", "meaning": "紧张的；担心的", "phrase": "feel nervous (感到紧张不安)", "root": "词根拆解：nerv- (神经) + -ous (多...的形容词后缀) -> 神经紧绷不安的 -> 紧张的"}, {"id": "u5_19", "unit": 5, "unitTitle": "Unit 5 Off to space", "word": "breathe", "phonetic": "/briːð/", "pos": "v.", "meaning": "呼吸", "phrase": "breathe oxygen (呼吸氧气)", "root": "词根拆解：breath (呼吸之气) 的动词形式 (结尾加e发浊音/ð/) -> 呼吸"}, {"id": "u6_1", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "Asia", "phonetic": "/ˈeɪʒə/", "pos": "n.", "meaning": "亚洲", "phrase": "in Asia (在亚洲)", "root": "形态与用法：新牛津 7A 考纲高频核心词汇"}, {"id": "u6_2", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "Asian", "phonetic": "/ˈeɪʒn/", "pos": "adj. / n.", "meaning": "亚洲的 / 亚洲人", "phrase": "Asian games (亚运会)", "root": "形态与用法：新牛津 7A 考纲高频核心词汇"}, {"id": "u6_3", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "guide", "phonetic": "/ɡaɪd/", "pos": "n. / v.", "meaning": "导游；旅行指南 / 引领", "phrase": "tour guide (导游) / guidebook (旅行指南)", "root": "词源助记：源自古法语 guider (指明道路者) -> 导游；引路人"}, {"id": "u6_4", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "tourist", "phonetic": "/ˈtʊərɪst/", "pos": "n.", "meaning": "游客；观光客", "phrase": "foreign tourists (外国游客)", "root": "词根拆解：tour (观光旅行) + -ist (人) -> 从事观光游历的人 -> 游客"}, {"id": "u6_5", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "capital", "phonetic": "/ˈkæpɪtl/", "pos": "n.", "meaning": "首都；省会；资金", "phrase": "capital city (首都城市)", "root": "词根拆解：capit- (头脑/首要) + -al -> 国家的头脑首脑中枢 -> 首都；首府"}, {"id": "u6_6", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "famous", "phonetic": "/ˈfeɪməs/", "pos": "adj.", "meaning": "著名的；知名的", "phrase": "be famous for (因...而闻名)", "root": "词根拆解：fam- (声誉/传闻) + -ous (形容词后缀) -> 享有名誉广为流传的 -> 著名的"}, {"id": "u6_7", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "heritage", "phonetic": "/ˈherɪtɪdʒ/", "pos": "n.", "meaning": "遗产（文化/历史）", "phrase": "World Heritage Site (世界遗产地)", "root": "词根拆解：herit- (继承) + -age (抽象名词后缀) -> 前人留存给后世继承的瑰宝 -> 文化遗产"}, {"id": "u6_8", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "site", "phonetic": "/saɪt/", "pos": "n.", "meaning": "地点；遗址；场所", "phrase": "historic site (历史遗址)", "root": "词源助记：拉丁语 situs (放置的位置) -> 具有特殊意义的遗址；场所"}, {"id": "u6_9", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "modern", "phonetic": "/ˈmɒdn/", "pos": "adj.", "meaning": "现代的；新式的", "phrase": "modern city (现代化都市)", "root": "词根拆解：mod- (现在/适时) + -ern -> 符合当下最新样貌的 -> 现代化的"}, {"id": "u6_10", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "traditional", "phonetic": "/trəˈdɪʃənl/", "pos": "adj.", "meaning": "传统的；习俗的", "phrase": "traditional culture (传统文化)", "root": "词根拆解：tradition (传统，trans 越过 + dare 递交代代相传) + -al -> 传统的"}, {"id": "u6_11", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "square", "phonetic": "/skweə(r)/", "pos": "n.", "meaning": "广场；正方形", "phrase": "city square (城市广场)", "root": "几何与空间：正方形 (四边相等) / 四方开阔的城市公共空地 (城市广场)"}, {"id": "u6_12", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "fountain", "phonetic": "/ˈfaʊntn/", "pos": "n.", "meaning": "喷泉；人工喷水池", "phrase": "music fountain (音乐喷泉)", "root": "词根拆解：fount- (泉水源头) + -ain -> 人工设计的涌水喷泉"}, {"id": "u6_13", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "compass", "phonetic": "/ˈkʌmpəs/", "pos": "n.", "meaning": "指南针；罗盘", "phrase": "use a compass (使用指南针)", "root": "词根拆解：com- (共同) + pass- (步幅/丈量) -> 测定周遭方位与经纬的罗盘 -> 指南针"}, {"id": "u6_14", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "direction", "phonetic": "/daɪˈrekʃn/", "pos": "n.", "meaning": "方向；方位；指引", "phrase": "in the right direction (朝正确方向)", "root": "词根拆解：di- (分开) + rect- (伸直/引导) + -ion -> 引领前行的朝向 -> 方向"}, {"id": "u6_15", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "suggest", "phonetic": "/səˈdʒest/", "pos": "v.", "meaning": "建议；提议", "phrase": "suggest doing sth. (提议做某事)", "root": "词根拆解：sub- (从下往上) + gest- (带来/呈上) -> 委婉从下呈递上自己的见解 -> 提议；建议"}, {"id": "u6_16", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "recommend", "phonetic": "/ˌrekəˈmend/", "pos": "v.", "meaning": "推荐；介绍", "phrase": "highly recommend (极力推荐)", "root": "词根拆解：re- (再次) + com- (完全) + mend- (交付托付) -> 值得再次郑重托付介绍 -> 推荐"}, {"id": "u6_17", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "cuisine", "phonetic": "/kwɪˈziːn/", "pos": "n.", "meaning": "菜肴；风味烹饪", "phrase": "local cuisine (地道风味美食)", "root": "词源助记：法语借词，源自拉丁语 coquere (烹调)，指有地域文化体系的风味美食"}, {"id": "u6_18", "unit": 6, "unitTitle": "Unit 6 Travelling around Asia", "word": "culture", "phonetic": "/ˈkʌltʃə(r)/", "pos": "n.", "meaning": "文化；文明", "phrase": "cultural exchange (文化交流)", "root": "词根拆解：cult- (耕耘/培育) + -ure -> 心灵与智慧的耕耘结晶 -> 文化；文明"}, {"id": "u7_1", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "fair", "phonetic": "/feə(r)/", "pos": "n. / adj.", "meaning": "博览会；集市 / 公平的", "phrase": "Clubs Fair (社团博览会)", "root": "多义巧记：作名词指露天集市、社团博览会；作形容词指公平公正"}, {"id": "u7_2", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "member", "phonetic": "/ˈmembə(r)/", "pos": "n.", "meaning": "成员；会员", "phrase": "club member (社团成员)", "root": "词源助记：源自拉丁语 membrum (肢体/器官) -> 属于组织肌体中的不可或缺一份子 -> 成员"}, {"id": "u7_3", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "join", "phonetic": "/dʒɔɪn/", "pos": "v.", "meaning": "加入；参加（组织社团）", "phrase": "join the art club (加入美术社)", "root": "词源助记：与 joint (接头) 同源，使彼此连接固定 -> 加入社团组织"}, {"id": "u7_4", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "attend", "phonetic": "/əˈtend/", "pos": "v.", "meaning": "出席；参加（会议/讲座）", "phrase": "attend a meeting (出席会议)", "root": "词根拆解：ad- (向) + tend- (伸展心神) -> 心思放在某处、亲临现场 -> 出席；参加"}, {"id": "u7_5", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "photography", "phonetic": "/fəˈtɒɡrəfi/", "pos": "n.", "meaning": "摄影（术）", "phrase": "learn photography (学摄影)", "root": "词根拆解：photo- (光) + -graphy (记录之术) -> 用光线记录画面的艺术 -> 摄影术"}, {"id": "u7_6", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "experiment", "phonetic": "/ɪkˈsperɪmənt/", "pos": "n. / v.", "meaning": "实验；试验", "phrase": "science experiment (科学实验)", "root": "词根拆解：ex- (向外) + peri- (尝试/经历) + -ment -> 动手尝试去检验真理 -> 科学实验"}, {"id": "u7_7", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "chess", "phonetic": "/tʃes/", "pos": "n.", "meaning": "国际象棋", "phrase": "play chess (下国际象棋)", "root": "词源助记：源自波斯语 shah (君王/沙皇)，国际象棋是以保护君王为核心的博弈"}, {"id": "u7_8", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "drama", "phonetic": "/ˈdrɑːmə/", "pos": "n.", "meaning": "戏剧；话剧", "phrase": "drama club (戏剧社)", "root": "词源助记：源自希腊语 dran (行动/演绎) -> 在舞台上演绎人生的故事 -> 戏剧"}, {"id": "u7_9", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "outing", "phonetic": "/ˈaʊtɪŋ/", "pos": "n.", "meaning": "远足；郊游；短途旅行", "phrase": "go on a school outing (参加学校郊游)", "root": "词根拆解：out (出外) + -ing (名词后缀) -> 走到户外大自然中去 -> 郊游；远足"}, {"id": "u7_10", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "camp", "phonetic": "/kæmp/", "pos": "n. / v.", "meaning": "营地 / 露营；宿营", "phrase": "summer camp (夏令营)", "root": "词根拆解：源自 campus (野外开阔平地) -> 在开阔原野安营扎寨 -> 营地；露营"}, {"id": "u7_11", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "perform", "phonetic": "/pəˈfɔːm/", "pos": "v.", "meaning": "表演；演奏；执行", "phrase": "perform on stage (在舞台上表演)", "root": "词根拆解：per- (完全) + form- (形成形式) -> 在舞台上将角色形态完整生动呈现 -> 表演"}, {"id": "u7_12", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "excited", "phonetic": "/ɪkˈsaɪtɪd/", "pos": "adj.", "meaning": "兴奋的；激动的（人）", "phrase": "be excited about (对...感到兴奋)", "root": "词根拆解：ex- (向外) + cit- (唤醒/召唤) + -ed -> 人的内心被唤醒激动的情绪 -> 兴奋的"}, {"id": "u7_13", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "exciting", "phonetic": "/ɪkˈsaɪtɪŋ/", "pos": "adj.", "meaning": "令人兴奋的（事）", "phrase": "exciting news (令人激动的消息)", "root": "词根拆解：ex- (向外) + cit- (唤醒) + -ing -> 某件事物具有唤醒激情的特质 -> 令人兴奋的"}, {"id": "u7_14", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "competition", "phonetic": "/ˌkɒmpəˈtɪʃn/", "pos": "n.", "meaning": "比赛；竞争", "phrase": "win a competition (在比赛中获胜)", "root": "词根拆解：com- (共同) + pet- (追求/角逐) + -ition -> 众人一起争夺顶峰 -> 竞赛；角逐"}, {"id": "u7_15", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "win", "phonetic": "/wɪn/", "pos": "v.", "meaning": "赢得；获胜（过去式won）", "phrase": "win first prize (赢得一等奖)", "root": "过去式注意：win (赢得) -> won (过去式) -> winner (胜利者)"}, {"id": "u7_16", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "prize", "phonetic": "/praɪz/", "pos": "n.", "meaning": "奖品；奖项", "phrase": "win a prize (获奖)", "root": "词源助记：与 price (价值) 同源 -> 给予表现优异者的奖励之物 -> 奖品；奖项"}, {"id": "u7_17", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "disappear", "phonetic": "/ˌdɪsəˈpɪə(r)/", "pos": "v.", "meaning": "消失；不见", "phrase": "disappear from sight (从视线中消失)", "root": "词根拆解：dis- (否定/消失) + appear (出现) -> 不复存在 -> 消失不见"}, {"id": "u7_18", "unit": 7, "unitTitle": "Unit 7 Fun after school", "word": "surprised", "phonetic": "/səˈpraɪzd/", "pos": "adj.", "meaning": "感到吃惊的", "phrase": "be surprised at (对...感到吃惊)", "root": "词根拆解：sur- (在上方) + prise- (抓住) + -ed -> 突然从上方被意外攫住心神 -> 吃惊的"}, {"id": "u8_1", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collect", "phonetic": "/kəˈlekt/", "pos": "v.", "meaning": "收集；收藏；聚集", "phrase": "collect stamps (集邮) / collect coins (集硬币)", "root": "词根拆解：com- (一起) + lect- (挑选/聚集) -> 挑拣到一起细心整理 -> 收集；收藏"}, {"id": "u8_2", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collection", "phonetic": "/kəˈlekʃn/", "pos": "n.", "meaning": "收藏品；收集物", "phrase": "have a large collection (拥有大量收藏)", "root": "词根拆解：collect (收集) + -ion (名词后缀) -> 收藏品；收藏集"}, {"id": "u8_3", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "collector", "phonetic": "/kəˈlektə(r)/", "pos": "n.", "meaning": "收藏家；收集者", "phrase": "stamp collector (集邮家)", "root": "词根拆解：collect (收集) + -or (人) -> 专门从事收藏鉴赏的人 -> 收藏家"}, {"id": "u8_4", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "stamp", "phonetic": "/stæmp/", "pos": "n.", "meaning": "邮票；印花；印章", "phrase": "postage stamp (邮票)", "root": "动作演变：重重跺脚加印印花 (stamp) -> 印在信封上的邮资凭证 -> 邮票"}, {"id": "u8_5", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "coin", "phonetic": "/kɔɪn/", "pos": "n.", "meaning": "硬币；钱币", "phrase": "flip a coin (抛硬币)", "root": "词源助记：源自拉丁语 cuneus (冲压金属用的楔子模具) -> 模具铸造出的金属钱币 -> 硬币"}, {"id": "u8_6", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "postcard", "phonetic": "/ˈpəʊstkɑːd/", "pos": "n.", "meaning": "明信片", "phrase": "send a postcard (寄明信片)", "root": "复合词：post (邮政) + card (卡片) -> 明信片"}, {"id": "u8_7", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "model", "phonetic": "/ˈmɒdl/", "pos": "n.", "meaning": "模型；模特；榜样", "phrase": "model plane (飞机模型) / role model (榜样)", "root": "词根拆解：mod- (尺度/标准) + -el (指小词) -> 按同等比例缩小打造的标准物件 -> 模型"}, {"id": "u8_8", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "item", "phonetic": "/ˈaɪtəm/", "pos": "n.", "meaning": "单件物品；项目", "phrase": "collector's item (珍贵收藏物)", "root": "词源助记：拉丁语 item (同样地/每一单项)，单据上的每一件单项 -> 单件物品"}, {"id": "u8_9", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "valuable", "phonetic": "/ˈvæljuəbl/", "pos": "adj.", "meaning": "有价值的；贵重的", "phrase": "valuable collection (珍贵收藏)", "root": "词根拆解：value (价值) + -able (能够...的) -> 具有很高经济或情感价值的 -> 珍贵的"}, {"id": "u8_10", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "memory", "phonetic": "/ˈmeməri/", "pos": "n.", "meaning": "回忆；记忆（复数memories）", "phrase": "good memories (美好回忆)", "root": "词根拆解：memor- (留心/记住) + -y -> 脑海中封存留存的记忆印记 -> 回忆；记忆"}, {"id": "u8_11", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "album", "phonetic": "/ˈælbəm/", "pos": "n.", "meaning": "集邮册；相册；唱片", "phrase": "stamp album (集邮簿) / photo album (影集)", "root": "词源助记：源自拉丁语 albus (白色)，罗马人用来写公告的白底木板 -> 装裱相片的空白纪念册"}, {"id": "u8_12", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "exchange", "phonetic": "/ɪksˈtʃeɪndʒ/", "pos": "v. / n.", "meaning": "交换；交流", "phrase": "exchange items (交换物品)", "root": "词根拆解：ex- (向外) + change (改变/交换) -> 彼此向外互换物品 -> 交换；交流"}, {"id": "u8_13", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "unusual", "phonetic": "/ʌnˈjuːʒuəl/", "pos": "adj.", "meaning": "不寻常的；独特的", "phrase": "unusual hobby (罕见的爱好)", "root": "词根拆解：un- (否定) + usual (平常的) -> 超出寻常独具特色的 -> 不寻常的"}, {"id": "u8_14", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "interview", "phonetic": "/ˈɪntəvjuː/", "pos": "n. / v.", "meaning": "采访；面试", "phrase": "do an interview (进行采访)", "root": "词根拆解：inter- (在两者之间) + view (注视/晤面) -> 双方坐在一起面对面考察问答 -> 采访；面试"}, {"id": "u8_15", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "reporter", "phonetic": "/rɪˈpɔːtə(r)/", "pos": "n.", "meaning": "记者", "phrase": "newspaper reporter (报社记者)", "root": "词根拆解：re- (带回) + port- (搬运) + -er (人) -> 从前线把第一手新闻搬运带回给大众的人 -> 记者"}, {"id": "u8_16", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "dollar", "phonetic": "/ˈdɒlə(r)/", "pos": "n.", "meaning": "美元；元", "phrase": "ten dollars (十美元)", "root": "词源助记：源自德国铸造优质银币的小镇 Joachimsthal (缩写为 thaler) -> 美元；元"}, {"id": "u8_17", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "silver", "phonetic": "/ˈsɪlvə(r)/", "pos": "n. / adj.", "meaning": "银；银器 / 银色的", "phrase": "silver coin (银币)", "root": "材质属性：闪耀纯净金属光泽的贵金属 -> 银；银币"}, {"id": "u8_18", "unit": 8, "unitTitle": "Unit 8 Collecting as a hobby", "word": "proud", "phonetic": "/praʊd/", "pos": "adj.", "meaning": "骄傲的；自豪的", "phrase": "be proud of (为...感到自豪)", "root": "词源助记：源自古法语 prodom (英勇有才能的人) -> 为自身或朋友的卓越成就感到无上光荣 -> 自豪的"}];
 
 // 本地持久化管理器
 const STORAGE_KEY = 'sm2_vocab_progress_7a';
@@ -1208,7 +1315,10 @@ const SETTINGS_KEY = 'sm2_vocab_settings_7a';
 const HISTORY_KEY = 'sm2_vocab_history_7a';
 const ACHIEVE_KEY = 'sm2_vocab_achievements_7a';
 
-// 成就定义库 (严格学术极简风，绝无夸张网络用语)
+// Leech (水蛭词) 遗忘阈值设定 (Anki经典设为4次)
+const LEECH_THRESHOLD = 4;
+
+// 成就定义库
 const ACHIEVEMENT_DEFINITIONS = [
   {
     id: "first_word",
@@ -1352,7 +1462,7 @@ function saveSettings(s) {
   } catch (e) {}
 }
 
-// SM2 算法逻辑
+// SM2 算法逻辑与 Leech 机制
 function getCardProgress(cardId) {
   const store = loadSM2Store();
   if (store[cardId]) {
@@ -1366,7 +1476,8 @@ function getCardProgress(cardId) {
     dueDate: null,
     lastReview: null,
     totalReviews: 0,
-    lapses: 0
+    lapses: 0,
+    isLeech: false
   };
 }
 
@@ -1374,11 +1485,15 @@ function updateSM2Progress(cardId, quality) {
   const store = loadSM2Store();
   const card = getCardProgress(cardId);
   const now = Date.now();
-  let { repetitions, interval, efactor } = card;
+  let { repetitions, interval, efactor, lapses } = card;
+
+  let isNowLapse = false;
 
   if (quality < 3) {
     repetitions = 0;
     interval = 1;
+    lapses = (lapses || 0) + 1;
+    isNowLapse = true;
   } else {
     if (repetitions === 0) {
       interval = 1;
@@ -1390,9 +1505,13 @@ function updateSM2Progress(cardId, quality) {
     repetitions += 1;
   }
 
+  // 计算 EF: EF' = EF + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
   efactor = efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
   if (efactor < 1.3) efactor = 1.3;
   if (efactor > 3.0) efactor = 3.0;
+
+  // 判断是否触发 Leech (水蛭词) 判定
+  const isLeech = lapses >= LEECH_THRESHOLD;
 
   const nextDue = now + interval * 24 * 60 * 60 * 1000;
   const updated = {
@@ -1403,7 +1522,8 @@ function updateSM2Progress(cardId, quality) {
     dueDate: nextDue,
     lastReview: now,
     totalReviews: (card.totalReviews || 0) + 1,
-    lapses: (card.lapses || 0) + (quality < 3 ? 1 : 0)
+    lapses,
+    isLeech
   };
 
   store[cardId] = updated;
@@ -1411,10 +1531,35 @@ function updateSM2Progress(cardId, quality) {
 
   recordReviewHistory();
 
-  // 触发成就核验
+  // 若刚达到 Leech 阈值，弹出专属提示
+  if (isNowLapse && lapses === LEECH_THRESHOLD) {
+    showNotionToast('提示：该词已被归入【难词特训】库，已自动强化形态拆解');
+  }
+
   checkAndAwardAchievements();
+  updateLeechCountBadge();
 
   return updated;
+}
+
+// 统计 Leech 词数量
+function getLeechCards() {
+  const sm2Store = loadSM2Store();
+  return VOCAB_DATABASE.filter(w => {
+    const p = sm2Store[w.id];
+    return p && p.lapses >= LEECH_THRESHOLD;
+  });
+}
+
+function updateLeechCountBadge() {
+  const leeches = getLeechCards();
+  const badge = document.getElementById('navLeechBadge');
+  badge.textContent = leeches.length;
+  if (leeches.length > 0) {
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
 }
 
 // 成就检测器
@@ -1423,7 +1568,6 @@ function checkAndAwardAchievements() {
   const history = loadHistoryStore();
   const unlockedStore = loadAchievements();
 
-  // 1. 累计评定次数
   let totalReviews = 0;
   let masteredCount = 0;
   let overcomeLapsesCount = 0;
@@ -1445,7 +1589,6 @@ function checkAndAwardAchievements() {
     }
   });
 
-  // 检查是否有任何单元完全掌握
   let hasFullUnitMastered = false;
   for (let u = 1; u <= 8; u++) {
     if (unitTotalCount[u] > 0 && unitMasteredCount[u] >= unitTotalCount[u]) {
@@ -1454,12 +1597,10 @@ function checkAndAwardAchievements() {
     }
   }
 
-  // 2. 今日复习次数
   const today = new Date();
   const todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
   const todayReviewCount = history[todayKey] || 0;
 
-  // 3. 计算连续打卡天数 (Streak)
   let maxStreakDays = 0;
   let currentStreak = 0;
   for (let i = 0; i < 60; i++) {
@@ -1511,7 +1652,7 @@ function showNotionToast(msg) {
   }, 3500);
 }
 
-// 发音播放器 (双引擎：有道语音 API + 本地 SpeechSynthesis 兜底)
+// 发音播放器
 function playPronunciation(word) {
   const settings = loadSettings();
   const accent = settings.voiceAccent || '2';
@@ -1537,7 +1678,6 @@ let sessionMasteredCount = 0;
 let isRevealed = false;
 let currentCard = null;
 
-// 停留倒计时状态
 let stayTimerInterval = null;
 let isStayLocked = false;
 
@@ -1620,7 +1760,13 @@ function startNewSession() {
   let candidates = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit));
 
   const mode = currentSettings.mode;
-  if (mode === 'due') {
+  if (mode === 'leech') {
+    candidates = getLeechCards();
+    if (candidates.length === 0) {
+      alert('当前还没有出现高频遗忘的难记词 (Lapses ≥ 4)！已自动载入单元词汇。');
+      candidates = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit));
+    }
+  } else if (mode === 'due') {
     const now = Date.now();
     candidates = candidates.filter(w => {
       const p = getCardProgress(w.id);
@@ -1682,13 +1828,22 @@ function loadNextCard() {
   // 填充内容
   document.getElementById('cardUnitTag').textContent = currentCard.unitTitle;
   const p = getCardProgress(currentCard.id);
-  document.getElementById('cardSm2Tag').textContent = '已记:' + p.repetitions + '次 · 间隔:' + p.interval + '天 · EF:' + p.efactor;
+  document.getElementById('cardSm2Tag').textContent = '已记:' + p.repetitions + '次 · 间隔:' + p.interval + '天 · 遗忘:' + (p.lapses||0) + '次 · EF:' + p.efactor;
+
+  // Leech 标记
+  const leechBadgeEl = document.getElementById('cardLeechTag');
+  if (p.lapses >= LEECH_THRESHOLD) {
+    leechBadgeEl.classList.add('active');
+  } else {
+    leechBadgeEl.classList.remove('active');
+  }
 
   document.getElementById('wordText').textContent = currentCard.word;
   document.getElementById('phoneticText').textContent = currentCard.phonetic;
   document.getElementById('posText').textContent = currentCard.pos;
   document.getElementById('meaningText').textContent = currentCard.meaning;
   document.getElementById('phraseText').textContent = currentCard.phrase;
+  document.getElementById('rootText').textContent = currentCard.root || '考纲核心词汇，结合搭配短语加深理解';
 
   // 预测下一次间隔显示
   const ef = p.efactor;
@@ -1704,6 +1859,7 @@ function loadNextCard() {
   updateProgressDisplay();
   renderHeatmap();
   renderAchievements();
+  updateLeechCountBadge();
 
   // 进卡自动发音
   if (currentSettings.autoPronounce) {
@@ -1726,12 +1882,12 @@ function revealCard() {
 
   // 2. 检查难度停留条件
   const p = getCardProgress(currentCard.id);
-  const isHardCard = currentSettings.stayEnforce !== false && (p.efactor < 2.2 || p.lapses > 0 || p.repetitions <= 1);
+  const isHardCard = currentSettings.stayEnforce !== false && (p.efactor < 2.2 || p.lapses > 0 || p.repetitions <= 1 || p.lapses >= LEECH_THRESHOLD);
 
   if (isHardCard) {
     isStayLocked = true;
     setRatingButtonsDisabled(true);
-    let remainingSeconds = 4;
+    let remainingSeconds = p.lapses >= LEECH_THRESHOLD ? 5 : 4; // Leech 词停留 5 秒强化认知
     const noticeEl = document.getElementById('stayTimerNotice');
     const countdownEl = document.getElementById('stayCountdownText');
     countdownEl.textContent = remainingSeconds;
@@ -1793,6 +1949,7 @@ function showSessionComplete() {
   document.getElementById('progressBarFill').style.width = '100%';
   renderHeatmap();
   renderAchievements();
+  updateLeechCountBadge();
 }
 
 // 热力图渲染逻辑
@@ -1865,7 +2022,57 @@ function renderHeatmap() {
   }
 }
 
-// 渲染成就画廊 (Notion Gallery)
+// 渲染难词隔离区 (Leech Ward)
+function renderLeechView() {
+  const leeches = getLeechCards();
+  const tbody = document.getElementById('leechTableBody');
+  const emptyBox = document.getElementById('leechEmptyBox');
+  tbody.innerHTML = '';
+
+  document.getElementById('leechCountOverview').textContent = leeches.length + ' 词处于顽固难记状态';
+
+  if (leeches.length === 0) {
+    emptyBox.style.display = 'block';
+    return;
+  }
+  emptyBox.style.display = 'none';
+
+  leeches.forEach((w, idx) => {
+    const p = getCardProgress(w.id);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">${idx + 1}</td>
+      <td style="font-weight: 600; color: var(--text);">${w.word}</td>
+      <td style="color: var(--text-sub); font-size: 12px; font-family: var(--font-mono);">${w.phonetic}</td>
+      <td>
+        <div style="font-weight: 500;">${w.meaning}</div>
+        <div style="font-size: 11.5px; color: var(--tag-blue-color); margin-top: 3px;">${w.root}</div>
+      </td>
+      <td style="font-family: var(--font-mono); font-weight: 600; color: var(--tag-red-color);">${p.lapses} 次</td>
+      <td style="font-family: var(--font-mono); font-size: 11px;">${p.efactor}</td>
+      <td>
+        <button class="nav-btn" style="padding: 2px 6px; font-size: 11px;" onclick="resetLeechCard('${w.id}')">降敏重置</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// 难词重置
+function resetLeechCard(cardId) {
+  const store = loadSM2Store();
+  if (store[cardId]) {
+    store[cardId].lapses = 0;
+    store[cardId].efactor = 2.5;
+    store[cardId].repetitions = 0;
+    saveSM2Store(store);
+    showNotionToast('该词已重置初始记忆参数，退出难词隔离区');
+    renderLeechView();
+    updateLeechCountBadge();
+  }
+}
+
+// 渲染成就画廊
 function renderAchievements() {
   const unlocked = loadAchievements();
   const gridEl = document.getElementById('achieveGrid');
@@ -1922,6 +2129,14 @@ document.getElementById('nextBatchBtn').addEventListener('click', startNewSessio
 document.getElementById('resetCurrentBatchBtn').addEventListener('click', startNewSession);
 document.getElementById('restartSessionBtn').addEventListener('click', startNewSession);
 
+document.getElementById('startLeechSessionBtn').addEventListener('click', function() {
+  currentSettings.mode = 'leech';
+  modeSelectEl.value = 'leech';
+  saveSettings(currentSettings);
+  tabReciteBtn.click();
+  startNewSession();
+});
+
 // 键盘快捷键监听
 window.addEventListener('keydown', function(e) {
   if (document.getElementById('reciteView').style.display === 'none') return;
@@ -1950,10 +2165,12 @@ window.addEventListener('keydown', function(e) {
 
 // 标签页切换
 const tabReciteBtn = document.getElementById('tabReciteBtn');
+const tabLeechBtn = document.getElementById('tabLeechBtn');
 const tabAchievementsBtn = document.getElementById('tabAchievementsBtn');
 const tabListBtn = document.getElementById('tabListBtn');
 
 const reciteView = document.getElementById('reciteView');
+const leechView = document.getElementById('leechView');
 const achievementsView = document.getElementById('achievementsView');
 const listView = document.getElementById('listView');
 const controlPanel = document.getElementById('controlPanel');
@@ -1961,9 +2178,11 @@ const heatmapSection = document.getElementById('heatmapSection');
 
 function hideAllTabs() {
   tabReciteBtn.classList.remove('active');
+  tabLeechBtn.classList.remove('active');
   tabAchievementsBtn.classList.remove('active');
   tabListBtn.classList.remove('active');
   reciteView.style.display = 'none';
+  leechView.style.display = 'none';
   achievementsView.style.display = 'none';
   listView.style.display = 'none';
   controlPanel.style.display = 'none';
@@ -1977,6 +2196,14 @@ tabReciteBtn.addEventListener('click', function() {
   controlPanel.style.display = 'block';
   heatmapSection.style.display = 'block';
   renderHeatmap();
+  updateLeechCountBadge();
+});
+
+tabLeechBtn.addEventListener('click', function() {
+  hideAllTabs();
+  tabLeechBtn.classList.add('active');
+  leechView.style.display = 'flex';
+  renderLeechView();
 });
 
 tabAchievementsBtn.addEventListener('click', function() {
@@ -2010,17 +2237,19 @@ function renderVocabTable() {
   filtered.forEach((w, idx) => {
     const tr = document.createElement('tr');
     const p = getCardProgress(w.id);
+    const isLeech = p.lapses >= LEECH_THRESHOLD;
     tr.innerHTML = `
       <td style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">${idx + 1}</td>
-      <td style="font-weight: 600; color: var(--text);">${w.word}</td>
+      <td style="font-weight: 600; color: var(--text);">${w.word} ${isLeech ? '<span class="card-leech-label active" style="font-size:9.5px; padding:0 3px;">LEECH</span>' : ''}</td>
       <td style="color: var(--text-sub); font-size: 12px; font-family: var(--font-mono);">${w.phonetic}</td>
       <td style="font-style: italic; color: var(--text-muted); font-size: 12px;">${w.pos}</td>
       <td>
         <div style="font-weight: 500;">${w.meaning}</div>
         <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${w.phrase}</div>
+        <div style="font-size: 11px; color: var(--tag-blue-color); margin-top: 2px;">${w.root}</div>
       </td>
       <td style="font-size: 11px; color: var(--text-sub);"><span class="unit-chip" style="padding: 1px 5px; font-size: 10.5px;">${w.unitTitle.split(' ')[0]} ${w.unitTitle.split(' ')[1]}</span></td>
-      <td><span class="sm2-badge">复习:${p.repetitions} · EF:${p.efactor}</span></td>
+      <td><span class="sm2-badge">复习:${p.repetitions} · 遗忘:${p.lapses||0}</span></td>
       <td>
         <button class="nav-btn" style="padding: 2px 6px; font-size: 11px;" onclick="playPronunciation('${w.word}')">发音</button>
       </td>
@@ -2053,6 +2282,7 @@ themeToggleBtn.addEventListener('click', function() {
 renderHeatmap();
 checkAndAwardAchievements();
 renderAchievements();
+updateLeechCountBadge();
 startNewSession();
 </script>
 </body>
