@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>初中英语研习 · 沪教版7A</title>
   <meta name="description" content="基于SM2记忆引擎的极简学术背单词工作台，针对沪教版初中一年级英语全单元词汇。">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <style>
     /* ==========================================================================
        Notion Design System Tokens
@@ -143,6 +146,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+    .brand-logo-img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      transition: filter 0.15s ease;
+    }
+    [data-theme="dark"] .brand-logo-img {
+      filter: invert(1) brightness(1.2);
     }
     .brand-badge {
       font-size: 11px;
@@ -1020,6 +1034,7 @@
 <header>
   <div class="header-inner">
     <div class="brand-title">
+      <img src="icon.png" alt="Logo" class="brand-logo-img">
       <span>沪教版初一英语 7A</span>
       <span class="brand-badge">SM2 Engine</span>
     </div>
