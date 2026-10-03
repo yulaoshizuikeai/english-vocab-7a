@@ -1,0 +1,8 @@
+/*
+  # 安全与防盗链 (Hotlinking & Leech Protection)
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' https://dict.youdao.com; media-src 'self' https://dict.youdao.com blob:; connect-src 'self' https://dict.youdao.com; img-src 'self' data:; style-src 'self' 'unsafe-inline';
+  Access-Control-Allow-Origin: https://english.yunet.cfd
