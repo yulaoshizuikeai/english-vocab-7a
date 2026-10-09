@@ -778,6 +778,107 @@
       gap: 16px;
     }
 
+    /* Stats Toolbar */
+    .stats-toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .stats-toolbar-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stats-toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* AI Diagnostic Dashboard Card */
+    .stats-ai-dashboard-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-ai-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stats-ai-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tag-blue-color);
+      background: var(--tag-blue-bg);
+      border: 1px solid rgba(24, 92, 136, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+    .stats-ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .stats-ai-item {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .stats-ai-item-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .stats-ai-item-val {
+      font-size: 20px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+    .stats-ai-item-hint {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+    .stats-ai-advice-box {
+      background: var(--surface-subtle);
+      border-left: 3px solid var(--border-strong);
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stats-ai-advice-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stats-ai-advice-content {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
     /* Anki Statistics Styles */
     .stats-metrics-grid {
       display: grid;

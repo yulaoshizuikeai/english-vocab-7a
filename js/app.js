@@ -16,6 +16,12 @@ import {
   saveAchievements
 } from './storage.js';
 import { playPronunciation } from './audio.js';
+import {
+  downloadFile,
+  exportBackupJSON,
+  importBackupJSON,
+  buildAIDiagnosticPrompt
+} from './export.js';
 
 // 学习记录目标定义（客观学术规范）
 const ACHIEVEMENT_DEFINITIONS = [
@@ -674,6 +680,10 @@ function renderStatistics() {
     { label: '2.9-3.0', min: 2.85, max: 3.05, count: 0 }
   ];
 
+  let totalLapsesAccum = 0;
+  let overdueCardsCount = 0;
+  let leechCardsCount = 0;
+
   allCards.forEach(c => {
     const p = store[c.id];
     if (!p || (p.totalReviews === 0 && p.repetitions === 0)) {
@@ -683,8 +693,13 @@ function renderStatistics() {
 
     reviewedCardsCount++;
     totalReviewsAccum += (p.totalReviews || 0);
+    totalLapsesAccum += (p.lapses || 0);
     efSum += (p.efactor || 2.5);
     totalIntervalSum += (p.interval || 0);
+
+    if (p.lapses >= LEECH_THRESHOLD || p.isLeech) {
+      leechCardsCount++;
+    }
 
     // 状态分类
     if (p.interval >= 21) {
@@ -698,7 +713,10 @@ function renderStatistics() {
     // 统计未来到期
     if (p.dueDate) {
       const diffDays = Math.floor((p.dueDate - now) / DAY_MS);
-      if (diffDays <= 0) {
+      if (diffDays < 0) {
+        overdueCardsCount++;
+        dueBins[0]++;
+      } else if (diffDays === 0) {
         dueBins[0]++;
       } else if (diffDays < 14) {
         dueBins[diffDays]++;
@@ -724,6 +742,56 @@ function renderStatistics() {
       }
     }
   });
+
+  // 0. AI 学情量化看板更新
+  const lapseRateVal = totalReviewsAccum > 0 ? ((totalLapsesAccum / totalReviewsAccum) * 100) : 0;
+  const retentionRateVal = totalReviewsAccum > 0 ? (100 - lapseRateVal) : 100;
+  const lapseRateStr = lapseRateVal.toFixed(1) + '%';
+  const retentionRateStr = retentionRateVal.toFixed(1) + '%';
+
+  const aiRetentionEl = document.getElementById('aiRetentionRate');
+  if (aiRetentionEl) aiRetentionEl.textContent = retentionRateStr;
+  const aiRetentionHintEl = document.getElementById('aiRetentionHint');
+  if (aiRetentionHintEl) {
+    aiRetentionHintEl.textContent = retentionRateVal >= 88 ? '记忆留存良好 (高于88%优良线)' : (retentionRateVal >= 75 ? '留存平稳 (可适当强化生词)' : '衰减偏快 (需增加复习频次)');
+  }
+
+  const aiLapseEl = document.getElementById('aiLapseRate');
+  if (aiLapseEl) aiLapseEl.textContent = lapseRateStr;
+  const aiLapseHintEl = document.getElementById('aiLapseHint');
+  if (aiLapseHintEl) {
+    aiLapseHintEl.textContent = `累计遗忘 ${totalLapsesAccum} 次 (总评 ${totalReviewsAccum} 次)`;
+  }
+
+  const aiBacklogEl = document.getElementById('aiBacklogCount');
+  if (aiBacklogEl) aiBacklogEl.textContent = `${overdueCardsCount + dueBins[0]} 词`;
+  const aiBacklogHintEl = document.getElementById('aiBacklogHint');
+  if (aiBacklogHintEl) {
+    aiBacklogHintEl.textContent = `逾期 ${overdueCardsCount} 词 · 今日到期 ${dueBins[0]} 词`;
+  }
+
+  const aiLeechEl = document.getElementById('aiLeechCount');
+  if (aiLeechEl) aiLeechEl.textContent = `${leechCardsCount} 词`;
+  const aiLeechHintEl = document.getElementById('aiLeechHint');
+  if (aiLeechHintEl) {
+    aiLeechHintEl.textContent = leechCardsCount > 0 ? '遗忘≥4次，建议重点攻坚' : '暂无高频难词阻滞';
+  }
+
+  // 动态生成今日推荐研习策略建议 (客观、学术)
+  const adviceEl = document.getElementById('aiStudyAdviceText');
+  if (adviceEl) {
+    if (totalReviewsAccum === 0) {
+      adviceEl.textContent = '当前尚未开始词汇自测。建议从 Unit 1 开始，每天学习 15~20 词，配合发音与词根拆解建立首轮记忆痕迹。';
+    } else if (overdueCardsCount > 10) {
+      adviceEl.textContent = `目前有 ${overdueCardsCount} 个词汇已过最佳记忆临界点。建议今日优先完成“到期复习”模式，及时修补衰减痕迹，暂缓开辟新单元。`;
+    } else if (leechCardsCount >= 3) {
+      adviceEl.textContent = `检测到 ${leechCardsCount} 个难记词汇连续受阻。建议切换至“重点难词”面板，结合考点例句与形态拆解专项攻克。`;
+    } else if (lapseRateVal > 15) {
+      adviceEl.textContent = `单次遗忘率（${lapseRateStr}）稍高于标准线。建议在背诵时利用翻卡两秒停留时间，大声朗读例句并联想场景，加深语境绑定。`;
+    } else {
+      adviceEl.textContent = `各项记忆指标处于健康区间（留存率 ${retentionRateStr}，EF基准稳定）。可按计划每日推进 1 个批次新词，并消化到期卡片。`;
+    }
+  }
 
   // 1. 顶部指标计算
   document.getElementById('statTotalCards').textContent = totalCards;
@@ -1110,6 +1178,82 @@ function initEventListeners() {
   document.getElementById('searchPhrasesBox').addEventListener('input', renderPhrasesTable);
   document.getElementById('phraseUnitFilter').addEventListener('change', renderPhrasesTable);
   document.getElementById('searchBox').addEventListener('input', renderVocabTable);
+
+  // 学情数据导出与 AI 诊断事件绑定
+  const exportAiPromptBtn = document.getElementById('exportAiPromptBtn');
+  if (exportAiPromptBtn) {
+    exportAiPromptBtn.addEventListener('click', async () => {
+      try {
+        const prompt = buildAIDiagnosticPrompt(VOCAB_DATABASE, PHRASE_DATABASE);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(prompt);
+          showToast('已复制 AI 诊断 Prompt，可直接发送给大模型');
+        } else {
+          // 降级使用 textarea 复制
+          const ta = document.createElement('textarea');
+          ta.value = prompt;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast('已复制 AI 诊断 Prompt 到剪贴板');
+        }
+      } catch (err) {
+        showToast('复制失败，请尝试直接导出报告');
+      }
+    });
+  }
+
+  const exportAiReportBtn = document.getElementById('exportAiReportBtn');
+  if (exportAiReportBtn) {
+    exportAiReportBtn.addEventListener('click', () => {
+      const prompt = buildAIDiagnosticPrompt(VOCAB_DATABASE, PHRASE_DATABASE);
+      const dateStr = new Date().toISOString().slice(0, 10);
+      downloadFile(prompt, `沪教牛津7A英语_AI学情诊断报告_${dateStr}.md`, 'text/markdown;charset=utf-8');
+      showToast('已生成并下载 AI 学情诊断 Markdown 报告');
+    });
+  }
+
+  const exportBackupJsonBtn = document.getElementById('exportBackupJsonBtn');
+  if (exportBackupJsonBtn) {
+    exportBackupJsonBtn.addEventListener('click', () => {
+      exportBackupJSON();
+      showToast('学情完整备份已导出');
+    });
+  }
+
+  const importBackupJsonBtn = document.getElementById('importBackupJsonBtn');
+  const importBackupFileInput = document.getElementById('importBackupFileInput');
+  if (importBackupJsonBtn && importBackupFileInput) {
+    importBackupJsonBtn.addEventListener('click', () => {
+      importBackupFileInput.value = '';
+      importBackupFileInput.click();
+    });
+
+    importBackupFileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target.result;
+        const res = importBackupJSON(content);
+        if (res.success) {
+          showToast(res.message);
+          // 重新刷新视图指标与缓存
+          renderStatistics();
+          renderHeatmap();
+          renderAchievements();
+          updateLeechCountBadge();
+          startNewSession();
+        } else {
+          alert('导入失败：' + res.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+  }
 }
 
 // 启动应用

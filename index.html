@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>初中英语研习 · 沪教版7A</title>
+  <title>初中英语研习 · 沪教牛津版7A</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,7 +13,7 @@
   <div class="header-inner">
     <div class="brand-title">
       <img src="icon.png" alt="Logo" class="brand-logo-img">
-      <span>沪教版初一英语 7A</span>
+      <span>沪教牛津版初一英语 7A</span>
       <span class="brand-badge">SM2 Engine</span>
     </div>
     <div class="header-nav">
@@ -242,6 +242,64 @@
 
   <!-- Anki 风格统计分析视图 (Statistics View) -->
   <div class="stats-container" id="statsView">
+    <!-- 顶部数据工具栏 (导出、AI 提示词、备份与导入) -->
+    <div class="stats-toolbar">
+      <div class="stats-toolbar-title">
+        <span style="font-weight: 600; color: var(--text);">学情分析与数据中心</span>
+        <span class="stats-card-tip">支持导出 AI 学情诊断数据或迁移备份</span>
+      </div>
+      <div class="stats-toolbar-actions">
+        <button class="action-btn" id="exportAiPromptBtn" title="一键复制结构化 Prompt，可直接发送给大模型分析">
+          <svg style="width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2;" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          复制 AI 诊断 Prompt
+        </button>
+        <button class="nav-btn" id="exportAiReportBtn" title="下载包含全量数据的 Markdown 学情报告">
+          导出 AI 报告 (.md)
+        </button>
+        <button class="nav-btn" id="exportBackupJsonBtn" title="导出当前浏览器的全部学习进度数据 (JSON)">
+          备份进度 (.json)
+        </button>
+        <button class="nav-btn" id="importBackupJsonBtn" title="从本地 JSON 恢复学习进度">
+          导入进度
+        </button>
+        <input type="file" id="importBackupFileInput" accept=".json,application/json" style="display: none;">
+      </div>
+    </div>
+
+    <!-- AI 学情定量评估看板 -->
+    <div class="stats-ai-dashboard-card">
+      <div class="stats-ai-header">
+        <div class="stats-ai-badge">AI 量化诊断画像</div>
+        <span style="font-size: 12px; color: var(--text-sub);">SM-2 记忆模型实时推演</span>
+      </div>
+      <div class="stats-ai-grid">
+        <div class="stats-ai-item">
+          <div class="stats-ai-item-label">记忆留存率 (Retention)</div>
+          <div class="stats-ai-item-val" id="aiRetentionRate">100.0%</div>
+          <div class="stats-ai-item-hint" id="aiRetentionHint">艾宾浩斯稳态分析中</div>
+        </div>
+        <div class="stats-ai-item">
+          <div class="stats-ai-item-label">单次遗忘率 (Lapse Rate)</div>
+          <div class="stats-ai-item-val" id="aiLapseRate">0.0%</div>
+          <div class="stats-ai-item-hint" id="aiLapseHint">累计遗忘 0 次</div>
+        </div>
+        <div class="stats-ai-item">
+          <div class="stats-ai-item-label">积压衰减风险 (Backlog)</div>
+          <div class="stats-ai-item-val" id="aiBacklogCount">0 词</div>
+          <div class="stats-ai-item-hint" id="aiBacklogHint">今日到期: 0 词</div>
+        </div>
+        <div class="stats-ai-item">
+          <div class="stats-ai-item-label">重点难词负荷 (Leech)</div>
+          <div class="stats-ai-item-val" id="aiLeechCount">0 词</div>
+          <div class="stats-ai-item-hint" id="aiLeechHint">建议优先巩固</div>
+        </div>
+      </div>
+      <div class="stats-ai-advice-box">
+        <div class="stats-ai-advice-title">今日推荐研习策略：</div>
+        <div class="stats-ai-advice-content" id="aiStudyAdviceText">正在分析当前记忆分布曲线与单元掌握进度...</div>
+      </div>
+    </div>
+
     <!-- 顶部四格指标卡片 -->
     <div class="stats-metrics-grid">
       <div class="stats-metric-card">
