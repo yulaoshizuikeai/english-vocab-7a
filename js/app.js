@@ -317,6 +317,10 @@ function resetStayLock() {
     stayTimerInterval = null;
   }
   isStayLocked = false;
+  const trackEl = document.getElementById('stayProgressTrack');
+  const fillEl = document.getElementById('stayProgressFill');
+  if (trackEl) trackEl.classList.remove('active');
+  if (fillEl) fillEl.style.width = '100%';
   setRatingButtonsDisabled(false);
 }
 
@@ -386,20 +390,47 @@ function revealCard() {
     }, 150);
   }
 
-  // 固化 2 秒自然沉淀（无多余弹窗，按钮禁用 2 秒后激活）
+  const p = getCardProgress(currentCard.id);
+  // 特别熟的卡片定义：已连续记对 ≥ 2 次、无未解决遗忘、且简易度 EF ≥ 2.4
+  const isMasteredCard = p.repetitions >= 2 && p.efactor >= 2.4 && (p.lapses || 0) === 0;
+
+  if (isMasteredCard) {
+    // 特别熟的卡片直接跳过两秒，瞬间可评
+    isStayLocked = false;
+    setRatingButtonsDisabled(false);
+    return;
+  }
+
+  // 需要沉淀的卡片启动 2 秒平滑状态条
   isStayLocked = true;
   setRatingButtonsDisabled(true);
-  let remainingSeconds = 2;
+
+  const trackEl = document.getElementById('stayProgressTrack');
+  const fillEl = document.getElementById('stayProgressFill');
+  if (trackEl && fillEl) {
+    trackEl.classList.add('active');
+    fillEl.style.width = '100%';
+  }
+
+  const totalDuration = 2000;
+  const intervalStep = 50;
+  let elapsed = 0;
 
   stayTimerInterval = setInterval(() => {
-    remainingSeconds--;
-    if (remainingSeconds <= 0) {
+    elapsed += intervalStep;
+    const remainingRatio = Math.max(0, 1 - (elapsed / totalDuration));
+    if (fillEl) {
+      fillEl.style.width = (remainingRatio * 100) + '%';
+    }
+
+    if (elapsed >= totalDuration) {
       clearInterval(stayTimerInterval);
       stayTimerInterval = null;
       isStayLocked = false;
       setRatingButtonsDisabled(false);
+      if (trackEl) trackEl.classList.remove('active');
     }
-  }, 1000);
+  }, intervalStep);
 }
 
 function handleRating(quality) {
