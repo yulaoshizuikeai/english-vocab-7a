@@ -1,0 +1,1018 @@
+/* ==========================================================================
+       Notion Design System Tokens
+       Typography: Inter / system sans + Iosevka / SF Mono
+       Palette: Monochromatic slate & document neutrals with subtle border lines
+       ========================================================================== */
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-hover: #f1f1ef;
+      --surface-subtle: #f7f6f3;
+      --surface-sunken: #f1f1ef;
+      --text: #37352f;
+      --text-sub: #787774;
+      --text-muted: #9b9a97;
+      --border: rgba(55, 53, 47, 0.09);
+      --border-focus: rgba(55, 53, 47, 0.25);
+      --border-strong: rgba(55, 53, 47, 0.16);
+
+      /* Notion semantic tags */
+      --tag-gray-bg: rgba(227, 226, 224, 0.5);
+      --tag-gray-color: #32302c;
+      --tag-blue-bg: rgba(211, 229, 239, 0.5);
+      --tag-blue-color: #185c88;
+      --tag-green-bg: rgba(219, 237, 219, 0.5);
+      --tag-green-color: #247846;
+      --tag-orange-bg: rgba(250, 222, 201, 0.5);
+      --tag-orange-color: #c96218;
+      --tag-red-bg: rgba(255, 226, 221, 0.5);
+      --tag-red-color: #b5382a;
+
+      /* SM2 Rating Buttons (Notion subtle tint style) */
+      --btn-again-bg: #fee2e2;
+      --btn-again-text: #991b1b;
+      --btn-again-border: #fecaca;
+      --btn-hard-bg: #fef3c7;
+      --btn-hard-text: #92400e;
+      --btn-hard-border: #fde68a;
+      --btn-good-bg: #e0e7ff;
+      --btn-good-text: #3730a3;
+      --btn-good-border: #c7d2fe;
+      --btn-easy-bg: #dcfce7;
+      --btn-easy-text: #166534;
+      --btn-easy-border: #bbf7d0;
+
+      /* GitHub / Notion Minimal Heatmap */
+      --heat-0: #f1f1ef;
+      --heat-1: #c6e7d0;
+      --heat-2: #8ad39e;
+      --heat-3: #41b868;
+      --heat-4: #218342;
+
+      --radius: 6px;
+      --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg: #191919;
+      --surface: #191919;
+      --surface-hover: #252525;
+      --surface-subtle: #202020;
+      --surface-sunken: #222222;
+      --text: #ffffffcf;
+      --text-sub: #9b9a97;
+      --text-muted: #6b6b68;
+      --border: rgba(255, 255, 255, 0.094);
+      --border-focus: rgba(255, 255, 255, 0.25);
+      --border-strong: rgba(255, 255, 255, 0.16);
+
+      --tag-gray-bg: rgba(255, 255, 255, 0.08);
+      --tag-gray-color: #9b9a97;
+      --tag-blue-bg: rgba(35, 131, 226, 0.18);
+      --tag-blue-color: #529cca;
+      --tag-green-bg: rgba(46, 170, 118, 0.18);
+      --tag-green-color: #4dab78;
+      --tag-orange-bg: rgba(255, 115, 0, 0.18);
+      --tag-orange-color: #ff9347;
+      --tag-red-bg: rgba(235, 87, 87, 0.18);
+      --tag-red-color: #ff7373;
+
+      --btn-again-bg: #3d1414;
+      --btn-again-text: #fca5a5;
+      --btn-again-border: #5c1d1d;
+      --btn-hard-bg: #392408;
+      --btn-hard-text: #fcd34d;
+      --btn-hard-border: #57370c;
+      --btn-good-bg: #1e1b4b;
+      --btn-good-text: #a5b4fc;
+      --btn-good-border: #312e81;
+      --btn-easy-bg: #0d331e;
+      --btn-easy-text: #86efac;
+      --btn-easy-border: #14532d;
+
+      --heat-0: #252525;
+      --heat-1: #133a21;
+      --heat-2: #1e5c35;
+      --heat-3: #2ea05b;
+      --heat-4: #4dab78;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      line-height: 1.5;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Notion-like Topbar */
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-logo-img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      transition: filter 0.15s ease;
+    }
+    [data-theme="dark"] .brand-logo-img {
+      filter: invert(1) brightness(1.2);
+    }
+    .brand-badge {
+      font-size: 11px;
+      padding: 1px 6px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      border-radius: 4px;
+      font-weight: 500;
+      font-family: var(--font-mono);
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      padding: 4px 10px;
+      font-size: 13px;
+      color: var(--text-sub);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.12s ease, color 0.12s ease;
+      font-family: var(--font-sans);
+    }
+    .nav-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+    .nav-btn.active {
+      background: var(--surface-subtle);
+      color: var(--text);
+      border-color: var(--border);
+      font-weight: 500;
+    }
+    .nav-badge {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      padding: 0 4px;
+      border-radius: 99px;
+      background: var(--tag-green-bg);
+      color: var(--tag-green-color);
+      font-weight: 600;
+    }
+    .leech-nav-badge {
+      background: var(--tag-red-bg);
+      color: var(--tag-red-color);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 20px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Notion Section Callout / Container */
+    .notion-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      transition: border-color 0.15s ease;
+    }
+    .notion-section-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Heatmap Module */
+    .heatmap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .heatmap-metrics {
+      display: flex;
+      gap: 16px;
+      color: var(--text-sub);
+      font-size: 12px;
+    }
+    .heatmap-metrics strong {
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+    .heatmap-scroll-wrap {
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+    .heatmap-grid {
+      display: inline-grid;
+      grid-template-rows: repeat(7, 10px);
+      grid-auto-flow: column;
+      grid-auto-columns: 10px;
+      gap: 3px;
+      align-items: center;
+    }
+    .heat-cell {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background-color: var(--heat-0);
+      cursor: pointer;
+      transition: outline 0.1s;
+    }
+    .heat-cell:hover {
+      outline: 1.5px solid var(--border-focus);
+      z-index: 5;
+    }
+    .heat-cell.level-0 { background-color: var(--heat-0); }
+    .heat-cell.level-1 { background-color: var(--heat-1); }
+    .heat-cell.level-2 { background-color: var(--heat-2); }
+    .heat-cell.level-3 { background-color: var(--heat-3); }
+    .heat-cell.level-4 { background-color: var(--heat-4); }
+
+    .heatmap-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .legend-box {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+    #heatmapTooltip {
+      position: fixed;
+      background: var(--text);
+      color: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      pointer-events: none;
+      z-index: 100;
+      display: none;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Notion Filters / Controls */
+    .controls-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .unit-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+    }
+    .unit-chip {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 12px;
+      color: var(--text-sub);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s ease;
+    }
+    .unit-chip:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+    .unit-chip.selected {
+      background: var(--tag-blue-bg);
+      color: var(--tag-blue-color);
+      border-color: rgba(35, 131, 226, 0.3);
+      font-weight: 500;
+    }
+    .unit-chip.action-chip {
+      background: transparent;
+      border-style: dashed;
+    }
+
+    .options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .options-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .notion-select {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12.5px;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+    .notion-select:focus {
+      border-color: var(--border-focus);
+    }
+    .notion-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      color: var(--text-sub);
+      font-size: 12.5px;
+    }
+    .notion-toggle input {
+      accent-color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Recite View */
+    .session-info-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--surface-subtle);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--text);
+      transition: width 0.25s ease;
+    }
+
+    /* Notion Card Component */
+    .flashcard-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .flashcard {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 36px 28px 32px;
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .flashcard:hover {
+      border-color: var(--border-focus);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .card-meta-bar {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .card-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-unit-label {
+      background: var(--surface-subtle);
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+    .card-leech-label {
+      background: var(--tag-red-bg);
+      color: var(--tag-red-color);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      display: none;
+    }
+    .card-leech-label.active {
+      display: inline-block;
+    }
+
+    .word-text {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .phonetic-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .phonetic-text {
+      font-size: 15px;
+      color: var(--text-sub);
+      font-family: "Lucida Sans Unicode", "Arial Unicode MS", var(--font-sans);
+    }
+    .pos-pill {
+      font-size: 11.5px;
+      font-style: italic;
+      color: var(--text-muted);
+      background: var(--surface-subtle);
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .pronounce-btn {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-sub);
+      transition: all 0.12s ease;
+    }
+    .pronounce-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: var(--border-focus);
+    }
+    .pronounce-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Unrevealed Hint */
+    .reveal-prompt {
+      margin-top: 18px;
+      padding: 8px 16px;
+      border: 1px dashed var(--border-strong);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      background: var(--surface-subtle);
+      transition: all 0.12s ease;
+    }
+    .reveal-prompt:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+
+    /* Meaning Block (Revealed) */
+    .meaning-block {
+      display: none;
+      width: 100%;
+      margin-top: 16px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      animation: fadeIn 0.15s ease;
+    }
+    .flashcard.revealed .meaning-block {
+      display: block;
+    }
+    .flashcard.revealed .reveal-prompt {
+      display: none;
+    }
+
+    .meaning-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    
+    /* 重点难词形态认知拆解 */
+    .root-box {
+      font-size: 12.5px;
+      color: var(--tag-blue-color);
+      background: var(--tag-blue-bg);
+      border: 1px solid rgba(24, 92, 136, 0.2);
+      border-radius: 4px;
+      padding: 7px 12px;
+      text-align: left;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .root-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+      display: block;
+      opacity: 0.85;
+    }
+
+    .phrase-box {
+      font-size: 13px;
+      color: var(--text-sub);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px 12px;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .phrase-title {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    /* Difficulty Countdown Notice */
+    .stay-timer-notice {
+      display: none;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--tag-orange-color);
+      background: var(--tag-orange-bg);
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(201, 98, 24, 0.2);
+      font-family: var(--font-mono);
+      text-align: center;
+    }
+    .stay-timer-notice.active {
+      display: inline-block;
+    }
+
+    /* Rating Button Group (Notion Card Style) */
+    .rating-container {
+      width: 100%;
+      margin-top: 16px;
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .rating-container.active {
+      display: grid;
+    }
+    .rate-btn {
+      padding: 10px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.12s ease;
+      font-family: var(--font-sans);
+    }
+    .rate-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .rate-btn:not(:disabled):hover {
+      border-color: var(--border-focus);
+    }
+    .rate-sub {
+      font-size: 10px;
+      opacity: 0.75;
+      font-family: var(--font-mono);
+    }
+    .rate-again {
+      background: var(--btn-again-bg);
+      color: var(--btn-again-text);
+      border-color: var(--btn-again-border);
+    }
+    .rate-hard {
+      background: var(--btn-hard-bg);
+      color: var(--btn-hard-text);
+      border-color: var(--btn-hard-border);
+    }
+    .rate-good {
+      background: var(--btn-good-bg);
+      color: var(--btn-good-text);
+      border-color: var(--btn-good-border);
+    }
+    .rate-easy {
+      background: var(--btn-easy-bg);
+      color: var(--btn-easy-text);
+      border-color: var(--btn-easy-border);
+    }
+
+    /* Shortcuts bar */
+    .shortcuts-bar {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      font-family: var(--font-mono);
+    }
+    .kbd {
+      padding: 1px 4px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface-subtle);
+      color: var(--text-sub);
+    }
+
+    /* Complete Card */
+    .complete-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      width: 100%;
+      text-align: center;
+      display: none;
+    }
+    .complete-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .complete-desc {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .action-btn {
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid transparent;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 4px;
+      transition: opacity 0.12s;
+    }
+    .action-btn:hover { opacity: 0.9; }
+    .action-btn.secondary {
+      background: var(--surface-subtle);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .action-btn.secondary:hover {
+      background: var(--surface-hover);
+    }
+
+    /* ==========================================================================
+       Achievement System Styles (Notion Gallery View)
+       ========================================================================== */
+    .achievements-container, .leech-container {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .achievement-overview-card {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .achieve-progress-box {
+      flex: 1;
+      min-width: 200px;
+    }
+    .achieve-progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .achieve-progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .achieve-progress-fill {
+      height: 100%;
+      background: var(--text);
+      transition: width 0.3s ease;
+    }
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .achieve-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+    .achieve-card.unlocked {
+      border-color: var(--border-strong);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .achieve-card.locked {
+      opacity: 0.55;
+      background: var(--surface-subtle);
+    }
+    .achieve-card:hover {
+      border-color: var(--border-focus);
+    }
+    .achieve-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-sub);
+    }
+    .achieve-card.unlocked .achieve-icon-box {
+      background: var(--tag-green-bg);
+      color: var(--tag-green-color);
+      border-color: rgba(46, 170, 118, 0.25);
+    }
+    .achieve-icon-box svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+    .achieve-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .achieve-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .achieve-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .achieve-status-tag {
+      font-size: 10.5px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+    .achieve-status-tag.done {
+      background: var(--tag-green-bg);
+      color: var(--tag-green-color);
+    }
+    .achieve-status-tag.todo {
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+    }
+    .achieve-desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+    .achieve-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    /* 重点难词视图 */
+    .leech-empty-box {
+      text-align: center;
+      padding: 32px;
+      color: var(--text-muted);
+      font-size: 13px;
+      background: var(--surface-subtle);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
+    /* Notion Toast Notification (Achievement Unlock) */
+    .notion-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+    .notion-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast-icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Notion Table Database View */
+    .list-view-container {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .list-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+    .search-box {
+      flex: 1;
+      max-width: 280px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface-subtle);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+    .search-box:focus {
+      border-color: var(--border-focus);
+    }
+    .notion-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .notion-table th {
+      text-align: left;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 11.5px;
+    }
+    .notion-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .notion-table tr:hover {
+      background: var(--surface-hover);
+    }
+    .sm2-badge {
+      font-size: 10.5px;
+      font-family: var(--font-mono);
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(2px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 12px 12px 32px; }
+      .word-text { font-size: 32px; }
+      .rating-container { grid-template-columns: repeat(2, 1fr); }
+      .shortcuts-bar { display: none; }
+      .heatmap-metrics { flex-direction: column; gap: 2px; }
+      .achieve-grid { grid-template-columns: 1fr; }
+    }

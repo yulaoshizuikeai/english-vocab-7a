@@ -1,0 +1,570 @@
+[
+  {
+    "id": "p1_1",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "be good at",
+    "meaning": "擅长……",
+    "example": "He is good at maths."
+  },
+  {
+    "id": "p1_2",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "turn to somebody for help",
+    "meaning": "求助于某人",
+    "example": "Turn to your teacher for help."
+  },
+  {
+    "id": "p1_3",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "after school",
+    "meaning": "放学后",
+    "example": "We play football after school."
+  },
+  {
+    "id": "p1_4",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "be willing to do something",
+    "meaning": "愿意做某事",
+    "example": "She is willing to help others."
+  },
+  {
+    "id": "p1_5",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "medium height",
+    "meaning": "中等身高",
+    "example": "He is of medium height."
+  },
+  {
+    "id": "p1_6",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "modern dance",
+    "meaning": "现代舞",
+    "example": "She loves modern dance."
+  },
+  {
+    "id": "p1_7",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "watch over",
+    "meaning": "照管；监督",
+    "example": "She watches over the little kids."
+  },
+  {
+    "id": "p1_8",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "rise into",
+    "meaning": "上升到",
+    "example": "Smoke rose into the air."
+  },
+  {
+    "id": "p1_9",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "cry out",
+    "meaning": "大叫；呼喊",
+    "example": "She cried out in pain."
+  },
+  {
+    "id": "p1_10",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "cry oneself to sleep",
+    "meaning": "哭着入睡",
+    "example": "The baby cried itself to sleep."
+  },
+  {
+    "id": "p1_11",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "wake up",
+    "meaning": "醒；醒来",
+    "example": "I wake up early."
+  },
+  {
+    "id": "p1_12",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "come and go",
+    "meaning": "来去",
+    "example": "Friends come and go."
+  },
+  {
+    "id": "p1_13",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "take somebody's place",
+    "meaning": "替代某人",
+    "example": "She took her friend's place."
+  },
+  {
+    "id": "p1_14",
+    "unit": 1,
+    "unitTitle": "Unit 1 Friendship",
+    "phrase": "come along",
+    "meaning": "出现",
+    "example": "Come along with me."
+  },
+  {
+    "id": "p2_1",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "do the dishes",
+    "meaning": "洗碗",
+    "example": "I do the dishes every evening."
+  },
+  {
+    "id": "p2_2",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "junior high school",
+    "meaning": "初级中学",
+    "example": "I'm in junior high school."
+  },
+  {
+    "id": "p2_3",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "take part in",
+    "meaning": "参与",
+    "example": "I take part in the sports meet."
+  },
+  {
+    "id": "p2_4",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "look forward to",
+    "meaning": "期待；盼望",
+    "example": "I look forward to seeing you."
+  },
+  {
+    "id": "p2_5",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "daily life",
+    "meaning": "日常生活",
+    "example": "Reading is part of my daily life."
+  },
+  {
+    "id": "p2_6",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "go to bed",
+    "meaning": "去睡觉",
+    "example": "I go to bed at ten."
+  },
+  {
+    "id": "p2_7",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "get up",
+    "meaning": "起床",
+    "example": "I get up at six."
+  },
+  {
+    "id": "p2_8",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "on foot",
+    "meaning": "步行",
+    "example": "I go to school on foot."
+  },
+  {
+    "id": "p2_9",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "full of energy",
+    "meaning": "充满活力",
+    "example": "She is full of energy."
+  },
+  {
+    "id": "p2_10",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "get ... ready for",
+    "meaning": "准备好……",
+    "example": "Get ready for the test."
+  },
+  {
+    "id": "p2_11",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "put on",
+    "meaning": "举办；上演",
+    "example": "We put on a play."
+  },
+  {
+    "id": "p2_12",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "clean up",
+    "meaning": "打扫干净",
+    "example": "We clean up the classroom."
+  },
+  {
+    "id": "p2_13",
+    "unit": 2,
+    "unitTitle": "Unit 2 School life",
+    "phrase": "pick up",
+    "meaning": "取（某物）",
+    "example": "Pick up your book."
+  },
+  {
+    "id": "p3_1",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "have picnics",
+    "meaning": "野餐",
+    "example": "have picnics: 野餐"
+  },
+  {
+    "id": "p3_2",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "work one's land",
+    "meaning": "耕种土地",
+    "example": "work one's land: 耕种土地"
+  },
+  {
+    "id": "p3_3",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "take a trip",
+    "meaning": "去旅行",
+    "example": "It is exciting to take a trip in the countryside in springtime."
+  },
+  {
+    "id": "p3_4",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "solar term",
+    "meaning": "节气",
+    "example": "solar term: 节气"
+  },
+  {
+    "id": "p3_5",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "in fact",
+    "meaning": "事实上",
+    "example": "in fact: 事实上"
+  },
+  {
+    "id": "p3_6",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "be divided into",
+    "meaning": "被划分成……",
+    "example": "be divided into: 被划分成……"
+  },
+  {
+    "id": "p3_7",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "be based on",
+    "meaning": "基于……",
+    "example": "be based on: 基于……"
+  },
+  {
+    "id": "p3_8",
+    "unit": 3,
+    "unitTitle": "Unit 3 The seasons",
+    "phrase": "play an important part in",
+    "meaning": "在……上发挥重要作用",
+    "example": "play an important part in: 在……上发挥重要作用"
+  },
+  {
+    "id": "p4_1",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "solar system",
+    "meaning": "太阳系",
+    "example": "solar system: 太阳系"
+  },
+  {
+    "id": "p4_2",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "fact file",
+    "meaning": "事实档案",
+    "example": "fact file: 事实档案"
+  },
+  {
+    "id": "p4_3",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "be covered by",
+    "meaning": "被……覆盖",
+    "example": "be covered by: 被……覆盖"
+  },
+  {
+    "id": "p4_4",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "as far as we know",
+    "meaning": "据我们所知",
+    "example": "as far as we know: 据我们所知"
+  },
+  {
+    "id": "p4_5",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "sea level",
+    "meaning": "海平面",
+    "example": "The highest mountain on Earth is over 8,800 metres above sea level."
+  },
+  {
+    "id": "p4_6",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "what's more",
+    "meaning": "更重要的是",
+    "example": "And what's more, the Earth provides us with all the things we need, such as food, water, air and energy."
+  },
+  {
+    "id": "p4_7",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "provide ... with ...",
+    "meaning": "提供；供应；给予",
+    "example": "provide ... with ...: 提供；供应；给予"
+  },
+  {
+    "id": "p4_8",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "take care of",
+    "meaning": "照顾；照料",
+    "example": "Take care of yourself."
+  },
+  {
+    "id": "p4_9",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "plastic pollution",
+    "meaning": "塑料污染",
+    "example": "plastic pollution: 塑料污染"
+  },
+  {
+    "id": "p4_10",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "cut down",
+    "meaning": "砍倒",
+    "example": "cut down: 砍倒"
+  },
+  {
+    "id": "p4_11",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "hundreds of",
+    "meaning": "数以百计",
+    "example": "Hundreds of birds fly south."
+  },
+  {
+    "id": "p4_12",
+    "unit": 4,
+    "unitTitle": "Unit 4 The Earth",
+    "phrase": "blow away",
+    "meaning": "吹走",
+    "example": "blow away: 吹走"
+  },
+  {
+    "id": "p5_1",
+    "unit": 5,
+    "unitTitle": "Unit 5 Off to space",
+    "phrase": "space station",
+    "meaning": "空间站",
+    "example": "space station: 空间站"
+  },
+  {
+    "id": "p5_2",
+    "unit": 5,
+    "unitTitle": "Unit 5 Off to space",
+    "phrase": "do exercise",
+    "meaning": "锻炼；运动",
+    "example": "Because of the low gravity, our bodies may get weak, so we'll have to do exercise every day."
+  },
+  {
+    "id": "p5_3",
+    "unit": 5,
+    "unitTitle": "Unit 5 Off to space",
+    "phrase": "take photos",
+    "meaning": "拍照",
+    "example": "take photos: 拍照"
+  },
+  {
+    "id": "p5_4",
+    "unit": 5,
+    "unitTitle": "Unit 5 Off to space",
+    "phrase": "get into orbit",
+    "meaning": "进入轨道",
+    "example": "The spaceship gets into orbit."
+  },
+  {
+    "id": "p5_5",
+    "unit": 5,
+    "unitTitle": "Unit 5 Off to space",
+    "phrase": "thousands of",
+    "meaning": "数以千计；成千上万",
+    "example": "He is a stamp collector, and he owns thousands of stamps."
+  },
+  {
+    "id": "p6_1",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "tourist spot",
+    "meaning": "旅游景点",
+    "example": "It is a famous tourist spot."
+  },
+  {
+    "id": "p6_2",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "light up",
+    "meaning": "点亮；照亮",
+    "example": "Lights light up the city."
+  },
+  {
+    "id": "p6_3",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "in the centre of",
+    "meaning": "在……的中心",
+    "example": "It lies in the centre of the city."
+  },
+  {
+    "id": "p6_4",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "be interested in",
+    "meaning": "对……有兴趣",
+    "example": "I'm interested in collecting stamps."
+  },
+  {
+    "id": "p6_5",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "historic site",
+    "meaning": "古迹；历史遗迹",
+    "example": "We visited a historic site."
+  },
+  {
+    "id": "p6_6",
+    "unit": 6,
+    "unitTitle": "Unit 6 Travelling around Asia",
+    "phrase": "in memory of",
+    "meaning": "作为对……的纪念",
+    "example": "The statue is in memory of the hero."
+  },
+  {
+    "id": "p7_1",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "clubs fair",
+    "meaning": "社团招募展",
+    "example": "Last month, they went to the Clubs Fair."
+  },
+  {
+    "id": "p7_2",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "solar power",
+    "meaning": "太阳能",
+    "example": "It runs on solar power.\""
+  },
+  {
+    "id": "p7_3",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "of course",
+    "meaning": "当然",
+    "example": "\"The Solar Power Club, of course!"
+  },
+  {
+    "id": "p7_4",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "remote control",
+    "meaning": "遥控器",
+    "example": "They get their energy from the sun.\" The girl then passed the remote control to Li Na."
+  },
+  {
+    "id": "p7_5",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "turn around",
+    "meaning": "转身",
+    "example": "turn around: 转身"
+  },
+  {
+    "id": "p7_6",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "make a difference",
+    "meaning": "有作用；有影响",
+    "example": "make a difference: 有作用；有影响"
+  },
+  {
+    "id": "p7_7",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "primary school",
+    "meaning": "小学",
+    "example": "primary school: 小学"
+  },
+  {
+    "id": "p7_8",
+    "unit": 7,
+    "unitTitle": "Unit 7 Fun after school",
+    "phrase": "fall off",
+    "meaning": "掉落",
+    "example": "fall off: 掉落"
+  },
+  {
+    "id": "p8_1",
+    "unit": 8,
+    "unitTitle": "Unit 8 Collecting as a hobby",
+    "phrase": "add ... to ...",
+    "meaning": "把……添加到……",
+    "example": "add ... to ...: 把……添加到……"
+  },
+  {
+    "id": "p8_2",
+    "unit": 8,
+    "unitTitle": "Unit 8 Collecting as a hobby",
+    "phrase": "soft drink",
+    "meaning": "软饮料（不含酒精）",
+    "example": "soft drink: 软饮料（不含酒精）"
+  },
+  {
+    "id": "p8_3",
+    "unit": 8,
+    "unitTitle": "Unit 8 Collecting as a hobby",
+    "phrase": "a waste of time",
+    "meaning": "浪费时间",
+    "example": "a waste of time: 浪费时间"
+  },
+  {
+    "id": "p8_4",
+    "unit": 8,
+    "unitTitle": "Unit 8 Collecting as a hobby",
+    "phrase": "pocket money",
+    "meaning": "（父母给孩子的）零花钱",
+    "example": "pocket money: （父母给孩子的）零花钱"
+  },
+  {
+    "id": "p8_5",
+    "unit": 8,
+    "unitTitle": "Unit 8 Collecting as a hobby",
+    "phrase": "all over the world",
+    "meaning": "全世界",
+    "example": "Friends come from all over the world."
+  }
+]
