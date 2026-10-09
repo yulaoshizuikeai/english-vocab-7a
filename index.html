@@ -1110,7 +1110,7 @@
           </label>
           <label class="notion-toggle">
             <input type="checkbox" id="stayEnforceToggle" checked>
-            <span>难词停留4秒</span>
+            <span>强制停留4秒</span>
           </label>
           <select class="notion-select" id="voiceAccentSelect">
             <option value="2">美音 (US)</option>
@@ -1178,9 +1178,9 @@
         </div>
       </div>
 
-      <!-- 难词强制停留条 -->
+      <!-- 强制停留提示条 -->
       <div class="stay-timer-notice" id="stayTimerNotice">
-        难词深度锁定记忆中：剩余 <span id="stayCountdownText">4</span> 秒
+        卡片深度研习锁定中：剩余 <span id="stayCountdownText">4</span> 秒
       </div>
 
       <!-- SM2 评分按钮栏 -->
@@ -1950,14 +1950,13 @@ function revealCard() {
     }, 150);
   }
 
-  // 2. 检查难度停留条件
-  const p = getCardProgress(currentCard.id);
-  const isHardCard = currentSettings.stayEnforce !== false && (p.efactor < 2.2 || p.lapses > 0 || p.repetitions <= 1 || p.lapses >= LEECH_THRESHOLD);
+  // 2. 强制卡片停留4秒机制 (防止浮躁刷卡，确保深度记忆与朗读沉淀)
+  const shouldEnforceStay = currentSettings.stayEnforce !== false;
 
-  if (isHardCard) {
+  if (shouldEnforceStay) {
     isStayLocked = true;
     setRatingButtonsDisabled(true);
-    let remainingSeconds = p.lapses >= LEECH_THRESHOLD ? 5 : 4; // Leech 词停留 5 秒强化认知
+    let remainingSeconds = 4;
     const noticeEl = document.getElementById('stayTimerNotice');
     const countdownEl = document.getElementById('stayCountdownText');
     countdownEl.textContent = remainingSeconds;
