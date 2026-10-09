@@ -1016,12 +1016,19 @@
       background: var(--tag-blue-bg);
       border: 1px solid var(--tag-blue-color);
       border-radius: 3px 3px 0 0;
-      min-height: 2px;
+      min-height: 0;
       transition: height 0.25s ease;
       cursor: pointer;
       position: relative;
     }
-    .chart-col-bar:hover {
+    .chart-col-bar.zero {
+      border: none;
+      background: transparent;
+      min-height: 0;
+      height: 0 !important;
+      cursor: default;
+    }
+    .chart-col-bar:not(.zero):hover {
       background: var(--tag-blue-color);
     }
     .chart-col-val {

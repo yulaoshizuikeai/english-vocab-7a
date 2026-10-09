@@ -846,11 +846,11 @@ function renderStatistics() {
   dueBins.forEach((cnt, idx) => {
     const col = document.createElement('div');
     col.className = 'chart-col';
-    const heightPct = Math.round((cnt / maxDue) * 100);
+    const heightPct = cnt > 0 ? Math.max(8, Math.round((cnt / maxDue) * 100)) : 0;
     const label = idx === 0 ? '今日' : `+${idx}天`;
     col.innerHTML = `
       <div class="chart-col-val">${cnt > 0 ? cnt : ''}</div>
-      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="${label}: ${cnt} 张卡片"></div>
+      <div class="chart-col-bar ${cnt === 0 ? 'zero' : ''}" style="height: ${heightPct}%;" title="${label}: ${cnt} 张卡片"></div>
       <div class="chart-col-label">${label}</div>
     `;
     chartDueEl.appendChild(col);
@@ -866,10 +866,10 @@ function renderStatistics() {
   intervalBins.forEach(b => {
     const col = document.createElement('div');
     col.className = 'chart-col';
-    const heightPct = Math.round((b.count / maxInt) * 100);
+    const heightPct = b.count > 0 ? Math.max(8, Math.round((b.count / maxInt) * 100)) : 0;
     col.innerHTML = `
       <div class="chart-col-val">${b.count > 0 ? b.count : ''}</div>
-      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="${b.label}: ${b.count} 张卡片"></div>
+      <div class="chart-col-bar ${b.count === 0 ? 'zero' : ''}" style="height: ${heightPct}%;" title="${b.label}: ${b.count} 张卡片"></div>
       <div class="chart-col-label">${b.label}</div>
     `;
     chartIntEl.appendChild(col);
@@ -883,10 +883,10 @@ function renderStatistics() {
   easeBins.forEach(b => {
     const col = document.createElement('div');
     col.className = 'chart-col';
-    const heightPct = Math.round((b.count / maxEase) * 100);
+    const heightPct = b.count > 0 ? Math.max(8, Math.round((b.count / maxEase) * 100)) : 0;
     col.innerHTML = `
       <div class="chart-col-val">${b.count > 0 ? b.count : ''}</div>
-      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="EF ${b.label}: ${b.count} 张卡片"></div>
+      <div class="chart-col-bar ${b.count === 0 ? 'zero' : ''}" style="height: ${heightPct}%;" title="EF ${b.label}: ${b.count} 张卡片"></div>
       <div class="chart-col-label">${b.label}</div>
     `;
     chartEaseEl.appendChild(col);
