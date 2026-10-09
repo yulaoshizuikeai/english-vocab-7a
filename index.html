@@ -22,6 +22,7 @@
         <span>重点难词</span>
         <span class="nav-badge leech-nav-badge" id="navLeechBadge" style="display: none;">0</span>
       </button>
+      <button class="nav-btn" id="tabStatsBtn">统计分析</button>
       <button class="nav-btn" id="tabAchievementsBtn">
         <span>学习记录</span>
         <span class="nav-badge" id="navAchieveBadge">0/10</span>
@@ -235,6 +236,102 @@
       </table>
       <div class="leech-empty-box" id="leechEmptyBox" style="display: none;">
         当前尚未出现连续遗忘词汇（Lapses ≥ 4），记忆状态良好。
+      </div>
+    </div>
+  </div>
+
+  <!-- Anki 风格统计分析视图 (Statistics View) -->
+  <div class="stats-container" id="statsView">
+    <!-- 顶部四格指标卡片 -->
+    <div class="stats-metrics-grid">
+      <div class="stats-metric-card">
+        <div class="stats-metric-label">总卡片量</div>
+        <div class="stats-metric-value" id="statTotalCards">0</div>
+        <div class="stats-metric-sub" id="statTotalCardsSub">单词 0 · 词组 0</div>
+      </div>
+      <div class="stats-metric-card">
+        <div class="stats-metric-label">成熟卡片 (Interval ≥ 21d)</div>
+        <div class="stats-metric-value" id="statMatureCards">0</div>
+        <div class="stats-metric-sub" id="statMatureRatio">占比 0%</div>
+      </div>
+      <div class="stats-metric-card">
+        <div class="stats-metric-label">今日自测完成</div>
+        <div class="stats-metric-value" id="statTodayReviews">0</div>
+        <div class="stats-metric-sub" id="statStreakDays">连续 0 天坚持</div>
+      </div>
+      <div class="stats-metric-card">
+        <div class="stats-metric-label">平均简易度 (EF)</div>
+        <div class="stats-metric-value" id="statAverageEf">2.50</div>
+        <div class="stats-metric-sub" id="statTotalReviews">累计复习 0 次</div>
+      </div>
+    </div>
+
+    <!-- 卡片状态分布堆叠条 (New / Learning / Young / Mature) -->
+    <div class="stats-section-card">
+      <div class="stats-card-header">
+        <span class="stats-card-title">卡片记忆状态分布 (Card Counts)</span>
+        <span class="stats-card-tip">根据经典 Anki 状态定义细分</span>
+      </div>
+      <div class="stats-state-bar-wrap">
+        <div class="stats-state-bar" id="statsStateBar">
+          <div class="state-seg seg-mature" id="segMature" style="width: 0%;"></div>
+          <div class="state-seg seg-young" id="segYoung" style="width: 0%;"></div>
+          <div class="state-seg seg-learning" id="segLearning" style="width: 0%;"></div>
+          <div class="state-seg seg-new" id="segNew" style="width: 100%;"></div>
+        </div>
+        <div class="stats-state-legend">
+          <div class="legend-item"><span class="legend-dot dot-mature"></span>成熟 (Mature ≥ 21d): <strong id="countMature">0</strong></div>
+          <div class="legend-item"><span class="legend-dot dot-young"></span>初熟 (Young &lt; 21d): <strong id="countYoung">0</strong></div>
+          <div class="legend-item"><span class="legend-dot dot-learning"></span>学习中 (Learning): <strong id="countLearning">0</strong></div>
+          <div class="legend-item"><span class="legend-dot dot-new"></span>未学新卡 (New): <strong id="countNew">0</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 双列图表网格 -->
+    <div class="stats-charts-grid">
+      <!-- 1. 未来到期预测分布 (Due Forecast) -->
+      <div class="stats-section-card">
+        <div class="stats-card-header">
+          <span class="stats-card-title">未来 14 天到期分布 (Future Due Forecast)</span>
+          <span class="stats-card-tip" id="dueTodaySummary">今日到期: 0</span>
+        </div>
+        <div class="stats-bar-chart" id="chartFutureDue">
+          <!-- 动态柱状图 -->
+        </div>
+      </div>
+
+      <!-- 2. 复习间隔分布 (Intervals Distribution) -->
+      <div class="stats-section-card">
+        <div class="stats-card-header">
+          <span class="stats-card-title">复习间隔分布 (Intervals)</span>
+          <span class="stats-card-tip" id="intervalSummary">平均间隔: 0 天</span>
+        </div>
+        <div class="stats-bar-chart" id="chartIntervals">
+          <!-- 动态柱状图 -->
+        </div>
+      </div>
+
+      <!-- 3. 简易度因子分布 (Ease Factor Distribution) -->
+      <div class="stats-section-card">
+        <div class="stats-card-header">
+          <span class="stats-card-title">简易度分布 (Ease Factor)</span>
+          <span class="stats-card-tip">起始基准: 2.50</span>
+        </div>
+        <div class="stats-bar-chart" id="chartEase">
+          <!-- 动态柱状图 -->
+        </div>
+      </div>
+
+      <!-- 4. 单元掌握进度矩阵 (Unit Mastery Matrix) -->
+      <div class="stats-section-card">
+        <div class="stats-card-header">
+          <span class="stats-card-title">单元考纲掌握度 (Unit Mastery)</span>
+          <span class="stats-card-tip">全书 8 单元对比</span>
+        </div>
+        <div class="stats-unit-list" id="statsUnitList">
+          <!-- 动态各单元进度条 -->
+        </div>
       </div>
     </div>
   </div>

@@ -627,6 +627,236 @@ function renderAchievements() {
   document.getElementById('navAchieveBadge').textContent = unlockedCount + '/' + totalCount;
 }
 
+// ==========================================================================
+// Anki 风格统计分析渲染逻辑 (Anki Statistics Engine)
+// ==========================================================================
+function renderStatistics() {
+  const store = loadSM2Store();
+  const history = loadHistoryStore();
+  const allCards = [...VOCAB_DATABASE, ...PHRASE_DATABASE];
+  const totalCards = allCards.length;
+
+  let matureCount = 0;   // interval >= 21d
+  let youngCount = 0;    // interval < 21d && repetitions >= 1
+  let learningCount = 0; // repetitions === 0 && (totalReviews > 0 || lapses > 0)
+  let newCount = 0;      // 尚未学习
+
+  let efSum = 0;
+  let reviewedCardsCount = 0;
+  let totalReviewsAccum = 0;
+  let totalIntervalSum = 0;
+
+  const now = Date.now();
+  const DAY_MS = 24 * 60 * 60 * 1000;
+
+  // 14 天未来到期直方图 bins: 0d(今日及逾期), 1d, 2d, ..., 13d
+  const dueBins = new Array(14).fill(0);
+
+  // 复习间隔 bins: 1d, 2-3d, 4-7d, 8-14d, 15-30d, 31-90d, 90d+
+  const intervalBins = [
+    { label: '1天', min: 1, max: 1, count: 0 },
+    { label: '2-3天', min: 2, max: 3, count: 0 },
+    { label: '4-7天', min: 4, max: 7, count: 0 },
+    { label: '8-14天', min: 8, max: 14, count: 0 },
+    { label: '15-30天', min: 15, max: 30, count: 0 },
+    { label: '1-3月', min: 31, max: 90, count: 0 },
+    { label: '3月+', min: 91, max: Infinity, count: 0 }
+  ];
+
+  // 简易度 EF bins: <=1.5, 1.6-1.8, 1.9-2.1, 2.2-2.4, 2.5, 2.6-2.8, 2.9-3.0
+  const easeBins = [
+    { label: '≤1.5', min: 1.0, max: 1.55, count: 0 },
+    { label: '1.6-1.8', min: 1.55, max: 1.85, count: 0 },
+    { label: '1.9-2.1', min: 1.85, max: 2.15, count: 0 },
+    { label: '2.2-2.4', min: 2.15, max: 2.45, count: 0 },
+    { label: '2.5(基准)', min: 2.45, max: 2.55, count: 0 },
+    { label: '2.6-2.8', min: 2.55, max: 2.85, count: 0 },
+    { label: '2.9-3.0', min: 2.85, max: 3.05, count: 0 }
+  ];
+
+  allCards.forEach(c => {
+    const p = store[c.id];
+    if (!p || (p.totalReviews === 0 && p.repetitions === 0)) {
+      newCount++;
+      return;
+    }
+
+    reviewedCardsCount++;
+    totalReviewsAccum += (p.totalReviews || 0);
+    efSum += (p.efactor || 2.5);
+    totalIntervalSum += (p.interval || 0);
+
+    // 状态分类
+    if (p.interval >= 21) {
+      matureCount++;
+    } else if (p.repetitions >= 1) {
+      youngCount++;
+    } else {
+      learningCount++;
+    }
+
+    // 统计未来到期
+    if (p.dueDate) {
+      const diffDays = Math.floor((p.dueDate - now) / DAY_MS);
+      if (diffDays <= 0) {
+        dueBins[0]++;
+      } else if (diffDays < 14) {
+        dueBins[diffDays]++;
+      }
+    }
+
+    // 统计复习间隔
+    if (p.interval > 0) {
+      for (const b of intervalBins) {
+        if (p.interval >= b.min && p.interval <= b.max) {
+          b.count++;
+          break;
+        }
+      }
+    }
+
+    // 统计简易度
+    const ef = p.efactor || 2.5;
+    for (const eb of easeBins) {
+      if (ef >= eb.min && ef < eb.max) {
+        eb.count++;
+        break;
+      }
+    }
+  });
+
+  // 1. 顶部指标计算
+  document.getElementById('statTotalCards').textContent = totalCards;
+  document.getElementById('statTotalCardsSub').textContent = `单词 ${VOCAB_DATABASE.length} · 词组 ${PHRASE_DATABASE.length}`;
+
+  document.getElementById('statMatureCards').textContent = matureCount;
+  const matureRatio = totalCards > 0 ? Math.round((matureCount / totalCards) * 100) : 0;
+  document.getElementById('statMatureRatio').textContent = `占比 ${matureRatio}%`;
+
+  const today = new Date();
+  const todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+  document.getElementById('statTodayReviews').textContent = history[todayKey] || 0;
+
+  let currentStreak = 0;
+  for (let i = 0; i < 60; i++) {
+    const d = new Date();
+    d.setDate(today.getDate() - i);
+    const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    if ((history[k] || 0) > 0) currentStreak++;
+    else break;
+  }
+  document.getElementById('statStreakDays').textContent = `连续 ${currentStreak} 天复习`;
+
+  const avgEf = reviewedCardsCount > 0 ? (efSum / reviewedCardsCount).toFixed(2) : '2.50';
+  document.getElementById('statAverageEf').textContent = avgEf;
+  document.getElementById('statTotalReviews').textContent = `累计评定 ${totalReviewsAccum} 次`;
+
+  // 2. 卡片状态堆叠条
+  const pctMature = (matureCount / totalCards) * 100;
+  const pctYoung = (youngCount / totalCards) * 100;
+  const pctLearning = (learningCount / totalCards) * 100;
+  const pctNew = (newCount / totalCards) * 100;
+
+  document.getElementById('segMature').style.width = pctMature + '%';
+  document.getElementById('segYoung').style.width = pctYoung + '%';
+  document.getElementById('segLearning').style.width = pctLearning + '%';
+  document.getElementById('segNew').style.width = pctNew + '%';
+
+  document.getElementById('countMature').textContent = `${matureCount} (${Math.round(pctMature)}%)`;
+  document.getElementById('countYoung').textContent = `${youngCount} (${Math.round(pctYoung)}%)`;
+  document.getElementById('countLearning').textContent = `${learningCount} (${Math.round(pctLearning)}%)`;
+  document.getElementById('countNew').textContent = `${newCount} (${Math.round(pctNew)}%)`;
+
+  // 3. 未来到期预测直方图
+  const chartDueEl = document.getElementById('chartFutureDue');
+  chartDueEl.innerHTML = '';
+  const maxDue = Math.max(...dueBins, 1);
+  document.getElementById('dueTodaySummary').textContent = `今日及逾期待复习: ${dueBins[0]}`;
+
+  dueBins.forEach((cnt, idx) => {
+    const col = document.createElement('div');
+    col.className = 'chart-col';
+    const heightPct = Math.round((cnt / maxDue) * 100);
+    const label = idx === 0 ? '今日' : `+${idx}天`;
+    col.innerHTML = `
+      <div class="chart-col-val">${cnt > 0 ? cnt : ''}</div>
+      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="${label}: ${cnt} 张卡片"></div>
+      <div class="chart-col-label">${label}</div>
+    `;
+    chartDueEl.appendChild(col);
+  });
+
+  // 4. 复习间隔直方图
+  const chartIntEl = document.getElementById('chartIntervals');
+  chartIntEl.innerHTML = '';
+  const avgInterval = reviewedCardsCount > 0 ? (totalIntervalSum / reviewedCardsCount).toFixed(1) : '0';
+  document.getElementById('intervalSummary').textContent = `平均记忆间隔: ${avgInterval} 天`;
+  const maxInt = Math.max(...intervalBins.map(b => b.count), 1);
+
+  intervalBins.forEach(b => {
+    const col = document.createElement('div');
+    col.className = 'chart-col';
+    const heightPct = Math.round((b.count / maxInt) * 100);
+    col.innerHTML = `
+      <div class="chart-col-val">${b.count > 0 ? b.count : ''}</div>
+      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="${b.label}: ${b.count} 张卡片"></div>
+      <div class="chart-col-label">${b.label}</div>
+    `;
+    chartIntEl.appendChild(col);
+  });
+
+  // 5. 简易度直方图
+  const chartEaseEl = document.getElementById('chartEase');
+  chartEaseEl.innerHTML = '';
+  const maxEase = Math.max(...easeBins.map(b => b.count), 1);
+
+  easeBins.forEach(b => {
+    const col = document.createElement('div');
+    col.className = 'chart-col';
+    const heightPct = Math.round((b.count / maxEase) * 100);
+    col.innerHTML = `
+      <div class="chart-col-val">${b.count > 0 ? b.count : ''}</div>
+      <div class="chart-col-bar" style="height: ${Math.max(4, heightPct)}%;" title="EF ${b.label}: ${b.count} 张卡片"></div>
+      <div class="chart-col-label">${b.label}</div>
+    `;
+    chartEaseEl.appendChild(col);
+  });
+
+  // 6. 单元考纲掌握度矩阵
+  const unitListEl = document.getElementById('statsUnitList');
+  unitListEl.innerHTML = '';
+
+  for (let u = 1; u <= 8; u++) {
+    const unitVocab = VOCAB_DATABASE.filter(w => w.unit === u);
+    const unitPhrases = PHRASE_DATABASE.filter(p => p.unit === u);
+    const unitAll = [...unitVocab, ...unitPhrases];
+    const totalU = unitAll.length;
+
+    let masteredU = 0;
+    unitAll.forEach(item => {
+      const p = store[item.id];
+      if (p && p.repetitions >= 2 && p.efactor >= 2.2) {
+        masteredU++;
+      }
+    });
+
+    const pct = totalU > 0 ? Math.round((masteredU / totalU) * 100) : 0;
+    const row = document.createElement('div');
+    row.className = 'unit-mastery-row';
+    const title = unitVocab[0] ? unitVocab[0].unitTitle : `Unit ${u}`;
+    row.innerHTML = `
+      <div class="unit-mastery-header">
+        <span>${title}</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">已掌握 ${masteredU} / ${totalU} (${pct}%)</span>
+      </div>
+      <div class="unit-mastery-track">
+        <div class="unit-mastery-fill" style="width: ${pct}%;"></div>
+      </div>
+    `;
+    unitListEl.appendChild(row);
+  }
+}
+
 // 单元词组表格渲染
 function renderPhrasesTable() {
   const query = (document.getElementById('searchPhrasesBox').value || '').trim().toLowerCase();
@@ -813,12 +1043,14 @@ function initEventListeners() {
   // 标签页切换
   const tabReciteBtn = document.getElementById('tabReciteBtn');
   const tabLeechBtn = document.getElementById('tabLeechBtn');
+  const tabStatsBtn = document.getElementById('tabStatsBtn');
   const tabAchievementsBtn = document.getElementById('tabAchievementsBtn');
   const tabPhrasesBtn = document.getElementById('tabPhrasesBtn');
   const tabListBtn = document.getElementById('tabListBtn');
 
   const reciteView = document.getElementById('reciteView');
   const leechView = document.getElementById('leechView');
+  const statsView = document.getElementById('statsView');
   const achievementsView = document.getElementById('achievementsView');
   const phrasesView = document.getElementById('phrasesView');
   const listView = document.getElementById('listView');
@@ -826,8 +1058,8 @@ function initEventListeners() {
   const heatmapSection = document.getElementById('heatmapSection');
 
   function hideAllTabs() {
-    [tabReciteBtn, tabLeechBtn, tabAchievementsBtn, tabPhrasesBtn, tabListBtn].forEach(b => b.classList.remove('active'));
-    [reciteView, leechView, achievementsView, phrasesView, listView, controlPanel, heatmapSection].forEach(v => v.style.display = 'none');
+    [tabReciteBtn, tabLeechBtn, tabStatsBtn, tabAchievementsBtn, tabPhrasesBtn, tabListBtn].forEach(b => b.classList.remove('active'));
+    [reciteView, leechView, statsView, achievementsView, phrasesView, listView, controlPanel, heatmapSection].forEach(v => v.style.display = 'none');
   }
 
   tabPhrasesBtn.addEventListener('click', function() {
@@ -852,6 +1084,13 @@ function initEventListeners() {
     tabLeechBtn.classList.add('active');
     leechView.style.display = 'flex';
     renderLeechView();
+  });
+
+  tabStatsBtn.addEventListener('click', function() {
+    hideAllTabs();
+    tabStatsBtn.classList.add('active');
+    statsView.style.display = 'flex';
+    renderStatistics();
   });
 
   tabAchievementsBtn.addEventListener('click', function() {
