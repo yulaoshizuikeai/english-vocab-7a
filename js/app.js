@@ -139,6 +139,8 @@ async function initData() {
     initUnitSelector();
     initEventListeners();
     initTheme();
+    // 确保首屏严格只呈现背诵视图
+    document.getElementById('tabReciteBtn').click();
     startNewSession();
   } catch (err) {
     console.error('Failed to load dataset:', err);
