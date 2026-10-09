@@ -386,10 +386,10 @@ function revealCard() {
     }, 150);
   }
 
-  // 固化 4 秒自然沉淀（无多余弹窗，按钮禁用 4 秒后激活）
+  // 固化 2 秒自然沉淀（无多余弹窗，按钮禁用 2 秒后激活）
   isStayLocked = true;
   setRatingButtonsDisabled(true);
-  let remainingSeconds = 4;
+  let remainingSeconds = 2;
 
   stayTimerInterval = setInterval(() => {
     remainingSeconds--;
