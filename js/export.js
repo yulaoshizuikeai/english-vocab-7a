@@ -9,6 +9,7 @@ import {
   loadSettings,
   saveSettings,
   loadHistoryStore,
+  saveHistoryStore,
   loadAchievements,
   saveAchievements
 } from './storage.js';
@@ -91,7 +92,7 @@ export function importBackupJSON(jsonString) {
     // 安全写入本地存储，严格保留原有字段
     saveSM2Store(progress);
     if (history && typeof history === 'object') {
-      localStorage.setItem('sm2_vocab_history_7a', JSON.stringify(history));
+      saveHistoryStore(history);
     }
     if (settings && typeof settings === 'object') {
       saveSettings(settings);

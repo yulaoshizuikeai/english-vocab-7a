@@ -5,6 +5,7 @@
 
 import { calculateSM2, predictIntervals, LEECH_THRESHOLD } from './sm2.js';
 import {
+  initStorageEngine,
   loadSM2Store,
   saveSM2Store,
   getCardProgress,
@@ -125,6 +126,10 @@ function showToast(msg) {
 // 加载外部数据
 async function initData() {
   try {
+    // 确保存储引擎完成自检与无损平滑迁移
+    await initStorageEngine();
+    currentSettings = loadSettings();
+
     const [vocabRes, phrasesRes] = await Promise.all([
       fetch('data/vocab-7a.json'),
       fetch('data/phrases-7a.json')
