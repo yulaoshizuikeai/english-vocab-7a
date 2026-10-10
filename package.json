@@ -1,0 +1,20 @@
+{
+  "name": "english-vocab-7a",
+  "version": "2.4.0",
+  "description": "沪教牛津版初一英语 7A (2024新课标) SM2 间隔重复背诵工作台",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/verify_storage.mjs",
+    "check": "node --check js/app.js && node --check js/storage.js && node --check js/audio.js && node --check js/export.js && node --check js/sm2.js"
+  },
+  "keywords": [
+    "english-vocabulary",
+    "sm2-algorithm",
+    "spaced-repetition",
+    "indexeddb",
+    "anki",
+    "junior-high-school"
+  ],
+  "author": "yulaoshi",
+  "license": "MIT"
+}
