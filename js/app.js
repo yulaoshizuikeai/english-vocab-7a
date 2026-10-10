@@ -1248,7 +1248,9 @@ function initEventListeners() {
         const res = importBackupJSON(content);
         if (res.success) {
           showToast(res.message);
-          // 重新刷新视图指标与缓存
+          // 重新刷新设置、单元选择器、视图指标与会话
+          currentSettings = loadSettings();
+          initUnitSelector();
           renderStatistics();
           renderHeatmap();
           renderAchievements();
