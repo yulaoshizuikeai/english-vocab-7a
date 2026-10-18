@@ -1,0 +1,110 @@
+[
+  {
+    "id": "8a_p1_1",
+    "book": "8a",
+    "unit": 1,
+    "unitTitle": "Unit 1 Encyclopaedias（百科全书）",
+    "phrase": "be famous / well-known for doing sth.",
+    "meaning": "Da Vinci is famous for painting the Mona Lisa.",
+    "example": "Da Vinci is famous for painting the Mona Lisa."
+  },
+  {
+    "id": "8a_p2_1",
+    "book": "8a",
+    "unit": 2,
+    "unitTitle": "Unit 2 Numbers（奇妙的数字）",
+    "phrase": "a number of (许多，谓复) vs. the number of (……的数量，谓单)",
+    "meaning": "",
+    "example": "课文核心短语：a number of (许多，谓复) vs. the number of (……的数量，谓单)"
+  },
+  {
+    "id": "8a_p3_1",
+    "book": "8a",
+    "unit": 3,
+    "unitTitle": "Unit 3 Computers（计算机世界）",
+    "phrase": "It is + adj. + for sb. + to do sth.",
+    "meaning": "It is convenient for us to search for information on the Internet.",
+    "example": "It is convenient for us to search for information on the Internet."
+  },
+  {
+    "id": "8a_p3_2",
+    "book": "8a",
+    "unit": 3,
+    "unitTitle": "Unit 3 Computers（计算机世界）",
+    "phrase": "with the help of...",
+    "meaning": "With the help of computers, we can complete tasks much faster.",
+    "example": "With the help of computers, we can complete tasks much faster."
+  },
+  {
+    "id": "8a_p4_1",
+    "book": "8a",
+    "unit": 4,
+    "unitTitle": "Unit 4 Inventions（改变世界的发明）",
+    "phrase": "一般过去时的被动语态",
+    "meaning": "The wheel was invented thousands of years ago.",
+    "example": "The wheel was invented thousands of years ago."
+  },
+  {
+    "id": "8a_p4_2",
+    "book": "8a",
+    "unit": 4,
+    "unitTitle": "Unit 4 Inventions（改变世界的发明）",
+    "phrase": "make it + adj. + for sb. to do sth.",
+    "meaning": "The telephone made it easy for people to communicate.",
+    "example": "The telephone made it easy for people to communicate."
+  },
+  {
+    "id": "8a_p5_1",
+    "book": "8a",
+    "unit": 5,
+    "unitTitle": "Unit 5 Educational exchanges（教育与文化交流）",
+    "phrase": "broaden one's horizons",
+    "meaning": "Travelling abroad helps broaden our horizons.",
+    "example": "Travelling abroad helps broaden our horizons."
+  },
+  {
+    "id": "8a_p5_2",
+    "book": "8a",
+    "unit": 5,
+    "unitTitle": "Unit 5 Educational exchanges（教育与文化交流）",
+    "phrase": "get used to (doing) sth.",
+    "meaning": "It took him two weeks to get used to using forks.",
+    "example": "It took him two weeks to get used to using forks."
+  },
+  {
+    "id": "8a_p6_1",
+    "book": "8a",
+    "unit": 6,
+    "unitTitle": "Unit 6 Ancient stories（古老的故事）",
+    "phrase": "过去进行时 (was/were + doing)",
+    "meaning": "While the Trojans were sleeping, the Greek soldiers climbed out of the horse.",
+    "example": "While the Trojans were sleeping, the Greek soldiers climbed out of the horse."
+  },
+  {
+    "id": "8a_p6_2",
+    "book": "8a",
+    "unit": 6,
+    "unitTitle": "Unit 6 Ancient stories（古老的故事）",
+    "phrase": "celebrate victory",
+    "meaning": "The people celebrated their victory with singing and dancing.",
+    "example": "The people celebrated their victory with singing and dancing."
+  },
+  {
+    "id": "8a_p7_1",
+    "book": "8a",
+    "unit": 7,
+    "unitTitle": "Unit 7 Memory（记忆的奥秘）",
+    "phrase": "if 条件状语从句（主将从现）",
+    "meaning": "If you review new words regularly, you will remember them better.",
+    "example": "If you review new words regularly, you will remember them better."
+  },
+  {
+    "id": "8a_p8_1",
+    "book": "8a",
+    "unit": 8,
+    "unitTitle": "Unit 8 English Week（精彩英语周）",
+    "phrase": "congratulate sb. on (doing) sth.",
+    "meaning": "We congratulated him on winning the first prize.",
+    "example": "We congratulated him on winning the first prize."
+  }
+]

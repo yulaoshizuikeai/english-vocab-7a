@@ -1,0 +1,42 @@
+[
+  {
+    "id": "7a",
+    "title": "七年级上册 (7A)",
+    "shortTitle": "7A",
+    "units": 8,
+    "vocabFile": "data/vocab-7a.json",
+    "phrasesFile": "data/phrases-7a.json"
+  },
+  {
+    "id": "7b",
+    "title": "七年级下册 (7B)",
+    "shortTitle": "7B",
+    "units": 8,
+    "vocabFile": "data/vocab-7b.json",
+    "phrasesFile": "data/phrases-7b.json"
+  },
+  {
+    "id": "8a",
+    "title": "八年级上册 (8A)",
+    "shortTitle": "8A",
+    "units": 8,
+    "vocabFile": "data/vocab-8a.json",
+    "phrasesFile": "data/phrases-8a.json"
+  },
+  {
+    "id": "8b",
+    "title": "八年级下册 (8B)",
+    "shortTitle": "8B",
+    "units": 8,
+    "vocabFile": "data/vocab-8b.json",
+    "phrasesFile": "data/phrases-8b.json"
+  },
+  {
+    "id": "9",
+    "title": "九年级全册 (9A/9B)",
+    "shortTitle": "9全册",
+    "units": 6,
+    "vocabFile": "data/vocab-9.json",
+    "phrasesFile": "data/phrases-9.json"
+  }
+]

@@ -1304,6 +1304,102 @@
       color: var(--text-sub);
     }
 
+    /* Multi-Book, Category & Appendix Enhancements (V3.0) */
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-sub);
+      min-width: 42px;
+      user-select: none;
+    }
+    .unit-chip.chip-book.selected {
+      background: var(--tag-green-bg);
+      color: var(--tag-green-color);
+      border-color: rgba(46, 170, 118, 0.4);
+      font-weight: 600;
+    }
+    .unit-chip.chip-category.selected[data-cat="core"] {
+      background: var(--tag-blue-bg);
+      color: var(--tag-blue-color);
+      border-color: rgba(35, 131, 226, 0.4);
+      font-weight: 600;
+    }
+    .unit-chip.chip-category.selected[data-cat="expansion"] {
+      background: var(--tag-orange-bg);
+      color: var(--tag-orange-color);
+      border-color: rgba(255, 115, 0, 0.4);
+      font-weight: 600;
+    }
+    .card-category-label {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-family: var(--font-sans);
+    }
+    .card-category-label.core {
+      background: var(--tag-blue-bg);
+      color: var(--tag-blue-color);
+      border: 1px solid rgba(35, 131, 226, 0.25);
+    }
+    .card-category-label.expansion {
+      background: var(--tag-orange-bg);
+      color: var(--tag-orange-color);
+      border: 1px solid rgba(255, 115, 0, 0.25);
+    }
+    .badge-core {
+      background: var(--tag-blue-bg);
+      color: var(--tag-blue-color);
+      font-size: 10px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+    .badge-exp {
+      background: var(--tag-orange-bg);
+      color: var(--tag-orange-color);
+      font-size: 10px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    /* Appendix View */
+    .appendix-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+    .appendix-subnav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .appendix-content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      line-height: 1.7;
+    }
+    .appendix-content-card h1 { font-size: 18px; margin: 0 0 12px; }
+    .appendix-content-card h2 { font-size: 15px; margin: 18px 0 8px; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+    .appendix-content-card h3 { font-size: 13.5px; margin: 12px 0 6px; color: var(--text-sub); }
+    .appendix-content-card table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12.5px; }
+    .appendix-content-card th, .appendix-content-card td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+    .appendix-content-card th { background: var(--surface-subtle); color: var(--text-sub); }
+    .appendix-content-card ul { padding-left: 20px; margin: 8px 0; font-size: 13px; }
+    .appendix-content-card li { margin-bottom: 4px; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(2px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1317,3 +1413,4 @@
       .heatmap-metrics { flex-direction: column; gap: 2px; }
       .achieve-grid { grid-template-columns: 1fr; }
     }
+

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>初中英语研习 · 沪教牛津版7A</title>
+  <title>初中英语研习 · 2024新课标沪教版 (7A-9全册)</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/style.css?v=3.0.0">
 </head>
 <body>
 
@@ -13,8 +13,8 @@
   <div class="header-inner">
     <div class="brand-title">
       <img src="icon.png" alt="Logo" class="brand-logo-img">
-      <span>沪教牛津版初一英语 7A</span>
-      <span class="brand-badge">SM2 Engine</span>
+      <span>沪教版初中英语 (2024新课标)</span>
+      <span class="brand-badge">SM-2 V3.0</span>
     </div>
     <div class="header-nav">
       <button class="nav-btn active" id="tabReciteBtn">背诵卡片</button>
@@ -29,6 +29,7 @@
       </button>
       <button class="nav-btn" id="tabPhrasesBtn">单元词组</button>
       <button class="nav-btn" id="tabListBtn">词库清单</button>
+      <button class="nav-btn" id="tabAppendixBtn">附录速查</button>
       <button class="nav-btn" id="themeToggleBtn" title="切换深浅外观">外观</button>
     </div>
   </div>
@@ -42,7 +43,7 @@
       <div class="heatmap-metrics">
         <span>今日复习: <strong id="todayReviewCount">0</strong> 词</span>
         <span>近30天累计: <strong id="periodTotalCount">0</strong> 次</span>
-        <span>已掌握: <strong id="totalMasteredCount">0</strong> / <span id="totalMasteredCap">256</span></span>
+        <span>本册已掌握: <strong id="totalMasteredCount">0</strong> / <span id="totalMasteredCap">302</span></span>
       </div>
     </div>
     <div class="heatmap-scroll-wrap">
@@ -63,15 +64,39 @@
   <!-- 控制面板 -->
   <div class="notion-section" id="controlPanel">
     <div class="controls-grid">
+      <!-- 1. 册别导航行 -->
+      <div class="control-row">
+        <span class="control-label">册别:</span>
+        <div class="unit-chips-wrap" id="bookSelector">
+          <!-- 动态注入册别: 7A, 7B, 8A, 8B, 9全册 -->
+        </div>
+      </div>
+
+      <!-- 2. 分层筛选行 -->
+      <div class="control-row">
+        <span class="control-label">分层:</span>
+        <div class="unit-chips-wrap" id="categorySelector">
+          <div class="unit-chip chip-category selected" data-cat="all">全部词汇</div>
+          <div class="unit-chip chip-category" data-cat="core">★ 课内核心必背</div>
+          <div class="unit-chip chip-category" data-cat="expansion">✦ 课外高分拓展</div>
+        </div>
+      </div>
+
+      <!-- 3. 单元选择行 -->
       <div class="filter-row">
-        <div class="unit-chips-wrap" id="unitSelector">
-          <!-- 动态注入单元 1~8 -->
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span class="control-label">单元:</span>
+          <div class="unit-chips-wrap" id="unitSelector">
+            <!-- 动态注入当前册别各单元 -->
+          </div>
         </div>
         <div>
           <button class="unit-chip action-chip" id="selectAllUnitsBtn">全选</button>
           <button class="unit-chip action-chip" id="clearUnitsBtn">清空</button>
         </div>
       </div>
+
+      <!-- 4. 模式与发音选项行 -->
       <div class="options-row">
         <div class="options-left">
           <select class="notion-select" id="modeSelect">
@@ -117,7 +142,8 @@
       <div class="flashcard" id="flashcard">
         <div class="card-meta-bar">
           <div class="card-meta-left">
-            <span class="card-unit-label" id="cardUnitTag">Unit 1</span>
+            <span class="card-unit-label" id="cardUnitTag">7A · Unit 1</span>
+            <span class="card-category-label core" id="cardCategoryTag">课内核心</span>
             <span class="card-leech-label" id="cardLeechTag">难词</span>
           </div>
           <span id="cardSm2Tag">已记:0次 · 间隔:0天 · EF:2.5</span>
@@ -303,7 +329,7 @@
     <!-- 顶部四格指标卡片 -->
     <div class="stats-metrics-grid">
       <div class="stats-metric-card">
-        <div class="stats-metric-label">总卡片量</div>
+        <div class="stats-metric-label">当前册总卡片量</div>
         <div class="stats-metric-value" id="statTotalCards">0</div>
         <div class="stats-metric-sub" id="statTotalCardsSub">单词 0 · 词组 0</div>
       </div>
@@ -385,7 +411,7 @@
       <div class="stats-section-card">
         <div class="stats-card-header">
           <span class="stats-card-title">单元考纲掌握度 (Unit Mastery)</span>
-          <span class="stats-card-tip">全书 8 单元对比</span>
+          <span class="stats-card-tip" id="unitMasteryTip">各单元进度对比</span>
         </div>
         <div class="stats-unit-list" id="statsUnitList">
           <!-- 动态各单元进度条 -->
@@ -417,22 +443,14 @@
   </div>
 
   <!-- 单元词组清单视图 -->
-  <div class="list-view-container" id="phrasesView">
+  <div class="list-view-container" id="phrasesView" style="display: none;">
     <div class="list-header-row">
       <input type="text" class="search-box" id="searchPhrasesBox" placeholder="搜索单元词组、释义或例句...">
       <div style="font-size: 12px; color: var(--text-sub); display: flex; align-items: center; gap: 10px;">
         <select class="notion-select" id="phraseUnitFilter" style="font-size: 11.5px; padding: 2px 6px;">
           <option value="all">全部单元</option>
-          <option value="1">Unit 1 Friendship</option>
-          <option value="2">Unit 2 School life</option>
-          <option value="3">Unit 3 The seasons</option>
-          <option value="4">Unit 4 The Earth</option>
-          <option value="5">Unit 5 Off to space</option>
-          <option value="6">Unit 6 Travelling around Asia</option>
-          <option value="7">Unit 7 Fun after school</option>
-          <option value="8">Unit 8 Collecting as a hobby</option>
         </select>
-        <span>共 <strong id="totalPhrasesCountText">71</strong> 条词组</span>
+        <span>共 <strong id="totalPhrasesCountText">0</strong> 条词组</span>
       </div>
     </div>
     <div style="overflow-x: auto;">
@@ -453,11 +471,24 @@
   </div>
 
   <!-- 词库清单视图 -->
-  <div class="list-view-container" id="listView">
+  <div class="list-view-container" id="listView" style="display: none;">
     <div class="list-header-row">
       <input type="text" class="search-box" id="searchBox" placeholder="搜索单词、释义或搭配...">
-      <div style="font-size: 12px; color: var(--text-sub);">
-        共 <strong id="totalVocabCountText">256</strong> 词
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-sub);">
+        <select class="notion-select" id="listBookFilter" style="font-size: 11.5px; padding: 2px 6px;">
+          <option value="current">当前所选册别</option>
+          <option value="7a">7A (七上)</option>
+          <option value="7b">7B (七下)</option>
+          <option value="8a">8A (八上)</option>
+          <option value="8b">8B (八下)</option>
+          <option value="9">9全册</option>
+        </select>
+        <select class="notion-select" id="listCategoryFilter" style="font-size: 11.5px; padding: 2px 6px;">
+          <option value="all">全部分类</option>
+          <option value="core">课内必背核心词</option>
+          <option value="expansion">课外高分拓展词</option>
+        </select>
+        <span>共 <strong id="totalVocabCountText">0</strong> 词</span>
       </div>
     </div>
     <div style="overflow-x: auto;">
@@ -468,6 +499,7 @@
             <th style="width: 140px;">Word</th>
             <th style="width: 120px;">Phonetic</th>
             <th style="width: 50px;">Pos</th>
+            <th style="width: 80px;">Category</th>
             <th>Meaning & Phrases</th>
             <th style="width: 80px;">Unit</th>
             <th style="width: 100px;">SM2 Status</th>
@@ -476,6 +508,18 @@
         </thead>
         <tbody id="vocabTableBody"></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- 附录与中考速查视图 (Appendix View) -->
+  <div class="appendix-container" id="appendixView" style="display: none;">
+    <div class="appendix-subnav">
+      <button class="unit-chip selected" id="appendixTabPhrases">中考高频核心词组全集</button>
+      <button class="unit-chip" id="appendixTabVerbs">必背不规则动词分类表</button>
+      <button class="unit-chip" id="appendixTabAffixes">中考构词法与词形转换规律</button>
+    </div>
+    <div class="appendix-content-card" id="appendixContent">
+      <!-- 动态填充内容 -->
     </div>
   </div>
 </main>
@@ -487,7 +531,7 @@
 </div>
 
 <!-- 模块化引入核心脚本 -->
-<script type="module" src="js/app.js?v=2.4"></script>
+<script type="module" src="js/app.js?v=3.0.0"></script>
 
 </body>
 </html>

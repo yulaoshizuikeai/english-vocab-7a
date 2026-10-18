@@ -1,6 +1,6 @@
 /**
- * 主控制器模块
- * 负责数据加载、状态机流转、视图切换、DOM 交互与 4 秒停留控制
+ * 主控制器模块 V3.0
+ * 负责全学段数据加载、多册切换、双层分类筛选、状态机流转、视图切换、DOM 交互与 2 秒停留控制
  */
 
 import { calculateSM2, predictIntervals, LEECH_THRESHOLD } from './sm2.js';
@@ -23,6 +23,15 @@ import {
   importBackupJSON,
   buildAIDiagnosticPrompt
 } from './export.js';
+
+// 册别基础配置
+const BOOKS_CONFIG = [
+  { id: '7a', title: '七年级上册 (7A)', shortTitle: '7A 七上', units: 8 },
+  { id: '7b', title: '七年级下册 (7B)', shortTitle: '7B 七下', units: 8 },
+  { id: '8a', title: '八年级上册 (8A)', shortTitle: '8A 八上', units: 8 },
+  { id: '8b', title: '八年级下册 (8B)', shortTitle: '8B 八下', units: 8 },
+  { id: '9',  title: '九年级全册 (9A/9B)', shortTitle: '9年级全册', units: 6 }
+];
 
 // 学习记录目标定义（客观学术规范）
 const ACHIEVEMENT_DEFINITIONS = [
@@ -98,9 +107,14 @@ const ACHIEVEMENT_DEFINITIONS = [
   }
 ];
 
-// 数据存储
+// 数据存储与内存缓存
 let VOCAB_DATABASE = [];
 let PHRASE_DATABASE = [];
+let GRAMMAR_APPENDIX = null;
+const BOOK_CACHE = {
+  vocab: {},
+  phrases: {}
+};
 
 // 会话状态
 let currentSettings = loadSettings();
@@ -123,28 +137,99 @@ function showToast(msg) {
   }, 3000);
 }
 
-// 加载外部数据
+function getActiveBookConfig() {
+  const bId = currentSettings.activeBook || '7a';
+  return BOOKS_CONFIG.find(b => b.id === bId) || BOOKS_CONFIG[0];
+}
+
+// 加载指定册别的数据
+async function loadBookData(bookId) {
+  if (BOOK_CACHE.vocab[bookId] && BOOK_CACHE.phrases[bookId]) {
+    VOCAB_DATABASE = BOOK_CACHE.vocab[bookId];
+    PHRASE_DATABASE = BOOK_CACHE.phrases[bookId];
+    return;
+  }
+
+  const [vocabRes, phrasesRes] = await Promise.all([
+    fetch(`data/vocab-${bookId}.json`),
+    fetch(`data/phrases-${bookId}.json`)
+  ]);
+
+  VOCAB_DATABASE = await vocabRes.json();
+  PHRASE_DATABASE = await phrasesRes.json();
+
+  BOOK_CACHE.vocab[bookId] = VOCAB_DATABASE;
+  BOOK_CACHE.phrases[bookId] = PHRASE_DATABASE;
+}
+
+// 切换册别
+async function switchBook(bookId) {
+  try {
+    currentSettings.activeBook = bookId;
+    const cfg = getActiveBookConfig();
+
+    // 纠正当前选中单元 (确保在 1..cfg.units 范围内)
+    currentSettings.selectedUnits = currentSettings.selectedUnits
+      .filter(u => u >= 1 && u <= cfg.units);
+    if (currentSettings.selectedUnits.length === 0) {
+      currentSettings.selectedUnits = [1];
+    }
+    saveSettings(currentSettings);
+
+    await loadBookData(bookId);
+
+    // 更新界面状态
+    renderBookSelector();
+    initUnitSelector();
+    updateHeaderCounters();
+    updatePhraseFilterDropdown();
+
+    // 重新开启会话
+    startNewSession();
+  } catch (err) {
+    console.error('切换册别失败:', err);
+    showToast('加载册别数据失败，请重试');
+  }
+}
+
+function updateHeaderCounters() {
+  const totalVocabEl = document.getElementById('totalVocabCountText');
+  if (totalVocabEl) totalVocabEl.textContent = VOCAB_DATABASE.length;
+
+  const totalPhrasesEl = document.getElementById('totalPhrasesCountText');
+  if (totalPhrasesEl) totalPhrasesEl.textContent = PHRASE_DATABASE.length;
+
+  const capEl = document.getElementById('totalMasteredCap');
+  if (capEl) capEl.textContent = VOCAB_DATABASE.length;
+}
+
+// 加载外部数据入口
 async function initData() {
   try {
-    // 确保存储引擎完成自检与无损平滑迁移
     await initStorageEngine();
     currentSettings = loadSettings();
 
-    const [vocabRes, phrasesRes] = await Promise.all([
-      fetch('data/vocab-7a.json'),
-      fetch('data/phrases-7a.json')
-    ]);
-    VOCAB_DATABASE = await vocabRes.json();
-    PHRASE_DATABASE = await phrasesRes.json();
+    // 确保 activeBook 有效
+    if (!BOOKS_CONFIG.some(b => b.id === currentSettings.activeBook)) {
+      currentSettings.activeBook = '7a';
+    }
 
-    document.getElementById('totalVocabCountText').textContent = VOCAB_DATABASE.length;
-    document.getElementById('totalPhrasesCountText').textContent = PHRASE_DATABASE.length;
-    document.getElementById('totalMasteredCap').textContent = VOCAB_DATABASE.length;
+    await loadBookData(currentSettings.activeBook);
 
+    updateHeaderCounters();
+    renderBookSelector();
+    renderCategorySelector();
     initUnitSelector();
     initEventListeners();
     initTheme();
-    // 确保首屏严格只呈现背诵视图
+
+    // 预载附录数据
+    fetch('data/grammar-appendix.json')
+      .then(res => res.json())
+      .then(data => { GRAMMAR_APPENDIX = data; })
+      .catch(e => console.warn('附录数据预载失败:', e));
+
+    // 首屏默认背诵视图
     document.getElementById('tabReciteBtn').click();
     startNewSession();
   } catch (err) {
@@ -153,11 +238,57 @@ async function initData() {
   }
 }
 
-// 初始化单元选择器
+// 渲染册别选择器
+function renderBookSelector() {
+  const container = document.getElementById('bookSelector');
+  if (!container) return;
+  container.innerHTML = '';
+
+  BOOKS_CONFIG.forEach(b => {
+    const chip = document.createElement('div');
+    const isSel = (currentSettings.activeBook || '7a') === b.id;
+    chip.className = 'unit-chip chip-book' + (isSel ? ' selected' : '');
+    chip.textContent = b.shortTitle;
+    chip.dataset.book = b.id;
+    chip.addEventListener('click', () => {
+      if (currentSettings.activeBook !== b.id) {
+        switchBook(b.id);
+      }
+    });
+    container.appendChild(chip);
+  });
+}
+
+// 渲染分层筛选器 (全部 / 课内核心 / 课外拓展)
+function renderCategorySelector() {
+  const container = document.getElementById('categorySelector');
+  if (!container) return;
+  const chips = container.querySelectorAll('.chip-category');
+  chips.forEach(chip => {
+    const cat = chip.dataset.cat;
+    if (cat === (currentSettings.categoryFilter || 'all')) {
+      chip.classList.add('selected');
+    } else {
+      chip.classList.remove('selected');
+    }
+    chip.onclick = () => {
+      chips.forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      currentSettings.categoryFilter = cat;
+      saveSettings(currentSettings);
+      startNewSession();
+    };
+  });
+}
+
+// 初始化单元选择器 (自适应当前册别 1..N)
 function initUnitSelector() {
   const unitSelectorEl = document.getElementById('unitSelector');
+  if (!unitSelectorEl) return;
   unitSelectorEl.innerHTML = '';
-  for (let u = 1; u <= 8; u++) {
+  const cfg = getActiveBookConfig();
+
+  for (let u = 1; u <= cfg.units; u++) {
     const chip = document.createElement('div');
     chip.className = 'unit-chip' + (currentSettings.selectedUnits.includes(u) ? ' selected' : '');
     chip.textContent = 'Unit ' + u;
@@ -180,11 +311,24 @@ function initUnitSelector() {
   }
 }
 
+function updatePhraseFilterDropdown() {
+  const sel = document.getElementById('phraseUnitFilter');
+  if (!sel) return;
+  const cfg = getActiveBookConfig();
+  sel.innerHTML = '<option value="all">全部单元</option>';
+  for (let u = 1; u <= cfg.units; u++) {
+    const opt = document.createElement('option');
+    opt.value = String(u);
+    opt.textContent = `Unit ${u}`;
+    sel.appendChild(opt);
+  }
+}
+
 // 统计重点难词
 function getLeechCards() {
   const store = loadSM2Store();
   return VOCAB_DATABASE.filter(w => {
-    const p = store[w.id];
+    const p = store[w.id] || store[w.canonicalId] || store[w.legacyId];
     return p && (p.lapses >= LEECH_THRESHOLD || p.isLeech);
   });
 }
@@ -214,12 +358,13 @@ function checkAndAwardAchievements() {
     if (c.lapses >= 1 && c.repetitions >= 2 && c.interval >= 3) overcomeLapsesCount++;
   });
 
+  const cfg = getActiveBookConfig();
   let hasFullUnitMastered = false;
-  for (let u = 1; u <= 8; u++) {
+  for (let u = 1; u <= cfg.units; u++) {
     const unitWords = VOCAB_DATABASE.filter(w => w.unit === u);
     if (unitWords.length === 0) continue;
     const allDone = unitWords.every(w => {
-      const p = store[w.id];
+      const p = store[w.id] || store[w.canonicalId];
       return p && p.repetitions >= 2;
     });
     if (allDone) {
@@ -274,12 +419,14 @@ function checkAndAwardAchievements() {
 
 // 会话队列调度
 function startNewSession() {
-  const mode = currentSettings.mode;
+  const mode = currentSettings.mode || 'unit';
+  const catFilter = currentSettings.categoryFilter || 'all';
   let candidates = [];
 
   if (mode === 'phrases') {
     candidates = PHRASE_DATABASE.filter(p => currentSettings.selectedUnits.includes(p.unit)).map(p => ({
       id: p.id,
+      canonicalId: p.id,
       unit: p.unit,
       unitTitle: p.unitTitle,
       word: p.phrase,
@@ -287,29 +434,39 @@ function startNewSession() {
       pos: 'phrase',
       meaning: p.meaning,
       phrase: p.example,
-      root: '课文核心短语搭配'
+      root: '课文核心短语搭配',
+      category: 'core',
+      book: currentSettings.activeBook || '7a'
     }));
   } else if (mode === 'leech') {
     candidates = getLeechCards();
-  } else if (mode === 'due') {
-    const store = loadSM2Store();
-    const now = Date.now();
-    candidates = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit)).filter(w => {
-      const p = store[w.id];
-      return p && p.dueDate && p.dueDate <= now;
-    });
-  } else if (mode === 'batch10' || mode === 'batch15' || mode === 'batch20') {
-    const limit = mode === 'batch10' ? 10 : (mode === 'batch15' ? 15 : 20);
-    const store = loadSM2Store();
-    const unmastered = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit))
-      .filter(w => !store[w.id] || store[w.id].repetitions < 2);
-    candidates = unmastered.slice(0, limit);
-    if (candidates.length === 0) {
-      candidates = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit)).slice(0, limit);
-    }
   } else {
-    // 默认单元全量模式
-    candidates = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit));
+    // 基础过滤：单元 + 分类 (core vs expansion)
+    let filteredVocab = VOCAB_DATABASE.filter(w => currentSettings.selectedUnits.includes(w.unit));
+    if (catFilter !== 'all') {
+      filteredVocab = filteredVocab.filter(w => (w.category || 'core') === catFilter);
+    }
+
+    if (mode === 'due') {
+      const now = Date.now();
+      candidates = filteredVocab.filter(w => {
+        const p = getCardProgress(w.id);
+        return p && p.dueDate && p.dueDate <= now;
+      });
+    } else if (mode === 'batch10' || mode === 'batch15' || mode === 'batch20') {
+      const limit = mode === 'batch10' ? 10 : (mode === 'batch15' ? 15 : 20);
+      const unmastered = filteredVocab.filter(w => {
+        const p = getCardProgress(w.id);
+        return !p || p.repetitions < 2;
+      });
+      candidates = unmastered.slice(0, limit);
+      if (candidates.length === 0) {
+        candidates = filteredVocab.slice(0, limit);
+      }
+    } else {
+      // 默认单元全量模式
+      candidates = filteredVocab;
+    }
   }
 
   sessionQueue = [...candidates];
@@ -357,7 +514,18 @@ function loadNextCard() {
   cardEl.classList.remove('revealed');
   document.getElementById('ratingContainer').classList.remove('active');
 
-  document.getElementById('cardUnitTag').textContent = currentCard.unitTitle;
+  const bCfg = getActiveBookConfig();
+  const bookTag = bCfg.shortTitle.split(' ')[0];
+  document.getElementById('cardUnitTag').textContent = `${bookTag} · ${currentCard.unitTitle || 'Unit ' + currentCard.unit}`;
+
+  // 课内核心 vs 课外拓展徽章
+  const catBadgeEl = document.getElementById('cardCategoryTag');
+  if (catBadgeEl) {
+    const isExp = currentCard.category === 'expansion';
+    catBadgeEl.textContent = isExp ? '课外拓展' : '课内核心';
+    catBadgeEl.className = 'card-category-label ' + (isExp ? 'expansion' : 'core');
+  }
+
   const p = getCardProgress(currentCard.id);
   document.getElementById('cardSm2Tag').textContent = '已记:' + p.repetitions + '次 · 间隔:' + p.interval + '天 · 遗忘:' + (p.lapses || 0) + '次 · EF:' + p.efactor;
 
@@ -373,7 +541,7 @@ function loadNextCard() {
   document.getElementById('posText').textContent = currentCard.pos || '';
   document.getElementById('meaningText').textContent = currentCard.meaning;
   document.getElementById('phraseText').textContent = currentCard.phrase;
-  document.getElementById('rootText').textContent = currentCard.root || '考纲核心词汇，结合搭配短语加深理解';
+  document.getElementById('rootText').textContent = currentCard.root || (currentCard.category === 'expansion' ? '课外高分拓展词（阅读与写作升级）' : '考纲核心词汇，结合搭配短语加深理解');
 
   // 预测下一次间隔显示
   const { hardDays, goodDays, easyDays } = predictIntervals(p);
@@ -404,17 +572,15 @@ function revealCard() {
   }
 
   const p = getCardProgress(currentCard.id);
-  // 特别熟的卡片定义：已连续记对 ≥ 2 次、无未解决遗忘、且简易度 EF ≥ 2.4
   const isMasteredCard = p.repetitions >= 2 && p.efactor >= 2.4 && (p.lapses || 0) === 0;
 
   if (isMasteredCard) {
-    // 特别熟的卡片直接跳过两秒，瞬间可评
     isStayLocked = false;
     setRatingButtonsDisabled(false);
     return;
   }
 
-  // 需要沉淀的卡片启动 2 秒平滑状态条
+  // 翻卡 2 秒平滑状态条
   isStayLocked = true;
   setRatingButtonsDisabled(true);
 
@@ -449,9 +615,19 @@ function revealCard() {
 function handleRating(quality) {
   if (!currentCard || !isRevealed || isStayLocked) return;
 
-  const updated = calculateSM2(getCardProgress(currentCard.id), quality);
+  const currentP = getCardProgress(currentCard.id);
+  const updated = calculateSM2(currentP, quality);
   const store = loadSM2Store();
+
+  // 双写：主 ID + 规范 canonicalId + legacyId，确保零丢失
   store[currentCard.id] = updated;
+  if (currentCard.canonicalId && currentCard.canonicalId !== currentCard.id) {
+    store[currentCard.canonicalId] = { ...updated, id: currentCard.canonicalId };
+  }
+  if (currentCard.legacyId && currentCard.legacyId !== currentCard.id) {
+    store[currentCard.legacyId] = { ...updated, id: currentCard.legacyId };
+  }
+
   saveSM2Store(store);
 
   recordReviewHistory();
@@ -514,9 +690,11 @@ function renderHeatmap() {
   }
   document.getElementById('periodTotalCount').textContent = last30Count;
 
+  // 统计当前册掌握数量
   let masteredCount = 0;
-  Object.values(sm2Store).forEach(c => {
-    if (c.repetitions >= 2) masteredCount++;
+  VOCAB_DATABASE.forEach(w => {
+    const p = getCardProgress(w.id);
+    if (p && p.repetitions >= 2) masteredCount++;
   });
   document.getElementById('totalMasteredCount').textContent = masteredCount;
 
@@ -591,16 +769,16 @@ function renderLeechView() {
 
 function resetLeechCard(cardId) {
   const store = loadSM2Store();
-  if (store[cardId]) {
-    store[cardId].lapses = 0;
-    store[cardId].efactor = 2.5;
-    store[cardId].repetitions = 0;
-    store[cardId].isLeech = false;
-    saveSM2Store(store);
-    showToast('该词已重置初始复习参数');
-    renderLeechView();
-    updateLeechCountBadge();
-  }
+  const p = getCardProgress(cardId);
+  p.lapses = 0;
+  p.efactor = 2.5;
+  p.repetitions = 0;
+  p.isLeech = false;
+  store[cardId] = p;
+  saveSM2Store(store);
+  showToast('该词已重置初始复习参数');
+  renderLeechView();
+  updateLeechCountBadge();
 }
 
 // 渲染学习记录目标列表
@@ -640,19 +818,16 @@ function renderAchievements() {
   document.getElementById('navAchieveBadge').textContent = unlockedCount + '/' + totalCount;
 }
 
-// ==========================================================================
-// Anki 风格统计分析渲染逻辑 (Anki Statistics Engine)
-// ==========================================================================
+// Anki 风格统计分析渲染逻辑
 function renderStatistics() {
-  const store = loadSM2Store();
   const history = loadHistoryStore();
   const allCards = [...VOCAB_DATABASE, ...PHRASE_DATABASE];
   const totalCards = allCards.length;
 
-  let matureCount = 0;   // interval >= 21d
-  let youngCount = 0;    // interval < 21d && repetitions >= 1
-  let learningCount = 0; // repetitions === 0 && (totalReviews > 0 || lapses > 0)
-  let newCount = 0;      // 尚未学习
+  let matureCount = 0;
+  let youngCount = 0;
+  let learningCount = 0;
+  let newCount = 0;
 
   let efSum = 0;
   let reviewedCardsCount = 0;
@@ -661,11 +836,8 @@ function renderStatistics() {
 
   const now = Date.now();
   const DAY_MS = 24 * 60 * 60 * 1000;
-
-  // 14 天未来到期直方图 bins: 0d(今日及逾期), 1d, 2d, ..., 13d
   const dueBins = new Array(14).fill(0);
 
-  // 复习间隔 bins: 1d, 2-3d, 4-7d, 8-14d, 15-30d, 31-90d, 90d+
   const intervalBins = [
     { label: '1天', min: 1, max: 1, count: 0 },
     { label: '2-3天', min: 2, max: 3, count: 0 },
@@ -676,7 +848,6 @@ function renderStatistics() {
     { label: '3月+', min: 91, max: Infinity, count: 0 }
   ];
 
-  // 简易度 EF bins: <=1.5, 1.6-1.8, 1.9-2.1, 2.2-2.4, 2.5, 2.6-2.8, 2.9-3.0
   const easeBins = [
     { label: '≤1.5', min: 1.0, max: 1.55, count: 0 },
     { label: '1.6-1.8', min: 1.55, max: 1.85, count: 0 },
@@ -692,7 +863,7 @@ function renderStatistics() {
   let leechCardsCount = 0;
 
   allCards.forEach(c => {
-    const p = store[c.id];
+    const p = getCardProgress(c.id);
     if (!p || (p.totalReviews === 0 && p.repetitions === 0)) {
       newCount++;
       return;
@@ -708,7 +879,6 @@ function renderStatistics() {
       leechCardsCount++;
     }
 
-    // 状态分类
     if (p.interval >= 21) {
       matureCount++;
     } else if (p.repetitions >= 1) {
@@ -717,7 +887,6 @@ function renderStatistics() {
       learningCount++;
     }
 
-    // 统计未来到期
     if (p.dueDate) {
       const diffDays = Math.floor((p.dueDate - now) / DAY_MS);
       if (diffDays < 0) {
@@ -730,7 +899,6 @@ function renderStatistics() {
       }
     }
 
-    // 统计复习间隔
     if (p.interval > 0) {
       for (const b of intervalBins) {
         if (p.interval >= b.min && p.interval <= b.max) {
@@ -740,7 +908,6 @@ function renderStatistics() {
       }
     }
 
-    // 统计简易度
     const ef = p.efactor || 2.5;
     for (const eb of easeBins) {
       if (ef >= eb.min && ef < eb.max) {
@@ -750,7 +917,7 @@ function renderStatistics() {
     }
   });
 
-  // 0. AI 学情量化看板更新
+  // AI 看板
   const lapseRateVal = totalReviewsAccum > 0 ? ((totalLapsesAccum / totalReviewsAccum) * 100) : 0;
   const retentionRateVal = totalReviewsAccum > 0 ? (100 - lapseRateVal) : 100;
   const lapseRateStr = lapseRateVal.toFixed(1) + '%';
@@ -784,7 +951,6 @@ function renderStatistics() {
     aiLeechHintEl.textContent = leechCardsCount > 0 ? '遗忘≥4次，建议重点攻坚' : '暂无高频难词阻滞';
   }
 
-  // 动态生成今日推荐研习策略建议 (客观、学术)
   const adviceEl = document.getElementById('aiStudyAdviceText');
   if (adviceEl) {
     if (totalReviewsAccum === 0) {
@@ -800,7 +966,7 @@ function renderStatistics() {
     }
   }
 
-  // 1. 顶部指标计算
+  // 指标卡片
   document.getElementById('statTotalCards').textContent = totalCards;
   document.getElementById('statTotalCardsSub').textContent = `单词 ${VOCAB_DATABASE.length} · 词组 ${PHRASE_DATABASE.length}`;
 
@@ -826,11 +992,11 @@ function renderStatistics() {
   document.getElementById('statAverageEf').textContent = avgEf;
   document.getElementById('statTotalReviews').textContent = `累计评定 ${totalReviewsAccum} 次`;
 
-  // 2. 卡片状态堆叠条
-  const pctMature = (matureCount / totalCards) * 100;
-  const pctYoung = (youngCount / totalCards) * 100;
-  const pctLearning = (learningCount / totalCards) * 100;
-  const pctNew = (newCount / totalCards) * 100;
+  // 状态堆叠条
+  const pctMature = totalCards > 0 ? (matureCount / totalCards) * 100 : 0;
+  const pctYoung = totalCards > 0 ? (youngCount / totalCards) * 100 : 0;
+  const pctLearning = totalCards > 0 ? (learningCount / totalCards) * 100 : 0;
+  const pctNew = totalCards > 0 ? (newCount / totalCards) * 100 : 0;
 
   document.getElementById('segMature').style.width = pctMature + '%';
   document.getElementById('segYoung').style.width = pctYoung + '%';
@@ -842,7 +1008,7 @@ function renderStatistics() {
   document.getElementById('countLearning').textContent = `${learningCount} (${Math.round(pctLearning)}%)`;
   document.getElementById('countNew').textContent = `${newCount} (${Math.round(pctNew)}%)`;
 
-  // 3. 未来到期预测直方图
+  // 未来到期柱状图
   const chartDueEl = document.getElementById('chartFutureDue');
   chartDueEl.innerHTML = '';
   const maxDue = Math.max(...dueBins, 1);
@@ -861,7 +1027,7 @@ function renderStatistics() {
     chartDueEl.appendChild(col);
   });
 
-  // 4. 复习间隔直方图
+  // 复习间隔柱状图
   const chartIntEl = document.getElementById('chartIntervals');
   chartIntEl.innerHTML = '';
   const avgInterval = reviewedCardsCount > 0 ? (totalIntervalSum / reviewedCardsCount).toFixed(1) : '0';
@@ -880,7 +1046,7 @@ function renderStatistics() {
     chartIntEl.appendChild(col);
   });
 
-  // 5. 简易度直方图
+  // 简易度柱状图
   const chartEaseEl = document.getElementById('chartEase');
   chartEaseEl.innerHTML = '';
   const maxEase = Math.max(...easeBins.map(b => b.count), 1);
@@ -897,11 +1063,12 @@ function renderStatistics() {
     chartEaseEl.appendChild(col);
   });
 
-  // 6. 单元考纲掌握度矩阵
+  // 单元考纲掌握度矩阵 (动态匹配当前册单元数)
   const unitListEl = document.getElementById('statsUnitList');
   unitListEl.innerHTML = '';
+  const cfg = getActiveBookConfig();
 
-  for (let u = 1; u <= 8; u++) {
+  for (let u = 1; u <= cfg.units; u++) {
     const unitVocab = VOCAB_DATABASE.filter(w => w.unit === u);
     const unitPhrases = PHRASE_DATABASE.filter(p => p.unit === u);
     const unitAll = [...unitVocab, ...unitPhrases];
@@ -909,7 +1076,7 @@ function renderStatistics() {
 
     let masteredU = 0;
     unitAll.forEach(item => {
-      const p = store[item.id];
+      const p = getCardProgress(item.id);
       if (p && p.repetitions >= 2 && p.efactor >= 2.2) {
         masteredU++;
       }
@@ -944,8 +1111,8 @@ function renderPhrasesTable() {
     if (!query) return true;
     return p.phrase.toLowerCase().includes(query) ||
            p.meaning.includes(query) ||
-           p.example.toLowerCase().includes(query) ||
-           p.unitTitle.toLowerCase().includes(query);
+           (p.example && p.example.toLowerCase().includes(query)) ||
+           (p.unitTitle && p.unitTitle.toLowerCase().includes(query));
   });
 
   filtered.forEach((p, idx) => {
@@ -954,7 +1121,7 @@ function renderPhrasesTable() {
       <td style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">${idx + 1}</td>
       <td style="font-weight: 600; color: var(--text);">${p.phrase}</td>
       <td style="font-weight: 500; color: var(--text);">${p.meaning}</td>
-      <td style="font-size: 12.5px; color: var(--text-sub); line-height: 1.45;">${p.example}</td>
+      <td style="font-size: 12.5px; color: var(--text-sub); line-height: 1.45;">${p.example || ''}</td>
       <td style="font-size: 11px; color: var(--text-sub);"><span class="unit-chip" style="padding: 1px 5px; font-size: 10.5px;">Unit ${p.unit}</span></td>
       <td>
         <button class="nav-btn" style="padding: 2px 6px; font-size: 11px;" data-speak="${p.phrase}">发音</button>
@@ -965,35 +1132,51 @@ function renderPhrasesTable() {
   });
 }
 
-// 词库清单渲染
-function renderVocabTable() {
+// 词库清单渲染 (支持跨册选择与核心/拓展分类)
+async function renderVocabTable() {
   const query = document.getElementById('searchBox').value.trim().toLowerCase();
+  const bookSel = document.getElementById('listBookFilter').value;
+  const catSel = document.getElementById('listCategoryFilter').value;
   const tbody = document.getElementById('vocabTableBody');
   tbody.innerHTML = '';
 
-  const filtered = VOCAB_DATABASE.filter(w => {
+  let dataset = VOCAB_DATABASE;
+  if (bookSel !== 'current' && bookSel !== currentSettings.activeBook) {
+    if (!BOOK_CACHE.vocab[bookSel]) {
+      const res = await fetch(`data/vocab-${bookSel}.json`);
+      BOOK_CACHE.vocab[bookSel] = await res.json();
+    }
+    dataset = BOOK_CACHE.vocab[bookSel];
+  }
+
+  const filtered = dataset.filter(w => {
+    if (catSel !== 'all' && (w.category || 'core') !== catSel) return false;
     if (!query) return true;
     return w.word.toLowerCase().includes(query) ||
            w.meaning.includes(query) ||
-           w.phrase.toLowerCase().includes(query) ||
-           w.unitTitle.toLowerCase().includes(query);
+           (w.phrase && w.phrase.toLowerCase().includes(query)) ||
+           (w.unitTitle && w.unitTitle.toLowerCase().includes(query));
   });
 
   filtered.forEach((w, idx) => {
     const tr = document.createElement('tr');
     const p = getCardProgress(w.id);
     const isLeech = p.lapses >= LEECH_THRESHOLD || p.isLeech;
+    const isExp = w.category === 'expansion';
+    const catBadge = isExp ? '<span class="badge-exp">拓展</span>' : '<span class="badge-core">核心</span>';
+
     tr.innerHTML = `
       <td style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">${idx + 1}</td>
       <td style="font-weight: 600; color: var(--text);">${w.word} ${isLeech ? '<span class="card-leech-label active" style="font-size:9.5px; padding:0 3px;">难词</span>' : ''}</td>
       <td style="color: var(--text-sub); font-size: 12px; font-family: var(--font-mono);">${w.phonetic || ''}</td>
       <td style="font-style: italic; color: var(--text-muted); font-size: 12px;">${w.pos || ''}</td>
+      <td>${catBadge}</td>
       <td>
         <div style="font-weight: 500;">${w.meaning}</div>
         <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${w.phrase || ''}</div>
         <div style="font-size: 11px; color: var(--tag-blue-color); margin-top: 2px;">${w.root || ''}</div>
       </td>
-      <td style="font-size: 11px; color: var(--text-sub);"><span class="unit-chip" style="padding: 1px 5px; font-size: 10.5px;">${w.unitTitle.split(' ')[0]} ${w.unitTitle.split(' ')[1]}</span></td>
+      <td style="font-size: 11px; color: var(--text-sub);"><span class="unit-chip" style="padding: 1px 5px; font-size: 10.5px;">Unit ${w.unit}</span></td>
       <td><span class="sm2-badge">复习:${p.repetitions} · 遗忘:${p.lapses || 0}</span></td>
       <td>
         <button class="nav-btn" style="padding: 2px 6px; font-size: 11px;" data-speak="${w.word}">发音</button>
@@ -1002,6 +1185,74 @@ function renderVocabTable() {
     tr.querySelector('[data-speak]').addEventListener('click', () => playPronunciation(w.word));
     tbody.appendChild(tr);
   });
+}
+
+// 简易轻量 Markdown 转 HTML 解析器 (用于附录呈现)
+function parseMarkdownToHTML(md) {
+  if (!md) return '<p>暂无内容</p>';
+  let html = md
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+    .replace(/`([^`]+)`/gim, '<code>$1</code>')
+    .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+  // 表格处理
+  const lines = html.split('\n');
+  let inTable = false;
+  const result = [];
+
+  for (let l of lines) {
+    const line = l.trim();
+    if (line.startsWith('|') && line.endsWith('|')) {
+      if (line.includes('---')) continue; // 跳过分割线
+      const cols = line.split('|').slice(1, -1).map(c => c.trim());
+      if (!inTable) {
+        inTable = true;
+        result.push('<table><thead><tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>');
+      } else {
+        result.push('<tr>' + cols.map(c => `<td>${c}</td>`).join('') + '</tr>');
+      }
+    } else {
+      if (inTable) {
+        inTable = false;
+        result.push('</tbody></table>');
+      }
+      if (line.startsWith('- ')) {
+        result.push(`<li>${line.substring(2)}</li>`);
+      } else if (line.length > 0 && !line.startsWith('<h') && !line.startsWith('<block')) {
+        result.push(`<p>${line}</p>`);
+      } else {
+        result.push(line);
+      }
+    }
+  }
+  if (inTable) result.push('</tbody></table>');
+  return result.join('\n');
+}
+
+// 附录速查视图渲染
+async function renderAppendixView(subTab = 'phrases') {
+  if (!GRAMMAR_APPENDIX) {
+    try {
+      const res = await fetch('data/grammar-appendix.json');
+      GRAMMAR_APPENDIX = await res.json();
+    } catch (e) {
+      document.getElementById('appendixContent').innerHTML = '<p>附录数据加载失败，请检查网络</p>';
+      return;
+    }
+  }
+
+  const contentEl = document.getElementById('appendixContent');
+  if (subTab === 'phrases') {
+    contentEl.innerHTML = parseMarkdownToHTML(GRAMMAR_APPENDIX.phrasesAll);
+  } else if (subTab === 'verbs') {
+    contentEl.innerHTML = parseMarkdownToHTML(GRAMMAR_APPENDIX.irregularVerbs);
+  } else if (subTab === 'affixes') {
+    contentEl.innerHTML = parseMarkdownToHTML(GRAMMAR_APPENDIX.affixes);
+  }
 }
 
 // 主题切换
@@ -1017,15 +1268,16 @@ function initTheme() {
 // 事件绑定
 function initEventListeners() {
   document.getElementById('selectAllUnitsBtn').addEventListener('click', function() {
-    currentSettings.selectedUnits = [1, 2, 3, 4, 5, 6, 7, 8];
-    document.querySelectorAll('.unit-chip[data-unit]').forEach(c => c.classList.add('selected'));
+    const cfg = getActiveBookConfig();
+    currentSettings.selectedUnits = Array.from({ length: cfg.units }, (_, i) => i + 1);
+    document.querySelectorAll('#unitSelector .unit-chip').forEach(c => c.classList.add('selected'));
     saveSettings(currentSettings);
     startNewSession();
   });
 
   document.getElementById('clearUnitsBtn').addEventListener('click', function() {
     currentSettings.selectedUnits = [1];
-    document.querySelectorAll('.unit-chip[data-unit]').forEach(c => {
+    document.querySelectorAll('#unitSelector .unit-chip').forEach(c => {
       if (c.dataset.unit === '1') c.classList.add('selected');
       else c.classList.remove('selected');
     });
@@ -1115,13 +1367,14 @@ function initEventListeners() {
     }
   });
 
-  // 标签页切换
+  // 顶部主导航标签页切换
   const tabReciteBtn = document.getElementById('tabReciteBtn');
   const tabLeechBtn = document.getElementById('tabLeechBtn');
   const tabStatsBtn = document.getElementById('tabStatsBtn');
   const tabAchievementsBtn = document.getElementById('tabAchievementsBtn');
   const tabPhrasesBtn = document.getElementById('tabPhrasesBtn');
   const tabListBtn = document.getElementById('tabListBtn');
+  const tabAppendixBtn = document.getElementById('tabAppendixBtn');
 
   const reciteView = document.getElementById('reciteView');
   const leechView = document.getElementById('leechView');
@@ -1129,12 +1382,17 @@ function initEventListeners() {
   const achievementsView = document.getElementById('achievementsView');
   const phrasesView = document.getElementById('phrasesView');
   const listView = document.getElementById('listView');
+  const appendixView = document.getElementById('appendixView');
   const controlPanel = document.getElementById('controlPanel');
   const heatmapSection = document.getElementById('heatmapSection');
 
   function hideAllTabs() {
-    [tabReciteBtn, tabLeechBtn, tabStatsBtn, tabAchievementsBtn, tabPhrasesBtn, tabListBtn].forEach(b => b.classList.remove('active'));
-    [reciteView, leechView, statsView, achievementsView, phrasesView, listView, controlPanel, heatmapSection].forEach(v => v.style.display = 'none');
+    [tabReciteBtn, tabLeechBtn, tabStatsBtn, tabAchievementsBtn, tabPhrasesBtn, tabListBtn, tabAppendixBtn].forEach(b => {
+      if (b) b.classList.remove('active');
+    });
+    [reciteView, leechView, statsView, achievementsView, phrasesView, listView, appendixView, controlPanel, heatmapSection].forEach(v => {
+      if (v) v.style.display = 'none';
+    });
   }
 
   tabPhrasesBtn.addEventListener('click', function() {
@@ -1182,9 +1440,44 @@ function initEventListeners() {
     renderVocabTable();
   });
 
+  if (tabAppendixBtn) {
+    tabAppendixBtn.addEventListener('click', function() {
+      hideAllTabs();
+      tabAppendixBtn.classList.add('active');
+      appendixView.style.display = 'flex';
+      renderAppendixView('phrases');
+    });
+  }
+
+  // 附录子标签切换
+  const appendixTabPhrases = document.getElementById('appendixTabPhrases');
+  const appendixTabVerbs = document.getElementById('appendixTabVerbs');
+  const appendixTabAffixes = document.getElementById('appendixTabAffixes');
+  const appendixTabs = [appendixTabPhrases, appendixTabVerbs, appendixTabAffixes];
+
+  if (appendixTabPhrases && appendixTabVerbs && appendixTabAffixes) {
+    appendixTabPhrases.addEventListener('click', () => {
+      appendixTabs.forEach(t => t.classList.remove('selected'));
+      appendixTabPhrases.classList.add('selected');
+      renderAppendixView('phrases');
+    });
+    appendixTabVerbs.addEventListener('click', () => {
+      appendixTabs.forEach(t => t.classList.remove('selected'));
+      appendixTabVerbs.classList.add('selected');
+      renderAppendixView('verbs');
+    });
+    appendixTabAffixes.addEventListener('click', () => {
+      appendixTabs.forEach(t => t.classList.remove('selected'));
+      appendixTabAffixes.classList.add('selected');
+      renderAppendixView('affixes');
+    });
+  }
+
   document.getElementById('searchPhrasesBox').addEventListener('input', renderPhrasesTable);
   document.getElementById('phraseUnitFilter').addEventListener('change', renderPhrasesTable);
   document.getElementById('searchBox').addEventListener('input', renderVocabTable);
+  document.getElementById('listBookFilter').addEventListener('change', renderVocabTable);
+  document.getElementById('listCategoryFilter').addEventListener('change', renderVocabTable);
 
   // 学情数据导出与 AI 诊断事件绑定
   const exportAiPromptBtn = document.getElementById('exportAiPromptBtn');
@@ -1196,7 +1489,6 @@ function initEventListeners() {
           await navigator.clipboard.writeText(prompt);
           showToast('已复制 AI 诊断 Prompt，可直接发送给大模型');
         } else {
-          // 降级使用 textarea 复制
           const ta = document.createElement('textarea');
           ta.value = prompt;
           ta.style.position = 'fixed';
@@ -1218,7 +1510,8 @@ function initEventListeners() {
     exportAiReportBtn.addEventListener('click', () => {
       const prompt = buildAIDiagnosticPrompt(VOCAB_DATABASE, PHRASE_DATABASE);
       const dateStr = new Date().toISOString().slice(0, 10);
-      downloadFile(prompt, `沪教牛津7A英语_AI学情诊断报告_${dateStr}.md`, 'text/markdown;charset=utf-8');
+      const bCfg = getActiveBookConfig();
+      downloadFile(prompt, `沪教版英语_${bCfg.shortTitle.replace(/\s+/g, '')}_AI学情诊断报告_${dateStr}.md`, 'text/markdown;charset=utf-8');
       showToast('已生成并下载 AI 学情诊断 Markdown 报告');
     });
   }
@@ -1248,8 +1541,9 @@ function initEventListeners() {
         const res = importBackupJSON(content);
         if (res.success) {
           showToast(res.message);
-          // 重新刷新设置、单元选择器、视图指标与会话
           currentSettings = loadSettings();
+          renderBookSelector();
+          renderCategorySelector();
           initUnitSelector();
           renderStatistics();
           renderHeatmap();

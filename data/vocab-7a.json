@@ -8,7 +8,11 @@
     "pos": "n.",
     "meaning": "吉他",
     "phrase": "课文例词：guitar (吉他)",
-    "root": "n. 吉他"
+    "root": "n. 吉他",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_1",
+    "legacyId": "u1_1",
+    "category": "core"
   },
   {
     "id": "u1_2",
@@ -19,7 +23,11 @@
     "pos": "adj.",
     "meaning": "诚实的",
     "phrase": "课文例词：honest (诚实的)",
-    "root": "adj. 诚实的"
+    "root": "adj. 诚实的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_2",
+    "legacyId": "u1_2",
+    "category": "core"
   },
   {
     "id": "u1_3",
@@ -30,7 +38,11 @@
     "pos": "adj.",
     "meaning": "有耐心的",
     "phrase": "Li Hua is helpful and patient.",
-    "root": "adj. 有耐心的"
+    "root": "adj. 有耐心的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_3",
+    "legacyId": "u1_3",
+    "category": "core"
   },
   {
     "id": "u1_4",
@@ -41,7 +53,11 @@
     "pos": "v.",
     "meaning": "改进；改善",
     "phrase": "With his help, my maths has improved a lot.",
-    "root": "v. 改进；改善"
+    "root": "v. 改进；改善",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_4",
+    "legacyId": "u1_4",
+    "category": "core"
   },
   {
     "id": "u1_5",
@@ -52,7 +68,11 @@
     "pos": "adj.",
     "meaning": "自信的；有自信心的",
     "phrase": "I am also more confident now, and I have the courage to try new things.",
-    "root": "adj. 自信的；有自信心的"
+    "root": "adj. 自信的；有自信心的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_5",
+    "legacyId": "u1_5",
+    "category": "core"
   },
   {
     "id": "u1_6",
@@ -63,7 +83,11 @@
     "pos": "n.",
     "meaning": "勇气；胆量",
     "phrase": "I am also more confident now, and I have the courage to try new things.",
-    "root": "n. 勇气；胆量"
+    "root": "n. 勇气；胆量",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_6",
+    "legacyId": "u1_6",
+    "category": "core"
   },
   {
     "id": "u1_7",
@@ -74,7 +98,11 @@
     "pos": "n.",
     "meaning": "友谊；朋友关系",
     "phrase": "My friendship with Li Hua teaches me a lot of things.",
-    "root": "n. 友谊；朋友关系"
+    "root": "n. 友谊；朋友关系",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_7",
+    "legacyId": "u1_7",
+    "category": "core"
   },
   {
     "id": "u1_8",
@@ -85,7 +113,11 @@
     "pos": "n.",
     "meaning": "信任；信赖",
     "phrase": "Friendships are not only about having fun, but also about love, honesty, understanding and trust.",
-    "root": "n. 信任；信赖"
+    "root": "n. 信任；信赖",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_8",
+    "legacyId": "u1_8",
+    "category": "core"
   },
   {
     "id": "u1_9",
@@ -96,7 +128,11 @@
     "pos": "n.",
     "meaning": "调查",
     "phrase": "课文例词：survey (调查)",
-    "root": "n. 调查"
+    "root": "n. 调查",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_9",
+    "legacyId": "u1_9",
+    "category": "core"
   },
   {
     "id": "u1_10",
@@ -107,7 +143,11 @@
     "pos": "adj.",
     "meaning": "个性的",
     "phrase": "课文例词：personal (个性的)",
-    "root": "adj. 个性的"
+    "root": "adj. 个性的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_10",
+    "legacyId": "u1_10",
+    "category": "core"
   },
   {
     "id": "u1_11",
@@ -118,7 +158,11 @@
     "pos": "n.",
     "meaning": "品质；品德",
     "phrase": "课文例词：quality (品质；品德)",
-    "root": "n. 品质；品德"
+    "root": "n. 品质；品德",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_11",
+    "legacyId": "u1_11",
+    "category": "core"
   },
   {
     "id": "u1_12",
@@ -129,7 +173,11 @@
     "pos": "adj.",
     "meaning": "关心他人的；体贴人的",
     "phrase": "课文例词：caring (关心他人的；体贴人的)",
-    "root": "adj. 关心他人的；体贴人的"
+    "root": "adj. 关心他人的；体贴人的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_12",
+    "legacyId": "u1_12",
+    "category": "core"
   },
   {
     "id": "u1_13",
@@ -140,7 +188,11 @@
     "pos": "v.",
     "meaning": "描述；形容",
     "phrase": "课文例词：describe (描述；形容)",
-    "root": "v. 描述；形容"
+    "root": "v. 描述；形容",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_13",
+    "legacyId": "u1_13",
+    "category": "core"
   },
   {
     "id": "u1_14",
@@ -151,7 +203,11 @@
     "pos": "n.",
     "meaning": "外貌",
     "phrase": "课文例词：appearance (外貌)",
-    "root": "n. 外貌"
+    "root": "n. 外貌",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_14",
+    "legacyId": "u1_14",
+    "category": "core"
   },
   {
     "id": "u1_15",
@@ -162,7 +218,11 @@
     "pos": "adj.",
     "meaning": "直的",
     "phrase": "课文例词：straight (直的)",
-    "root": "adj. 直的"
+    "root": "adj. 直的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_15",
+    "legacyId": "u1_15",
+    "category": "core"
   },
   {
     "id": "u1_16",
@@ -173,7 +233,11 @@
     "pos": "adj.",
     "meaning": "褐色的；乌黑的",
     "phrase": "课文例词：dark (褐色的；乌黑的)",
-    "root": "adj. 褐色的；乌黑的"
+    "root": "adj. 褐色的；乌黑的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_16",
+    "legacyId": "u1_16",
+    "category": "core"
   },
   {
     "id": "u1_17",
@@ -184,7 +248,11 @@
     "pos": "adj.",
     "meaning": "同一的；相同的",
     "phrase": "课文例词：same (同一的；相同的)",
-    "root": "adj. 同一的；相同的"
+    "root": "adj. 同一的；相同的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_17",
+    "legacyId": "u1_17",
+    "category": "core"
   },
   {
     "id": "u1_18",
@@ -195,7 +263,11 @@
     "pos": "adj.",
     "meaning": "基本的；基础的",
     "phrase": "课文例词：basic (基本的；基础的)",
-    "root": "adj. 基本的；基础的"
+    "root": "adj. 基本的；基础的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_18",
+    "legacyId": "u1_18",
+    "category": "core"
   },
   {
     "id": "u1_19",
@@ -206,7 +278,11 @@
     "pos": "n.",
     "meaning": "想法",
     "phrase": "课文例词：thought (想法)",
-    "root": "n. 想法"
+    "root": "n. 想法",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_19",
+    "legacyId": "u1_19",
+    "category": "core"
   },
   {
     "id": "u1_20",
@@ -217,7 +293,11 @@
     "pos": "adj.",
     "meaning": "高兴的；愉快的",
     "phrase": "课文例词：glad (高兴的；愉快的)",
-    "root": "adj. 高兴的；愉快的"
+    "root": "adj. 高兴的；愉快的",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_20",
+    "legacyId": "u1_20",
+    "category": "core"
   },
   {
     "id": "u1_21",
@@ -228,7 +308,11 @@
     "pos": "v.",
     "meaning": "上升",
     "phrase": "课文例词：rise (上升)",
-    "root": "v. 上升"
+    "root": "v. 上升",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_21",
+    "legacyId": "u1_21",
+    "category": "core"
   },
   {
     "id": "u1_22",
@@ -239,7 +323,11 @@
     "pos": "n.",
     "meaning": "结局",
     "phrase": "The break ends at 10:10 a.m.",
-    "root": "n. 结局"
+    "root": "n. 结局",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_22",
+    "legacyId": "u1_22",
+    "category": "core"
   },
   {
     "id": "u1_23",
@@ -250,7 +338,11 @@
     "pos": "n.",
     "meaning": "心",
     "phrase": "课文例词：heart (心)",
-    "root": "n. 心"
+    "root": "n. 心",
+    "book": "7a",
+    "canonicalId": "7a_u1_core_23",
+    "legacyId": "u1_23",
+    "category": "core"
   },
   {
     "id": "u2_1",
@@ -261,7 +353,11 @@
     "pos": "n.",
     "meaning": "地理（学）",
     "phrase": "Geography is a new subject in junior high.",
-    "root": "n. 地理（学）"
+    "root": "n. 地理（学）",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_24",
+    "legacyId": "u2_1",
+    "category": "core"
   },
   {
     "id": "u2_2",
@@ -272,7 +368,11 @@
     "pos": "n.",
     "meaning": "角；墙角",
     "phrase": "After that, I usually go to the book corner in the classroom.",
-    "root": "n. 角；墙角"
+    "root": "n. 角；墙角",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_25",
+    "legacyId": "u2_2",
+    "category": "core"
   },
   {
     "id": "u2_3",
@@ -283,7 +383,11 @@
     "pos": "n.",
     "meaning": "活动",
     "phrase": "课文例词：activity (活动)",
-    "root": "n. 活动"
+    "root": "n. 活动",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_26",
+    "legacyId": "u2_3",
+    "category": "core"
   },
   {
     "id": "u2_4",
@@ -294,7 +398,11 @@
     "pos": "n.",
     "meaning": "社团",
     "phrase": "I go to the Ping-pong Club with my friend Chen Ming.",
-    "root": "n. 社团"
+    "root": "n. 社团",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_27",
+    "legacyId": "u2_4",
+    "category": "core"
   },
   {
     "id": "u2_5",
@@ -305,7 +413,11 @@
     "pos": "v.",
     "meaning": "练习；训练",
     "phrase": "We look forward to it and will practise very hard.",
-    "root": "v. 练习；训练"
+    "root": "v. 练习；训练",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_28",
+    "legacyId": "u2_5",
+    "category": "core"
   },
   {
     "id": "u2_6",
@@ -316,7 +428,11 @@
     "pos": "v.",
     "meaning": "解答",
     "phrase": "课文例词：solve (解答)",
-    "root": "v. 解答"
+    "root": "v. 解答",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_29",
+    "legacyId": "u2_6",
+    "category": "core"
   },
   {
     "id": "u2_7",
@@ -327,7 +443,11 @@
     "pos": "v.",
     "meaning": "培养；发展",
     "phrase": "I developed this hobby thanks to my grandpa.",
-    "root": "v. 培养；发展"
+    "root": "v. 培养；发展",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_30",
+    "legacyId": "u2_7",
+    "category": "core"
   },
   {
     "id": "u2_8",
@@ -338,7 +458,11 @@
     "pos": "n.",
     "meaning": "技术；技能",
     "phrase": "课文例词：skill (技术；技能)",
-    "root": "n. 技术；技能"
+    "root": "n. 技术；技能",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_31",
+    "legacyId": "u2_8",
+    "category": "core"
   },
   {
     "id": "u2_9",
@@ -349,7 +473,11 @@
     "pos": "adj.",
     "meaning": "青少年的",
     "phrase": "课文例词：teen (青少年的)",
-    "root": "adj. 青少年的"
+    "root": "adj. 青少年的",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_32",
+    "legacyId": "u2_9",
+    "category": "core"
   },
   {
     "id": "u2_10",
@@ -360,7 +488,11 @@
     "pos": "n.",
     "meaning": "杂志",
     "phrase": "课文例词：magazine (杂志)",
-    "root": "n. 杂志"
+    "root": "n. 杂志",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_33",
+    "legacyId": "u2_10",
+    "category": "core"
   },
   {
     "id": "u2_11",
@@ -371,7 +503,11 @@
     "pos": "n.",
     "meaning": "（13至19岁之间的）青少年",
     "phrase": "课文例词：teenager (（13至19岁之间的）青少年)",
-    "root": "n. （13至19岁之间的）青少年"
+    "root": "n. （13至19岁之间的）青少年",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_34",
+    "legacyId": "u2_11",
+    "category": "core"
   },
   {
     "id": "u2_12",
@@ -382,7 +518,11 @@
     "pos": "n.",
     "meaning": "问候；招呼",
     "phrase": "课文例词：greeting (问候；招呼)",
-    "root": "n. 问候；招呼"
+    "root": "n. 问候；招呼",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_35",
+    "legacyId": "u2_12",
+    "category": "core"
   },
   {
     "id": "u2_13",
@@ -393,7 +533,11 @@
     "pos": "n.",
     "meaning": "年级",
     "phrase": "课文例词：grade (年级)",
-    "root": "n. 年级"
+    "root": "n. 年级",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_36",
+    "legacyId": "u2_13",
+    "category": "core"
   },
   {
     "id": "u2_14",
@@ -404,7 +548,11 @@
     "pos": "n.",
     "meaning": "精力；活力",
     "phrase": "And what's more, the Earth provides us with all the things we need, such as food, water, air and energy.",
-    "root": "n. 精力；活力"
+    "root": "n. 精力；活力",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_37",
+    "legacyId": "u2_14",
+    "category": "core"
   },
   {
     "id": "u2_15",
@@ -415,7 +563,11 @@
     "pos": "n.",
     "meaning": "戏；剧",
     "phrase": "课文例词：drama (戏；剧)",
-    "root": "n. 戏；剧"
+    "root": "n. 戏；剧",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_38",
+    "legacyId": "u2_15",
+    "category": "core"
   },
   {
     "id": "u2_16",
@@ -426,7 +578,11 @@
     "pos": "adv.",
     "meaning": "真诚地；诚实地",
     "phrase": "课文例词：sincerely (真诚地；诚实地)",
-    "root": "adv. 真诚地；诚实地"
+    "root": "adv. 真诚地；诚实地",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_39",
+    "legacyId": "u2_16",
+    "category": "core"
   },
   {
     "id": "u2_17",
@@ -437,7 +593,11 @@
     "pos": "n.",
     "meaning": "日记；日记簿",
     "phrase": "课文例词：diary (日记；日记簿)",
-    "root": "n. 日记；日记簿"
+    "root": "n. 日记；日记簿",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_40",
+    "legacyId": "u2_17",
+    "category": "core"
   },
   {
     "id": "u2_18",
@@ -448,7 +608,11 @@
     "pos": "n.",
     "meaning": "课题",
     "phrase": "课文例词：project (课题)",
-    "root": "n. 课题"
+    "root": "n. 课题",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_41",
+    "legacyId": "u2_18",
+    "category": "core"
   },
   {
     "id": "u2_19",
@@ -459,7 +623,11 @@
     "pos": "n.",
     "meaning": "海报",
     "phrase": "课文例词：poster (海报)",
-    "root": "n. 海报"
+    "root": "n. 海报",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_42",
+    "legacyId": "u2_19",
+    "category": "core"
   },
   {
     "id": "u2_20",
@@ -470,7 +638,11 @@
     "pos": "v.",
     "meaning": "意识到",
     "phrase": "课文例词：realize (意识到)",
-    "root": "v. 意识到"
+    "root": "v. 意识到",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_43",
+    "legacyId": "u2_20",
+    "category": "core"
   },
   {
     "id": "u2_21",
@@ -481,7 +653,11 @@
     "pos": "adv.",
     "meaning": "幸运地；幸好",
     "phrase": "课文例词：luckily (幸运地；幸好)",
-    "root": "adv. 幸运地；幸好"
+    "root": "adv. 幸运地；幸好",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_44",
+    "legacyId": "u2_21",
+    "category": "core"
   },
   {
     "id": "u2_22",
@@ -492,7 +668,11 @@
     "pos": "adv.",
     "meaning": "恰好",
     "phrase": "课文例词：just (恰好)",
-    "root": "adv. 恰好"
+    "root": "adv. 恰好",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_45",
+    "legacyId": "u2_22",
+    "category": "core"
   },
   {
     "id": "u2_23",
@@ -503,7 +683,11 @@
     "pos": "n.",
     "meaning": "演示",
     "phrase": "课文例词：presentation (演示)",
-    "root": "n. 演示"
+    "root": "n. 演示",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_46",
+    "legacyId": "u2_23",
+    "category": "core"
   },
   {
     "id": "u2_24",
@@ -514,7 +698,11 @@
     "pos": "n.",
     "meaning": "心情；情绪",
     "phrase": "课文例词：mood (心情；情绪)",
-    "root": "n. 心情；情绪"
+    "root": "n. 心情；情绪",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_47",
+    "legacyId": "u2_24",
+    "category": "core"
   },
   {
     "id": "u2_25",
@@ -525,7 +713,11 @@
     "pos": "v.",
     "meaning": "介意",
     "phrase": "课文例词：mind (介意)",
-    "root": "v. 介意"
+    "root": "v. 介意",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_48",
+    "legacyId": "u2_25",
+    "category": "core"
   },
   {
     "id": "u2_26",
@@ -536,7 +728,11 @@
     "pos": "v.",
     "meaning": "（把……）打包",
     "phrase": "课文例词：pack (（把……）打包)",
-    "root": "v. （把……）打包"
+    "root": "v. （把……）打包",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_49",
+    "legacyId": "u2_26",
+    "category": "core"
   },
   {
     "id": "u2_27",
@@ -547,7 +743,11 @@
     "pos": "v.",
     "meaning": "庆祝；庆贺",
     "phrase": "课文例词：celebrate (庆祝；庆贺)",
-    "root": "v. 庆祝；庆贺"
+    "root": "v. 庆祝；庆贺",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_50",
+    "legacyId": "u2_27",
+    "category": "core"
   },
   {
     "id": "u2_28",
@@ -558,7 +758,11 @@
     "pos": "n.",
     "meaning": "成功",
     "phrase": "课文例词：success (成功)",
-    "root": "n. 成功"
+    "root": "n. 成功",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_51",
+    "legacyId": "u2_28",
+    "category": "core"
   },
   {
     "id": "u2_29",
@@ -569,7 +773,11 @@
     "pos": "adj.",
     "meaning": "困难的",
     "phrase": "课文例词：rocky (困难的)",
-    "root": "adj. 困难的"
+    "root": "adj. 困难的",
+    "book": "7a",
+    "canonicalId": "7a_u2_core_52",
+    "legacyId": "u2_29",
+    "category": "core"
   },
   {
     "id": "u3_1",
@@ -580,7 +788,11 @@
     "pos": "n.",
     "meaning": "脚印；足迹",
     "phrase": "课文例词：footprint (脚印；足迹)",
-    "root": "n. 脚印；足迹"
+    "root": "n. 脚印；足迹",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_53",
+    "legacyId": "u3_1",
+    "category": "core"
   },
   {
     "id": "u3_2",
@@ -591,7 +803,11 @@
     "pos": "adj.",
     "meaning": "潮湿的",
     "phrase": "课文例词：wet (潮湿的)",
-    "root": "adj. 潮湿的"
+    "root": "adj. 潮湿的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_54",
+    "legacyId": "u3_2",
+    "category": "core"
   },
   {
     "id": "u3_3",
@@ -602,7 +818,11 @@
     "pos": "adj.",
     "meaning": "深的",
     "phrase": "课文例词：deep (深的)",
-    "root": "adj. 深的"
+    "root": "adj. 深的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_55",
+    "legacyId": "u3_3",
+    "category": "core"
   },
   {
     "id": "u3_4",
@@ -613,7 +833,11 @@
     "pos": "adj.",
     "meaning": "铺满沙子的；含沙的",
     "phrase": "课文例词：sandy (铺满沙子的；含沙的)",
-    "root": "adj. 铺满沙子的；含沙的"
+    "root": "adj. 铺满沙子的；含沙的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_56",
+    "legacyId": "u3_4",
+    "category": "core"
   },
   {
     "id": "u3_5",
@@ -624,7 +848,11 @@
     "pos": "v.",
     "meaning": "踢；踹",
     "phrase": "课文例词：kick (踢；踹)",
-    "root": "v. 踢；踹"
+    "root": "v. 踢；踹",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_57",
+    "legacyId": "u3_5",
+    "category": "core"
   },
   {
     "id": "u3_6",
@@ -635,7 +863,11 @@
     "pos": "n.",
     "meaning": "镇；市镇",
     "phrase": "课文例词：town (镇；市镇)",
-    "root": "n. 镇；市镇"
+    "root": "n. 镇；市镇",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_58",
+    "legacyId": "u3_6",
+    "category": "core"
   },
   {
     "id": "u3_7",
@@ -646,7 +878,11 @@
     "pos": "n.",
     "meaning": "特色；特征",
     "phrase": "There are four seasons in a year, and each season has its special features.",
-    "root": "n. 特色；特征"
+    "root": "n. 特色；特征",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_59",
+    "legacyId": "u3_7",
+    "category": "core"
   },
   {
     "id": "u3_8",
@@ -657,7 +893,11 @@
     "pos": "n.",
     "meaning": "南；南方",
     "phrase": "Plants start to grow, and birds come back from the south.",
-    "root": "n. 南；南方"
+    "root": "n. 南；南方",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_60",
+    "legacyId": "u3_8",
+    "category": "core"
   },
   {
     "id": "u3_9",
@@ -668,7 +908,11 @@
     "pos": "adj.",
     "meaning": "晴朗的",
     "phrase": "The sun shines brightly in the clear, blue sky.",
-    "root": "adj. 晴朗的"
+    "root": "adj. 晴朗的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_61",
+    "legacyId": "u3_9",
+    "category": "core"
   },
   {
     "id": "u3_10",
@@ -679,7 +923,11 @@
     "pos": "adv.",
     "meaning": "喧闹地；响亮地",
     "phrase": "Cicadas sing loudly.",
-    "root": "adv. 喧闹地；响亮地"
+    "root": "adv. 喧闹地；响亮地",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_62",
+    "legacyId": "u3_10",
+    "category": "core"
   },
   {
     "id": "u3_11",
@@ -690,7 +938,11 @@
     "pos": "n.",
     "meaning": "雷",
     "phrase": "There is often thunder and lightning in the afternoon.",
-    "root": "n. 雷"
+    "root": "n. 雷",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_63",
+    "legacyId": "u3_11",
+    "category": "core"
   },
   {
     "id": "u3_12",
@@ -701,7 +953,11 @@
     "pos": "n.",
     "meaning": "闪电",
     "phrase": "There is often thunder and lightning in the afternoon.",
-    "root": "n. 闪电"
+    "root": "n. 闪电",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_64",
+    "legacyId": "u3_12",
+    "category": "core"
   },
   {
     "id": "u3_13",
@@ -712,7 +968,11 @@
     "pos": "adj.",
     "meaning": "新鲜的",
     "phrase": "It is nice to eat ice cream or fresh fruit in summer.",
-    "root": "adj. 新鲜的"
+    "root": "adj. 新鲜的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_65",
+    "legacyId": "u3_13",
+    "category": "core"
   },
   {
     "id": "u3_14",
@@ -723,7 +983,11 @@
     "pos": "v.",
     "meaning": "采集（植物、水果等）",
     "phrase": "Squirrels gather food for the cold winter.",
-    "root": "v. 采集（植物、水果等）"
+    "root": "v. 采集（植物、水果等）",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_66",
+    "legacyId": "u3_14",
+    "category": "core"
   },
   {
     "id": "u3_15",
@@ -734,7 +998,11 @@
     "pos": "adj.",
     "meaning": "安静的；平静的",
     "phrase": "Winter: Winter is peaceful and fun.",
-    "root": "adj. 安静的；平静的"
+    "root": "adj. 安静的；平静的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_67",
+    "legacyId": "u3_15",
+    "category": "core"
   },
   {
     "id": "u3_16",
@@ -745,7 +1013,11 @@
     "pos": "n.",
     "meaning": "蛇",
     "phrase": "Bears and snakes find warm places to sleep through the winter.",
-    "root": "n. 蛇"
+    "root": "n. 蛇",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_68",
+    "legacyId": "u3_16",
+    "category": "core"
   },
   {
     "id": "u3_17",
@@ -756,7 +1028,11 @@
     "pos": "prep.",
     "meaning": "自始至终；从头到尾",
     "phrase": "Bears and snakes find warm places to sleep through the winter.",
-    "root": "prep. 自始至终；从头到尾"
+    "root": "prep. 自始至终；从头到尾",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_69",
+    "legacyId": "u3_17",
+    "category": "core"
   },
   {
     "id": "u3_18",
@@ -767,7 +1043,11 @@
     "pos": "n.",
     "meaning": "区域；地区",
     "phrase": "Classes end at 4:25 p.m., and many students take part in after-school activities.",
-    "root": "n. 区域；地区"
+    "root": "n. 区域；地区",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_70",
+    "legacyId": "u3_18",
+    "category": "core"
   },
   {
     "id": "u3_19",
@@ -778,7 +1058,11 @@
     "pos": "n.",
     "meaning": "文章",
     "phrase": "课文例词：article (文章)",
-    "root": "n. 文章"
+    "root": "n. 文章",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_71",
+    "legacyId": "u3_19",
+    "category": "core"
   },
   {
     "id": "u3_20",
@@ -789,7 +1073,11 @@
     "pos": "n.",
     "meaning": "原因；理由",
     "phrase": "课文例词：reason (原因；理由)",
-    "root": "n. 原因；理由"
+    "root": "n. 原因；理由",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_72",
+    "legacyId": "u3_20",
+    "category": "core"
   },
   {
     "id": "u3_21",
@@ -800,7 +1088,11 @@
     "pos": "adj.",
     "meaning": "有生气；有活力",
     "phrase": "课文例词：alive (有生气；有活力)",
-    "root": "adj. 有生气；有活力"
+    "root": "adj. 有生气；有活力",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_73",
+    "legacyId": "u3_21",
+    "category": "core"
   },
   {
     "id": "u3_22",
@@ -811,7 +1103,11 @@
     "pos": "n.",
     "meaning": "沙堡",
     "phrase": "课文例词：sandcastle (沙堡)",
-    "root": "n. 沙堡"
+    "root": "n. 沙堡",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_74",
+    "legacyId": "u3_22",
+    "category": "core"
   },
   {
     "id": "u3_23",
@@ -822,7 +1118,11 @@
     "pos": "v.",
     "meaning": "按……方式发展",
     "phrase": "课文例词：follow (按……方式发展)",
-    "root": "v. 按……方式发展"
+    "root": "v. 按……方式发展",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_75",
+    "legacyId": "u3_23",
+    "category": "core"
   },
   {
     "id": "u3_24",
@@ -833,7 +1133,11 @@
     "pos": "v.",
     "meaning": "（使）分开",
     "phrase": "课文例词：divide (（使）分开)",
-    "root": "v. （使）分开"
+    "root": "v. （使）分开",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_76",
+    "legacyId": "u3_24",
+    "category": "core"
   },
   {
     "id": "u3_25",
@@ -844,7 +1148,11 @@
     "pos": "v.",
     "meaning": "对……作出抉择；决定",
     "phrase": "课文例词：decide (对……作出抉择；决定)",
-    "root": "v. 对……作出抉择；决定"
+    "root": "v. 对……作出抉择；决定",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_77",
+    "legacyId": "u3_25",
+    "category": "core"
   },
   {
     "id": "u3_26",
@@ -855,7 +1163,11 @@
     "pos": "n.",
     "meaning": "庄稼；作物",
     "phrase": "课文例词：crop (庄稼；作物)",
-    "root": "n. 庄稼；作物"
+    "root": "n. 庄稼；作物",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_78",
+    "legacyId": "u3_26",
+    "category": "core"
   },
   {
     "id": "u3_27",
@@ -866,7 +1178,11 @@
     "pos": "n.",
     "meaning": "文化；文明",
     "phrase": "If you enjoy history and culture, you will love this place.",
-    "root": "n. 文化；文明"
+    "root": "n. 文化；文明",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_79",
+    "legacyId": "u3_27",
+    "category": "core"
   },
   {
     "id": "u3_28",
@@ -877,7 +1193,11 @@
     "pos": "adj.",
     "meaning": "地方的；当地的",
     "phrase": "You can also buy local food and gifts there.",
-    "root": "adj. 地方的；当地的"
+    "root": "adj. 地方的；当地的",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_80",
+    "legacyId": "u3_28",
+    "category": "core"
   },
   {
     "id": "u3_29",
@@ -888,7 +1208,11 @@
     "pos": "n.",
     "meaning": "传统",
     "phrase": "In Shanghai, East meets West, and tradition meets modernity.",
-    "root": "n. 传统"
+    "root": "n. 传统",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_81",
+    "legacyId": "u3_29",
+    "category": "core"
   },
   {
     "id": "u3_30",
@@ -899,7 +1223,11 @@
     "pos": "v.",
     "meaning": "持续；继续存在",
     "phrase": "课文例词：continue (持续；继续存在)",
-    "root": "v. 持续；继续存在"
+    "root": "v. 持续；继续存在",
+    "book": "7a",
+    "canonicalId": "7a_u3_core_82",
+    "legacyId": "u3_30",
+    "category": "core"
   },
   {
     "id": "u4_1",
@@ -910,7 +1238,11 @@
     "pos": "n.",
     "meaning": "系统",
     "phrase": "课文例词：system (系统)",
-    "root": "n. 系统"
+    "root": "n. 系统",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_83",
+    "legacyId": "u4_1",
+    "category": "core"
   },
   {
     "id": "u4_2",
@@ -921,7 +1253,11 @@
     "pos": "n.",
     "meaning": "档案",
     "phrase": "课文例词：file (档案)",
-    "root": "n. 档案"
+    "root": "n. 档案",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_84",
+    "legacyId": "u4_2",
+    "category": "core"
   },
   {
     "id": "u4_3",
@@ -932,7 +1268,11 @@
     "pos": "adj.",
     "meaning": "令人大为惊奇的",
     "phrase": "The Earth is an amazing planet!",
-    "root": "adj. 令人大为惊奇的"
+    "root": "adj. 令人大为惊奇的",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_85",
+    "legacyId": "u4_3",
+    "category": "core"
   },
   {
     "id": "u4_4",
@@ -943,7 +1283,11 @@
     "pos": "n.",
     "meaning": "行星",
     "phrase": "The Earth is an amazing planet!",
-    "root": "n. 行星"
+    "root": "n. 行星",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_86",
+    "legacyId": "u4_4",
+    "category": "core"
   },
   {
     "id": "u4_5",
@@ -954,7 +1298,11 @@
     "pos": "num.",
     "meaning": "十亿",
     "phrase": "课文例词：billion (十亿)",
-    "root": "num. 十亿"
+    "root": "num. 十亿",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_87",
+    "legacyId": "u4_5",
+    "category": "core"
   },
   {
     "id": "u4_6",
@@ -965,7 +1313,11 @@
     "pos": "v.",
     "meaning": "盖；覆盖",
     "phrase": "课文例词：cover (盖；覆盖)",
-    "root": "v. 盖；覆盖"
+    "root": "v. 盖；覆盖",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_88",
+    "legacyId": "u4_6",
+    "category": "core"
   },
   {
     "id": "u4_7",
@@ -976,7 +1328,11 @@
     "pos": "n.",
     "meaning": "地区；地域",
     "phrase": "Some places are very hot, like the areas near the equator.",
-    "root": "n. 地区；地域"
+    "root": "n. 地区；地域",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_89",
+    "legacyId": "u4_7",
+    "category": "core"
   },
   {
     "id": "u4_8",
@@ -987,7 +1343,11 @@
     "pos": "adj.",
     "meaning": "极冷的",
     "phrase": "Some are freezing cold, like the North and South Poles.",
-    "root": "adj. 极冷的"
+    "root": "adj. 极冷的",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_90",
+    "legacyId": "u4_8",
+    "category": "core"
   },
   {
     "id": "u4_9",
@@ -998,7 +1358,11 @@
     "pos": "n.",
     "meaning": "北；北方",
     "phrase": "Some are freezing cold, like the North and South Poles.",
-    "root": "n. 北；北方"
+    "root": "n. 北；北方",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_91",
+    "legacyId": "u4_9",
+    "category": "core"
   },
   {
     "id": "u4_10",
@@ -1009,7 +1373,11 @@
     "pos": "n.",
     "meaning": "（行星的）极；地极",
     "phrase": "Some are freezing cold, like the North and South Poles.",
-    "root": "n. （行星的）极；地极"
+    "root": "n. （行星的）极；地极",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_92",
+    "legacyId": "u4_10",
+    "category": "core"
   },
   {
     "id": "u4_11",
@@ -1020,7 +1388,11 @@
     "pos": "n.",
     "meaning": "沙漠；荒漠",
     "phrase": "There are fields and mountains, rivers and seas, forests and deserts.",
-    "root": "n. 沙漠；荒漠"
+    "root": "n. 沙漠；荒漠",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_93",
+    "legacyId": "u4_11",
+    "category": "core"
   },
   {
     "id": "u4_12",
@@ -1031,7 +1403,11 @@
     "pos": "n.",
     "meaning": "米",
     "phrase": "The highest mountain on Earth is over 8,800 metres above sea level.",
-    "root": "n. 米"
+    "root": "n. 米",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_94",
+    "legacyId": "u4_12",
+    "category": "core"
   },
   {
     "id": "u4_13",
@@ -1042,7 +1418,11 @@
     "pos": "v.",
     "meaning": "足够达到",
     "phrase": "The tallest trees in the world can reach over 100 metres in height.",
-    "root": "v. 足够达到"
+    "root": "v. 足够达到",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_95",
+    "legacyId": "u4_13",
+    "category": "core"
   },
   {
     "id": "u4_14",
@@ -1053,7 +1433,11 @@
     "pos": "n.",
     "meaning": "谷粒",
     "phrase": "The smallest plant is as small as a grain of rice.",
-    "root": "n. 谷粒"
+    "root": "n. 谷粒",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_96",
+    "legacyId": "u4_14",
+    "category": "core"
   },
   {
     "id": "u4_15",
@@ -1064,7 +1448,11 @@
     "pos": "adj.",
     "meaning": "宽的；宽阔的",
     "phrase": "Other animals, like birds, enjoy the wide open sky.",
-    "root": "adj. 宽的；宽阔的"
+    "root": "adj. 宽的；宽阔的",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_97",
+    "legacyId": "u4_15",
+    "category": "core"
   },
   {
     "id": "u4_16",
@@ -1075,7 +1463,11 @@
     "pos": "n.",
     "meaning": "鲸",
     "phrase": "Big blue whales call the sea home, along with many amazing fish.",
-    "root": "n. 鲸"
+    "root": "n. 鲸",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_98",
+    "legacyId": "u4_16",
+    "category": "core"
   },
   {
     "id": "u4_17",
@@ -1086,7 +1478,11 @@
     "pos": "n.",
     "meaning": "蝴蝶",
     "phrase": "课文例词：butterfly (蝴蝶)",
-    "root": "n. 蝴蝶"
+    "root": "n. 蝴蝶",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_99",
+    "legacyId": "u4_17",
+    "category": "core"
   },
   {
     "id": "u4_18",
@@ -1097,7 +1493,11 @@
     "pos": "v.",
     "meaning": "提供；供应",
     "phrase": "And what's more, the Earth provides us with all the things we need, such as food, water, air and energy.",
-    "root": "v. 提供；供应"
+    "root": "v. 提供；供应",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_100",
+    "legacyId": "u4_18",
+    "category": "core"
   },
   {
     "id": "u4_19",
@@ -1108,7 +1508,11 @@
     "pos": "v.",
     "meaning": "支持；维持",
     "phrase": "It is our home and the only planet we know that supports life.",
-    "root": "v. 支持；维持"
+    "root": "v. 支持；维持",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_101",
+    "legacyId": "u4_19",
+    "category": "core"
   },
   {
     "id": "u4_20",
@@ -1119,7 +1523,11 @@
     "pos": "v.",
     "meaning": "探索",
     "phrase": "Let's explore, learn about and take care of our home.",
-    "root": "v. 探索"
+    "root": "v. 探索",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_102",
+    "legacyId": "u4_20",
+    "category": "core"
   },
   {
     "id": "u4_21",
@@ -1130,7 +1538,11 @@
     "pos": "v.",
     "meaning": "消失；不见",
     "phrase": "The rocket took off into the sky and disappeared.",
-    "root": "v. 消失；不见"
+    "root": "v. 消失；不见",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_103",
+    "legacyId": "u4_21",
+    "category": "core"
   },
   {
     "id": "u4_22",
@@ -1141,7 +1553,11 @@
     "pos": "n.",
     "meaning": "塑料",
     "phrase": "课文例词：plastic (塑料)",
-    "root": "n. 塑料"
+    "root": "n. 塑料",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_104",
+    "legacyId": "u4_22",
+    "category": "core"
   },
   {
     "id": "u4_23",
@@ -1152,7 +1568,11 @@
     "pos": "n.",
     "meaning": "污染",
     "phrase": "课文例词：pollution (污染)",
-    "root": "n. 污染"
+    "root": "n. 污染",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_105",
+    "legacyId": "u4_23",
+    "category": "core"
   },
   {
     "id": "u4_24",
@@ -1163,7 +1583,11 @@
     "pos": "v.",
     "meaning": "保护",
     "phrase": "He even wears white gloves to protect his stamps!",
-    "root": "v. 保护"
+    "root": "v. 保护",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_106",
+    "legacyId": "u4_24",
+    "category": "core"
   },
   {
     "id": "u4_25",
@@ -1174,7 +1598,11 @@
     "pos": "n.",
     "meaning": "化学制品；化学品",
     "phrase": "课文例词：chemical (化学制品；化学品)",
-    "root": "n. 化学制品；化学品"
+    "root": "n. 化学制品；化学品",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_107",
+    "legacyId": "u4_25",
+    "category": "core"
   },
   {
     "id": "u4_26",
@@ -1185,7 +1613,11 @@
     "pos": "n.",
     "meaning": "地下水",
     "phrase": "课文例词：groundwater (地下水)",
-    "root": "n. 地下水"
+    "root": "n. 地下水",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_108",
+    "legacyId": "u4_26",
+    "category": "core"
   },
   {
     "id": "u4_27",
@@ -1196,7 +1628,11 @@
     "pos": "v.",
     "meaning": "燃烧；烧",
     "phrase": "课文例词：burn (燃烧；烧)",
-    "root": "v. 燃烧；烧"
+    "root": "v. 燃烧；烧",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_109",
+    "legacyId": "u4_27",
+    "category": "core"
   },
   {
     "id": "u4_28",
@@ -1207,7 +1643,11 @@
     "pos": "n.",
     "meaning": "石油；原油",
     "phrase": "课文例词：oil (石油；原油)",
-    "root": "n. 石油；原油"
+    "root": "n. 石油；原油",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_110",
+    "legacyId": "u4_28",
+    "category": "core"
   },
   {
     "id": "u4_29",
@@ -1218,7 +1658,11 @@
     "pos": "n.",
     "meaning": "天然气",
     "phrase": "课文例词：gas (天然气)",
-    "root": "n. 天然气"
+    "root": "n. 天然气",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_111",
+    "legacyId": "u4_29",
+    "category": "core"
   },
   {
     "id": "u4_30",
@@ -1229,7 +1673,11 @@
     "pos": "adj.",
     "meaning": "有害的",
     "phrase": "课文例词：harmful (有害的)",
-    "root": "adj. 有害的"
+    "root": "adj. 有害的",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_112",
+    "legacyId": "u4_30",
+    "category": "core"
   },
   {
     "id": "u4_31",
@@ -1240,7 +1688,11 @@
     "pos": "n.",
     "meaning": "网站",
     "phrase": "课文例词：website (网站)",
-    "root": "n. 网站"
+    "root": "n. 网站",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_113",
+    "legacyId": "u4_31",
+    "category": "core"
   },
   {
     "id": "u4_32",
@@ -1251,7 +1703,11 @@
     "pos": "adj.",
     "meaning": "自己的；本人的",
     "phrase": "He is a stamp collector, and he owns thousands of stamps.",
-    "root": "adj. 自己的；本人的"
+    "root": "adj. 自己的；本人的",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_114",
+    "legacyId": "u4_32",
+    "category": "core"
   },
   {
     "id": "u4_33",
@@ -1262,7 +1718,11 @@
     "pos": "adv.",
     "meaning": "然而；不过",
     "phrase": "课文例词：however (然而；不过)",
-    "root": "adv. 然而；不过"
+    "root": "adv. 然而；不过",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_115",
+    "legacyId": "u4_33",
+    "category": "core"
   },
   {
     "id": "u4_34",
@@ -1273,7 +1733,11 @@
     "pos": "n.",
     "meaning": "皇帝",
     "phrase": "课文例词：emperor (皇帝)",
-    "root": "n. 皇帝"
+    "root": "n. 皇帝",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_116",
+    "legacyId": "u4_34",
+    "category": "core"
   },
   {
     "id": "u4_35",
@@ -1284,7 +1748,11 @@
     "pos": "v.",
     "meaning": "打猎",
     "phrase": "课文例词：hunt (打猎)",
-    "root": "v. 打猎"
+    "root": "v. 打猎",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_117",
+    "legacyId": "u4_35",
+    "category": "core"
   },
   {
     "id": "u4_36",
@@ -1295,7 +1763,11 @@
     "pos": "n.",
     "meaning": "战争",
     "phrase": "课文例词：war (战争)",
-    "root": "n. 战争"
+    "root": "n. 战争",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_118",
+    "legacyId": "u4_36",
+    "category": "core"
   },
   {
     "id": "u4_37",
@@ -1306,7 +1778,11 @@
     "pos": "n.",
     "meaning": "沙暴",
     "phrase": "课文例词：sandstorm (沙暴)",
-    "root": "n. 沙暴"
+    "root": "n. 沙暴",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_119",
+    "legacyId": "u4_37",
+    "category": "core"
   },
   {
     "id": "u4_38",
@@ -1317,7 +1793,11 @@
     "pos": "n.",
     "meaning": "解决办法",
     "phrase": "课文例词：solution (解决办法)",
-    "root": "n. 解决办法"
+    "root": "n. 解决办法",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_120",
+    "legacyId": "u4_38",
+    "category": "core"
   },
   {
     "id": "u4_39",
@@ -1328,7 +1808,11 @@
     "pos": "v.",
     "meaning": "刮；吹",
     "phrase": "课文例词：blow (刮；吹)",
-    "root": "v. 刮；吹"
+    "root": "v. 刮；吹",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_121",
+    "legacyId": "u4_39",
+    "category": "core"
   },
   {
     "id": "u4_40",
@@ -1339,7 +1823,11 @@
     "pos": "n.",
     "meaning": "（统称）一代人",
     "phrase": "课文例词：generation (（统称）一代人)",
-    "root": "n. （统称）一代人"
+    "root": "n. （统称）一代人",
+    "book": "7a",
+    "canonicalId": "7a_u4_core_122",
+    "legacyId": "u4_40",
+    "category": "core"
   },
   {
     "id": "u5_1",
@@ -1350,7 +1838,11 @@
     "pos": "n.",
     "meaning": "航天服；宇航服",
     "phrase": "I'll have to wear a spacesuit to help me breathe because there's no air on the Moon.",
-    "root": "n. 航天服；宇航服"
+    "root": "n. 航天服；宇航服",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_123",
+    "legacyId": "u5_1",
+    "category": "core"
   },
   {
     "id": "u5_2",
@@ -1361,7 +1853,11 @@
     "pos": "v.",
     "meaning": "收集；采集",
     "phrase": "Some people play sports and others build models, but my hobby is collecting stamps.",
-    "root": "v. 收集；采集"
+    "root": "v. 收集；采集",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_124",
+    "legacyId": "u5_2",
+    "category": "core"
   },
   {
     "id": "u5_3",
@@ -1372,7 +1868,11 @@
     "pos": "v.",
     "meaning": "离开",
     "phrase": "Leaves turn brown, red or yellow and start falling from the trees.",
-    "root": "v. 离开"
+    "root": "v. 离开",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_125",
+    "legacyId": "u5_3",
+    "category": "core"
   },
   {
     "id": "u5_4",
@@ -1383,7 +1883,11 @@
     "pos": "n.",
     "meaning": "千米；公里",
     "phrase": "The Moon is around 380,000 kilometres from the Earth, so it'll take us about three days to get there.",
-    "root": "n. 千米；公里"
+    "root": "n. 千米；公里",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_126",
+    "legacyId": "u5_4",
+    "category": "core"
   },
   {
     "id": "u5_5",
@@ -1394,7 +1898,11 @@
     "pos": "adj.",
     "meaning": "虚弱的；无力的",
     "phrase": "The gravity in space is very weak, so we'll all be floating around in the spaceship.",
-    "root": "adj. 虚弱的；无力的"
+    "root": "adj. 虚弱的；无力的",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_127",
+    "legacyId": "u5_5",
+    "category": "core"
   },
   {
     "id": "u5_6",
@@ -1405,7 +1913,11 @@
     "pos": "v.",
     "meaning": "（用线、绳等）拴",
     "phrase": "We need to tie the sleeping bag to the wall so that we won't float away in our sleep!",
-    "root": "v. （用线、绳等）拴"
+    "root": "v. （用线、绳等）拴",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_128",
+    "legacyId": "u5_6",
+    "category": "core"
   },
   {
     "id": "u5_7",
@@ -1416,7 +1928,11 @@
     "pos": "adj.",
     "meaning": "低于通常（或平均）数量（或水平、价值）的",
     "phrase": "Because of the low gravity, our bodies may get weak, so we'll have to do exercise every day.",
-    "root": "adj. 低于通常（或平均）数量（或水平、价值）的"
+    "root": "adj. 低于通常（或平均）数量（或水平、价值）的",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_129",
+    "legacyId": "u5_7",
+    "category": "core"
   },
   {
     "id": "u5_8",
@@ -1427,7 +1943,11 @@
     "pos": "v.",
     "meaning": "有……重；重",
     "phrase": "A person weighs much less on the Moon, so we can jump very high.",
-    "root": "v. 有……重；重"
+    "root": "v. 有……重；重",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_130",
+    "legacyId": "u5_8",
+    "category": "core"
   },
   {
     "id": "u5_9",
@@ -1438,7 +1958,11 @@
     "pos": "v.",
     "meaning": "呼吸",
     "phrase": "I'll have to wear a spacesuit to help me breathe because there's no air on the Moon.",
-    "root": "v. 呼吸"
+    "root": "v. 呼吸",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_131",
+    "legacyId": "u5_9",
+    "category": "core"
   },
   {
     "id": "u5_10",
@@ -1449,7 +1973,11 @@
     "pos": "n.",
     "meaning": "设施；设备",
     "phrase": "课文例词：facility (设施；设备)",
-    "root": "n. 设施；设备"
+    "root": "n. 设施；设备",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_132",
+    "legacyId": "u5_10",
+    "category": "core"
   },
   {
     "id": "u5_11",
@@ -1460,7 +1988,11 @@
     "pos": "n.",
     "meaning": "冒险；冒险经历；奇遇",
     "phrase": "课文例词：adventure (冒险；冒险经历；奇遇)",
-    "root": "n. 冒险；冒险经历；奇遇"
+    "root": "n. 冒险；冒险经历；奇遇",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_133",
+    "legacyId": "u5_11",
+    "category": "core"
   },
   {
     "id": "u5_12",
@@ -1471,7 +2003,11 @@
     "pos": "v.",
     "meaning": "沿某方向前进；向某方向移动",
     "phrase": "They get their energy from the sun.\" The girl then passed the remote control to Li Na.",
-    "root": "v. 沿某方向前进；向某方向移动"
+    "root": "v. 沿某方向前进；向某方向移动",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_134",
+    "legacyId": "u5_12",
+    "category": "core"
   },
   {
     "id": "u5_13",
@@ -1482,7 +2018,11 @@
     "pos": "n.",
     "meaning": "实验；试验",
     "phrase": "课文例词：experiment (实验；试验)",
-    "root": "n. 实验；试验"
+    "root": "n. 实验；试验",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_135",
+    "legacyId": "u5_13",
+    "category": "core"
   },
   {
     "id": "u5_14",
@@ -1493,7 +2033,11 @@
     "pos": "v.",
     "meaning": "使做好准备；把……预备好",
     "phrase": "课文例词：prepare (使做好准备；把……预备好)",
-    "root": "v. 使做好准备；把……预备好"
+    "root": "v. 使做好准备；把……预备好",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_136",
+    "legacyId": "u5_14",
+    "category": "core"
   },
   {
     "id": "u5_15",
@@ -1504,7 +2048,11 @@
     "pos": "n.",
     "meaning": "梦想；理想",
     "phrase": "课文例词：dream (梦想；理想)",
-    "root": "n. 梦想；理想"
+    "root": "n. 梦想；理想",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_137",
+    "legacyId": "u5_15",
+    "category": "core"
   },
   {
     "id": "u5_16",
@@ -1515,7 +2063,11 @@
     "pos": "n.",
     "meaning": "机会；机遇",
     "phrase": "课文例词：chance (机会；机遇)",
-    "root": "n. 机会；机遇"
+    "root": "n. 机会；机遇",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_138",
+    "legacyId": "u5_16",
+    "category": "core"
   },
   {
     "id": "u5_17",
@@ -1526,7 +2078,11 @@
     "pos": "v.",
     "meaning": "邮寄；发送",
     "phrase": "课文例词：send (邮寄；发送)",
-    "root": "v. 邮寄；发送"
+    "root": "v. 邮寄；发送",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_139",
+    "legacyId": "u5_17",
+    "category": "core"
   },
   {
     "id": "u5_18",
@@ -1537,7 +2093,11 @@
     "pos": "n.",
     "meaning": "序言；引言",
     "phrase": "课文例词：introduction (序言；引言)",
-    "root": "n. 序言；引言"
+    "root": "n. 序言；引言",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_140",
+    "legacyId": "u5_18",
+    "category": "core"
   },
   {
     "id": "u5_19",
@@ -1548,7 +2108,11 @@
     "pos": "n.",
     "meaning": "景色；风景",
     "phrase": "课文例词：view (景色；风景)",
-    "root": "n. 景色；风景"
+    "root": "n. 景色；风景",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_141",
+    "legacyId": "u5_19",
+    "category": "core"
   },
   {
     "id": "u5_20",
@@ -1559,7 +2123,11 @@
     "pos": "adv.",
     "meaning": "总有一天；有朝一日",
     "phrase": "课文例词：someday (总有一天；有朝一日)",
-    "root": "adv. 总有一天；有朝一日"
+    "root": "adv. 总有一天；有朝一日",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_142",
+    "legacyId": "u5_20",
+    "category": "core"
   },
   {
     "id": "u5_21",
@@ -1570,7 +2138,11 @@
     "pos": "n.",
     "meaning": "经历；阅历",
     "phrase": "课文例词：experience (经历；阅历)",
-    "root": "n. 经历；阅历"
+    "root": "n. 经历；阅历",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_143",
+    "legacyId": "u5_21",
+    "category": "core"
   },
   {
     "id": "u5_22",
@@ -1581,7 +2153,11 @@
     "pos": "n.",
     "meaning": "着陆器",
     "phrase": "课文例词：lander (着陆器)",
-    "root": "n. 着陆器"
+    "root": "n. 着陆器",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_144",
+    "legacyId": "u5_22",
+    "category": "core"
   },
   {
     "id": "u5_23",
@@ -1592,7 +2168,11 @@
     "pos": "n.",
     "meaning": "岛",
     "phrase": "课文例词：island (岛)",
-    "root": "n. 岛"
+    "root": "n. 岛",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_145",
+    "legacyId": "u5_23",
+    "category": "core"
   },
   {
     "id": "u5_24",
@@ -1603,7 +2183,11 @@
     "pos": "adj.",
     "meaning": "古老的；很老的",
     "phrase": "课文例词：ancient (古老的；很老的)",
-    "root": "adj. 古老的；很老的"
+    "root": "adj. 古老的；很老的",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_146",
+    "legacyId": "u5_24",
+    "category": "core"
   },
   {
     "id": "u5_25",
@@ -1614,7 +2198,11 @@
     "pos": "n.",
     "meaning": "诗",
     "phrase": "课文例词：poem (诗)",
-    "root": "n. 诗"
+    "root": "n. 诗",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_147",
+    "legacyId": "u5_25",
+    "category": "core"
   },
   {
     "id": "u5_26",
@@ -1625,7 +2213,11 @@
     "pos": "v.",
     "meaning": "表示；表达；表露",
     "phrase": "课文例词：express (表示；表达；表露)",
-    "root": "v. 表示；表达；表露"
+    "root": "v. 表示；表达；表露",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_148",
+    "legacyId": "u5_26",
+    "category": "core"
   },
   {
     "id": "u5_27",
@@ -1636,7 +2228,11 @@
     "pos": "n.",
     "meaning": "决心；坚毅；坚定",
     "phrase": "课文例词：determination (决心；坚毅；坚定)",
-    "root": "n. 决心；坚毅；坚定"
+    "root": "n. 决心；坚毅；坚定",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_149",
+    "legacyId": "u5_27",
+    "category": "core"
   },
   {
     "id": "u5_28",
@@ -1647,7 +2243,11 @@
     "pos": "n.",
     "meaning": "宇宙",
     "phrase": "课文例词：universe (宇宙)",
-    "root": "n. 宇宙"
+    "root": "n. 宇宙",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_150",
+    "legacyId": "u5_28",
+    "category": "core"
   },
   {
     "id": "u5_29",
@@ -1658,7 +2258,11 @@
     "pos": "adv.",
     "meaning": "已经；早已",
     "phrase": "课文例词：already (已经；早已)",
-    "root": "adv. 已经；早已"
+    "root": "adv. 已经；早已",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_151",
+    "legacyId": "u5_29",
+    "category": "core"
   },
   {
     "id": "u5_30",
@@ -1669,7 +2273,11 @@
     "pos": "n.",
     "meaning": "世纪",
     "phrase": "Xintiandi: Xintiandi is famous for its shikumen buildings from the 19th century.",
-    "root": "n. 世纪"
+    "root": "n. 世纪",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_152",
+    "legacyId": "u5_30",
+    "category": "core"
   },
   {
     "id": "u5_31",
@@ -1680,7 +2288,11 @@
     "pos": "n.",
     "meaning": "邻居",
     "phrase": "课文例词：neighbour (邻居)",
-    "root": "n. 邻居"
+    "root": "n. 邻居",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_153",
+    "legacyId": "u5_31",
+    "category": "core"
   },
   {
     "id": "u5_32",
@@ -1691,7 +2303,11 @@
     "pos": "v.",
     "meaning": "环行",
     "phrase": "课文例词：circle (环行)",
-    "root": "v. 环行"
+    "root": "v. 环行",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_154",
+    "legacyId": "u5_32",
+    "category": "core"
   },
   {
     "id": "u5_33",
@@ -1702,7 +2318,11 @@
     "pos": "n.",
     "meaning": "表面；表层；面",
     "phrase": "课文例词：surface (表面；表层；面)",
-    "root": "n. 表面；表层；面"
+    "root": "n. 表面；表层；面",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_155",
+    "legacyId": "u5_33",
+    "category": "core"
   },
   {
     "id": "u5_34",
@@ -1713,7 +2333,11 @@
     "pos": "v.",
     "meaning": "放开；松开；使自由移动（或飞翔、降落等）",
     "phrase": "课文例词：release (放开；松开；使自由移动（或飞翔、降落等）)",
-    "root": "v. 放开；松开；使自由移动（或飞翔、降落等）"
+    "root": "v. 放开；松开；使自由移动（或飞翔、降落等）",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_156",
+    "legacyId": "u5_34",
+    "category": "core"
   },
   {
     "id": "u5_35",
@@ -1724,7 +2348,11 @@
     "pos": "n.",
     "meaning": "千克；公斤",
     "phrase": "课文例词：kilogram (千克；公斤)",
-    "root": "n. 千克；公斤"
+    "root": "n. 千克；公斤",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_157",
+    "legacyId": "u5_35",
+    "category": "core"
   },
   {
     "id": "u5_36",
@@ -1735,7 +2363,11 @@
     "pos": "n.",
     "meaning": "计划；方案",
     "phrase": "课文例词：programme (计划；方案)",
-    "root": "n. 计划；方案"
+    "root": "n. 计划；方案",
+    "book": "7a",
+    "canonicalId": "7a_u5_core_158",
+    "legacyId": "u5_36",
+    "category": "core"
   },
   {
     "id": "u6_1",
@@ -1746,7 +2378,11 @@
     "pos": "n.",
     "meaning": "指南；手册",
     "phrase": "课文例词：guide (指南；手册)",
-    "root": "n. 指南；手册"
+    "root": "n. 指南；手册",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_159",
+    "legacyId": "u6_1",
+    "category": "core"
   },
   {
     "id": "u6_2",
@@ -1757,7 +2393,11 @@
     "pos": "n.",
     "meaning": "东；东方",
     "phrase": "In Shanghai, East meets West, and tradition meets modernity.",
-    "root": "n. 东；东方"
+    "root": "n. 东；东方",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_160",
+    "legacyId": "u6_2",
+    "category": "core"
   },
   {
     "id": "u6_3",
@@ -1768,7 +2408,11 @@
     "pos": "n.",
     "meaning": "西；西方",
     "phrase": "In Shanghai, East meets West, and tradition meets modernity.",
-    "root": "n. 西；西方"
+    "root": "n. 西；西方",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_161",
+    "legacyId": "u6_3",
+    "category": "core"
   },
   {
     "id": "u6_4",
@@ -1779,7 +2423,11 @@
     "pos": "n.",
     "meaning": "混合；结合",
     "phrase": "These buildings are a mix of traditional Chinese and Western styles.",
-    "root": "n. 混合；结合"
+    "root": "n. 混合；结合",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_162",
+    "legacyId": "u6_4",
+    "category": "core"
   },
   {
     "id": "u6_5",
@@ -1790,7 +2438,11 @@
     "pos": "adj.",
     "meaning": "西方的；西方国家的",
     "phrase": "These buildings are a mix of traditional Chinese and Western styles.",
-    "root": "adj. 西方的；西方国家的"
+    "root": "adj. 西方的；西方国家的",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_163",
+    "legacyId": "u6_5",
+    "category": "core"
   },
   {
     "id": "u6_6",
@@ -1801,7 +2453,11 @@
     "pos": "n.",
     "meaning": "风格",
     "phrase": "These buildings are a mix of traditional Chinese and Western styles.",
-    "root": "n. 风格"
+    "root": "n. 风格",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_164",
+    "legacyId": "u6_6",
+    "category": "core"
   },
   {
     "id": "u6_7",
@@ -1812,7 +2468,11 @@
     "pos": "adj.",
     "meaning": "大众喜爱的；广受欢迎的",
     "phrase": "Today, the area is a very popular tourist spot, with lots of restaurants and shops.",
-    "root": "adj. 大众喜爱的；广受欢迎的"
+    "root": "adj. 大众喜爱的；广受欢迎的",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_165",
+    "legacyId": "u6_7",
+    "category": "core"
   },
   {
     "id": "u6_8",
@@ -1823,7 +2483,11 @@
     "pos": "n.",
     "meaning": "（建筑物、城镇等的）地点",
     "phrase": "You can also visit the Site of the First National Congress of the Communist Party of China (CPC) in Xintiandi, and there is a large museum there.",
-    "root": "n. （建筑物、城镇等的）地点"
+    "root": "n. （建筑物、城镇等的）地点",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_166",
+    "legacyId": "u6_8",
+    "category": "core"
   },
   {
     "id": "u6_9",
@@ -1834,7 +2498,11 @@
     "pos": "prep.",
     "meaning": "在……对面；在……对过",
     "phrase": "Look east across the Huangpu River, and you will see skyscrapers.",
-    "root": "prep. 在……对面；在……对过"
+    "root": "prep. 在……对面；在……对过",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_167",
+    "legacyId": "u6_9",
+    "category": "core"
   },
   {
     "id": "u6_10",
@@ -1845,7 +2513,11 @@
     "pos": "n.",
     "meaning": "成年人",
     "phrase": "Yu Garden: open from Tuesday to Sunday, 9:00–16:30; adults 30 yuan, students and seniors 15 yuan.",
-    "root": "n. 成年人"
+    "root": "n. 成年人",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_168",
+    "legacyId": "u6_10",
+    "category": "core"
   },
   {
     "id": "u6_11",
@@ -1856,7 +2528,11 @@
     "pos": "n.",
     "meaning": "老年人；长者",
     "phrase": "Yu Garden: open from Tuesday to Sunday, 9:00–16:30; adults 30 yuan, students and seniors 15 yuan.",
-    "root": "n. 老年人；长者"
+    "root": "n. 老年人；长者",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_169",
+    "legacyId": "u6_11",
+    "category": "core"
   },
   {
     "id": "u6_12",
@@ -1867,7 +2543,11 @@
     "pos": "n.",
     "meaning": "顾客；主顾",
     "phrase": "课文例词：customer (顾客；主顾)",
-    "root": "n. 顾客；主顾"
+    "root": "n. 顾客；主顾",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_170",
+    "legacyId": "u6_12",
+    "category": "core"
   },
   {
     "id": "u6_13",
@@ -1878,7 +2558,11 @@
     "pos": "n.",
     "meaning": "设计",
     "phrase": "\"Our club will teach you how to design and build rockets.",
-    "root": "n. 设计"
+    "root": "n. 设计",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_171",
+    "legacyId": "u6_13",
+    "category": "core"
   },
   {
     "id": "u6_14",
@@ -1889,7 +2573,11 @@
     "pos": "adv.",
     "meaning": "其他的；别的",
     "phrase": "课文例词：else (其他的；别的)",
-    "root": "adv. 其他的；别的"
+    "root": "adv. 其他的；别的",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_172",
+    "legacyId": "u6_14",
+    "category": "core"
   },
   {
     "id": "u6_15",
@@ -1900,7 +2588,11 @@
     "pos": "n.",
     "meaning": "建议；提议",
     "phrase": "课文例词：suggestion (建议；提议)",
-    "root": "n. 建议；提议"
+    "root": "n. 建议；提议",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_173",
+    "legacyId": "u6_15",
+    "category": "core"
   },
   {
     "id": "u6_16",
@@ -1911,7 +2603,11 @@
     "pos": "n.",
     "meaning": "指点；实用的提示",
     "phrase": "课文例词：tip (指点；实用的提示)",
-    "root": "n. 指点；实用的提示"
+    "root": "n. 指点；实用的提示",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_174",
+    "legacyId": "u6_16",
+    "category": "core"
   },
   {
     "id": "u6_17",
@@ -1922,7 +2618,11 @@
     "pos": "adj.",
     "meaning": "历史上著名（或重要）的；可名垂青史的",
     "phrase": "课文例词：historic (历史上著名（或重要）的；可名垂青史的)",
-    "root": "adj. 历史上著名（或重要）的；可名垂青史的"
+    "root": "adj. 历史上著名（或重要）的；可名垂青史的",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_175",
+    "legacyId": "u6_17",
+    "category": "core"
   },
   {
     "id": "u6_18",
@@ -1933,7 +2633,11 @@
     "pos": "n.",
     "meaning": "名单；目录",
     "phrase": "课文例词：list (名单；目录)",
-    "root": "n. 名单；目录"
+    "root": "n. 名单；目录",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_176",
+    "legacyId": "u6_18",
+    "category": "core"
   },
   {
     "id": "u6_19",
@@ -1944,7 +2648,11 @@
     "pos": "n.",
     "meaning": "风景；景色",
     "phrase": "课文例词：landscape (风景；景色)",
-    "root": "n. 风景；景色"
+    "root": "n. 风景；景色",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_177",
+    "legacyId": "u6_19",
+    "category": "core"
   },
   {
     "id": "u6_20",
@@ -1955,7 +2663,11 @@
     "pos": "n.",
     "meaning": "回忆；记忆",
     "phrase": "课文例词：memory (回忆；记忆)",
-    "root": "n. 回忆；记忆"
+    "root": "n. 回忆；记忆",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_178",
+    "legacyId": "u6_20",
+    "category": "core"
   },
   {
     "id": "u6_21",
@@ -1966,7 +2678,11 @@
     "pos": "n.",
     "meaning": "将军",
     "phrase": "课文例词：general (将军)",
-    "root": "n. 将军"
+    "root": "n. 将军",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_179",
+    "legacyId": "u6_21",
+    "category": "core"
   },
   {
     "id": "u6_22",
@@ -1977,7 +2693,11 @@
     "pos": "n.",
     "meaning": "看见",
     "phrase": "课文例词：sight (看见)",
-    "root": "n. 看见"
+    "root": "n. 看见",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_180",
+    "legacyId": "u6_22",
+    "category": "core"
   },
   {
     "id": "u6_23",
@@ -1988,7 +2708,11 @@
     "pos": "adj.",
     "meaning": "自然的；天然的",
     "phrase": "课文例词：natural (自然的；天然的)",
-    "root": "adj. 自然的；天然的"
+    "root": "adj. 自然的；天然的",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_181",
+    "legacyId": "u6_23",
+    "category": "core"
   },
   {
     "id": "u6_24",
@@ -1999,7 +2723,11 @@
     "pos": "adv.",
     "meaning": "几乎；差不多",
     "phrase": "It is almost like a history lesson.",
-    "root": "adv. 几乎；差不多"
+    "root": "adv. 几乎；差不多",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_182",
+    "legacyId": "u6_24",
+    "category": "core"
   },
   {
     "id": "u6_25",
@@ -2010,7 +2738,11 @@
     "pos": "v.",
     "meaning": "开始变得；变成",
     "phrase": "课文例词：become (开始变得；变成)",
-    "root": "v. 开始变得；变成"
+    "root": "v. 开始变得；变成",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_183",
+    "legacyId": "u6_25",
+    "category": "core"
   },
   {
     "id": "u6_26",
@@ -2021,7 +2753,11 @@
     "pos": "n.",
     "meaning": "（通往其他地区的）门户",
     "phrase": "课文例词：gateway (（通往其他地区的）门户)",
-    "root": "n. （通往其他地区的）门户"
+    "root": "n. （通往其他地区的）门户",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_184",
+    "legacyId": "u6_26",
+    "category": "core"
   },
   {
     "id": "u6_27",
@@ -2032,7 +2768,11 @@
     "pos": "v.",
     "meaning": "影响；对……起作用",
     "phrase": "课文例词：influence (影响；对……起作用)",
-    "root": "v. 影响；对……起作用"
+    "root": "v. 影响；对……起作用",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_185",
+    "legacyId": "u6_27",
+    "category": "core"
   },
   {
     "id": "u6_28",
@@ -2043,7 +2783,11 @@
     "pos": "n.",
     "meaning": "艺术作品",
     "phrase": "课文例词：artwork (艺术作品)",
-    "root": "n. 艺术作品"
+    "root": "n. 艺术作品",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_186",
+    "legacyId": "u6_28",
+    "category": "core"
   },
   {
     "id": "u6_29",
@@ -2054,7 +2798,11 @@
     "pos": "n.",
     "meaning": "绘画",
     "phrase": "课文例词：painting (绘画)",
-    "root": "n. 绘画"
+    "root": "n. 绘画",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_187",
+    "legacyId": "u6_29",
+    "category": "core"
   },
   {
     "id": "u6_30",
@@ -2065,7 +2813,11 @@
     "pos": "n.",
     "meaning": "场面；情景",
     "phrase": "课文例词：scene (场面；情景)",
-    "root": "n. 场面；情景"
+    "root": "n. 场面；情景",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_188",
+    "legacyId": "u6_30",
+    "category": "core"
   },
   {
     "id": "u6_31",
@@ -2076,7 +2828,11 @@
     "pos": "n.",
     "meaning": "妻子",
     "phrase": "课文例词：wife (妻子)",
-    "root": "n. 妻子"
+    "root": "n. 妻子",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_189",
+    "legacyId": "u6_31",
+    "category": "core"
   },
   {
     "id": "u6_32",
@@ -2087,7 +2843,11 @@
     "pos": "n.",
     "meaning": "石头；石料",
     "phrase": "课文例词：stone (石头；石料)",
-    "root": "n. 石头；石料"
+    "root": "n. 石头；石料",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_190",
+    "legacyId": "u6_32",
+    "category": "core"
   },
   {
     "id": "u6_33",
@@ -2098,7 +2858,11 @@
     "pos": "n.",
     "meaning": "映像；映照出的影像",
     "phrase": "课文例词：reflection (映像；映照出的影像)",
-    "root": "n. 映像；映照出的影像"
+    "root": "n. 映像；映照出的影像",
+    "book": "7a",
+    "canonicalId": "7a_u6_core_191",
+    "legacyId": "u6_33",
+    "category": "core"
   },
   {
     "id": "u7_1",
@@ -2109,7 +2873,11 @@
     "pos": "n.",
     "meaning": "文学；文学作品",
     "phrase": "课文例词：literature (文学；文学作品)",
-    "root": "n. 文学；文学作品"
+    "root": "n. 文学；文学作品",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_192",
+    "legacyId": "u7_1",
+    "category": "core"
   },
   {
     "id": "u7_2",
@@ -2120,7 +2888,11 @@
     "pos": "v.",
     "meaning": "扮演（戏剧、电影中的角色）",
     "phrase": "课文例词：act (扮演（戏剧、电影中的角色）)",
-    "root": "v. 扮演（戏剧、电影中的角色）"
+    "root": "v. 扮演（戏剧、电影中的角色）",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_193",
+    "legacyId": "u7_2",
+    "category": "core"
   },
   {
     "id": "u7_3",
@@ -2131,7 +2903,11 @@
     "pos": "v.",
     "meaning": "欣赏；赏识",
     "phrase": "课文例词：appreciate (欣赏；赏识)",
-    "root": "v. 欣赏；赏识"
+    "root": "v. 欣赏；赏识",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_194",
+    "legacyId": "u7_3",
+    "category": "core"
   },
   {
     "id": "u7_4",
@@ -2142,7 +2918,11 @@
     "pos": "v.",
     "meaning": "成为……的一员；参加",
     "phrase": "\"If you join our club, you will learn how to cut paper into many different pretty shapes.",
-    "root": "v. 成为……的一员；参加"
+    "root": "v. 成为……的一员；参加",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_195",
+    "legacyId": "u7_4",
+    "category": "core"
   },
   {
     "id": "u7_5",
@@ -2153,7 +2933,11 @@
     "pos": "adv.",
     "meaning": "肯定；没问题；当然；确实",
     "phrase": "课文例词：definitely (肯定；没问题；当然；确实)",
-    "root": "adv. 肯定；没问题；当然；确实"
+    "root": "adv. 肯定；没问题；当然；确实",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_196",
+    "legacyId": "u7_5",
+    "category": "core"
   },
   {
     "id": "u7_6",
@@ -2164,7 +2948,11 @@
     "pos": "n.",
     "meaning": "集市",
     "phrase": "Last month, they went to the Clubs Fair.",
-    "root": "n. 集市"
+    "root": "n. 集市",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_197",
+    "legacyId": "u7_6",
+    "category": "core"
   },
   {
     "id": "u7_7",
@@ -2175,7 +2963,11 @@
     "pos": "n.",
     "meaning": "火箭",
     "phrase": "First, Li Na and Liu Wei learnt about the Rocket Club.",
-    "root": "n. 火箭"
+    "root": "n. 火箭",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_198",
+    "legacyId": "u7_7",
+    "category": "core"
   },
   {
     "id": "u7_8",
@@ -2186,7 +2978,11 @@
     "pos": "v.",
     "meaning": "发射",
     "phrase": "Then you can launch them into the sky,\" a boy said.",
-    "root": "v. 发射"
+    "root": "v. 发射",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_199",
+    "legacyId": "u7_8",
+    "category": "core"
   },
   {
     "id": "u7_9",
@@ -2197,7 +2993,11 @@
     "pos": "v.",
     "meaning": "大声说；叫",
     "phrase": "A girl suddenly shouted, \"Watch out!\"",
-    "root": "v. 大声说；叫"
+    "root": "v. 大声说；叫",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_200",
+    "legacyId": "u7_9",
+    "category": "core"
   },
   {
     "id": "u7_10",
@@ -2208,7 +3008,11 @@
     "pos": "n.",
     "meaning": "力量；能量",
     "phrase": "It runs on solar power.\"",
-    "root": "n. 力量；能量"
+    "root": "n. 力量；能量",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_201",
+    "legacyId": "u7_10",
+    "category": "core"
   },
   {
     "id": "u7_11",
@@ -2219,7 +3023,11 @@
     "pos": "n.",
     "meaning": "片刻；瞬间",
     "phrase": "A moment later, a toy plane quickly flew past Li Na and Liu Wei.",
-    "root": "n. 片刻；瞬间"
+    "root": "n. 片刻；瞬间",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_202",
+    "legacyId": "u7_11",
+    "category": "core"
   },
   {
     "id": "u7_12",
@@ -2230,7 +3038,11 @@
     "pos": "n.",
     "meaning": "成员",
     "phrase": "A member of the club started telling them about their club activities.",
-    "root": "n. 成员"
+    "root": "n. 成员",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_203",
+    "legacyId": "u7_12",
+    "category": "core"
   },
   {
     "id": "u7_13",
@@ -2241,7 +3053,11 @@
     "pos": "n.",
     "meaning": "形状；外形",
     "phrase": "\"If you join our club, you will learn how to cut paper into many different pretty shapes.",
-    "root": "n. 形状；外形"
+    "root": "n. 形状；外形",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_204",
+    "legacyId": "u7_13",
+    "category": "core"
   },
   {
     "id": "u7_14",
@@ -2252,7 +3068,11 @@
     "pos": "v.",
     "meaning": "去……远足；做徒步旅行",
     "phrase": "课文例词：hike (去……远足；做徒步旅行)",
-    "root": "v. 去……远足；做徒步旅行"
+    "root": "v. 去……远足；做徒步旅行",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_205",
+    "legacyId": "u7_14",
+    "category": "core"
   },
   {
     "id": "u7_15",
@@ -2263,7 +3083,11 @@
     "pos": "adv.",
     "meaning": "不久前；最近",
     "phrase": "课文例词：recently (不久前；最近)",
-    "root": "adv. 不久前；最近"
+    "root": "adv. 不久前；最近",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_206",
+    "legacyId": "u7_15",
+    "category": "core"
   },
   {
     "id": "u7_16",
@@ -2274,7 +3098,11 @@
     "pos": "v.",
     "meaning": "出席；参加",
     "phrase": "课文例词：attend (出席；参加)",
-    "root": "v. 出席；参加"
+    "root": "v. 出席；参加",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_207",
+    "legacyId": "u7_16",
+    "category": "core"
   },
   {
     "id": "u7_17",
@@ -2285,7 +3113,11 @@
     "pos": "n.",
     "meaning": "慈善机构（或组织）",
     "phrase": "课文例词：charity (慈善机构（或组织）)",
-    "root": "n. 慈善机构（或组织）"
+    "root": "n. 慈善机构（或组织）",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_208",
+    "legacyId": "u7_17",
+    "category": "core"
   },
   {
     "id": "u7_18",
@@ -2296,7 +3128,11 @@
     "pos": "n.",
     "meaning": "出售；销售",
     "phrase": "课文例词：sale (出售；销售)",
-    "root": "n. 出售；销售"
+    "root": "n. 出售；销售",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_209",
+    "legacyId": "u7_18",
+    "category": "core"
   },
   {
     "id": "u7_19",
@@ -2307,7 +3143,11 @@
     "pos": "n.",
     "meaning": "点心；小吃",
     "phrase": "课文例词：snack (点心；小吃)",
-    "root": "n. 点心；小吃"
+    "root": "n. 点心；小吃",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_210",
+    "legacyId": "u7_19",
+    "category": "core"
   },
   {
     "id": "u7_20",
@@ -2318,7 +3158,11 @@
     "pos": "v.",
     "meaning": "装饰；装潢",
     "phrase": "课文例词：decorate (装饰；装潢)",
-    "root": "v. 装饰；装潢"
+    "root": "v. 装饰；装潢",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_211",
+    "legacyId": "u7_20",
+    "category": "core"
   },
   {
     "id": "u7_21",
@@ -2329,7 +3173,11 @@
     "pos": "n.",
     "meaning": "差别；差异",
     "phrase": "课文例词：difference (差别；差异)",
-    "root": "n. 差别；差异"
+    "root": "n. 差别；差异",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_212",
+    "legacyId": "u7_21",
+    "category": "core"
   },
   {
     "id": "u7_22",
@@ -2340,7 +3188,11 @@
     "pos": "v.",
     "meaning": "参加比赛（或竞赛）",
     "phrase": "课文例词：compete (参加比赛（或竞赛）)",
-    "root": "v. 参加比赛（或竞赛）"
+    "root": "v. 参加比赛（或竞赛）",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_213",
+    "legacyId": "u7_22",
+    "category": "core"
   },
   {
     "id": "u7_23",
@@ -2351,7 +3203,11 @@
     "pos": "n.",
     "meaning": "公开活动；社交场合",
     "phrase": "课文例词：event (公开活动；社交场合)",
-    "root": "n. 公开活动；社交场合"
+    "root": "n. 公开活动；社交场合",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_214",
+    "legacyId": "u7_23",
+    "category": "core"
   },
   {
     "id": "u7_24",
@@ -2362,7 +3218,11 @@
     "pos": "n.",
     "meaning": "勺；匙",
     "phrase": "课文例词：spoon (勺；匙)",
-    "root": "n. 勺；匙"
+    "root": "n. 勺；匙",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_215",
+    "legacyId": "u7_24",
+    "category": "core"
   },
   {
     "id": "u7_25",
@@ -2373,7 +3233,11 @@
     "pos": "adj.",
     "meaning": "每年的；一年一次的",
     "phrase": "课文例词：annual (每年的；一年一次的)",
-    "root": "adj. 每年的；一年一次的"
+    "root": "adj. 每年的；一年一次的",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_216",
+    "legacyId": "u7_25",
+    "category": "core"
   },
   {
     "id": "u7_26",
@@ -2384,7 +3248,11 @@
     "pos": "adj.",
     "meaning": "极好的；了不起的",
     "phrase": "课文例词：fantastic (极好的；了不起的)",
-    "root": "adj. 极好的；了不起的"
+    "root": "adj. 极好的；了不起的",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_217",
+    "legacyId": "u7_26",
+    "category": "core"
   },
   {
     "id": "u7_27",
@@ -2395,7 +3263,11 @@
     "pos": "n.",
     "meaning": "元（美国、加拿大、澳大利亚等国的货币单位）",
     "phrase": "课文例词：dollar (元（美国、加拿大、澳大利亚等国的货币单位）)",
-    "root": "n. 元（美国、加拿大、澳大利亚等国的货币单位）"
+    "root": "n. 元（美国、加拿大、澳大利亚等国的货币单位）",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_218",
+    "legacyId": "u7_27",
+    "category": "core"
   },
   {
     "id": "u7_28",
@@ -2406,7 +3278,11 @@
     "pos": "n.",
     "meaning": "果馅饼；果馅派",
     "phrase": "课文例词：pie (果馅饼；果馅派)",
-    "root": "n. 果馅饼；果馅派"
+    "root": "n. 果馅饼；果馅派",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_219",
+    "legacyId": "u7_28",
+    "category": "core"
   },
   {
     "id": "u7_29",
@@ -2417,7 +3293,11 @@
     "pos": "n.",
     "meaning": "设备；器材",
     "phrase": "课文例词：equipment (设备；器材)",
-    "root": "n. 设备；器材"
+    "root": "n. 设备；器材",
+    "book": "7a",
+    "canonicalId": "7a_u7_core_220",
+    "legacyId": "u7_29",
+    "category": "core"
   },
   {
     "id": "u8_1",
@@ -2428,7 +3308,11 @@
     "pos": "n.",
     "meaning": "环状物；圆形的东西",
     "phrase": "课文例词：ring (环状物；圆形的东西)",
-    "root": "n. 环状物；圆形的东西"
+    "root": "n. 环状物；圆形的东西",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_221",
+    "legacyId": "u8_1",
+    "category": "core"
   },
   {
     "id": "u8_2",
@@ -2439,7 +3323,11 @@
     "pos": "n.",
     "meaning": "（常指同类的）收集物",
     "phrase": "Every Sunday my grandpa adds new ones to his collection, and I sometimes help him take old stamps from envelopes and postcards.",
-    "root": "n. （常指同类的）收集物"
+    "root": "n. （常指同类的）收集物",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_222",
+    "legacyId": "u8_2",
+    "category": "core"
   },
   {
     "id": "u8_3",
@@ -2450,7 +3338,11 @@
     "pos": "v.",
     "meaning": "拥有；有",
     "phrase": "He is a stamp collector, and he owns thousands of stamps.",
-    "root": "v. 拥有；有"
+    "root": "v. 拥有；有",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_223",
+    "legacyId": "u8_3",
+    "category": "core"
   },
   {
     "id": "u8_4",
@@ -2461,7 +3353,11 @@
     "pos": "adj.",
     "meaning": "贵重的",
     "phrase": "Some of them are valuable, so he always handles them with great care.",
-    "root": "adj. 贵重的"
+    "root": "adj. 贵重的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_224",
+    "legacyId": "u8_4",
+    "category": "core"
   },
   {
     "id": "u8_5",
@@ -2472,7 +3368,11 @@
     "pos": "v.",
     "meaning": "（用手）触",
     "phrase": "Some of them are valuable, so he always handles them with great care.",
-    "root": "v. （用手）触"
+    "root": "v. （用手）触",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_225",
+    "legacyId": "u8_5",
+    "category": "core"
   },
   {
     "id": "u8_6",
@@ -2483,7 +3383,11 @@
     "pos": "n.",
     "meaning": "（分手指的）手套",
     "phrase": "He even wears white gloves to protect his stamps!",
-    "root": "n. （分手指的）手套"
+    "root": "n. （分手指的）手套",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_226",
+    "legacyId": "u8_6",
+    "category": "core"
   },
   {
     "id": "u8_7",
@@ -2494,7 +3398,11 @@
     "pos": "v.",
     "meaning": "增加；添加",
     "phrase": "Every Sunday my grandpa adds new ones to his collection, and I sometimes help him take old stamps from envelopes and postcards.",
-    "root": "v. 增加；添加"
+    "root": "v. 增加；添加",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_227",
+    "legacyId": "u8_7",
+    "category": "core"
   },
   {
     "id": "u8_8",
@@ -2505,7 +3413,11 @@
     "pos": "n.",
     "meaning": "信封",
     "phrase": "Every Sunday my grandpa adds new ones to his collection, and I sometimes help him take old stamps from envelopes and postcards.",
-    "root": "n. 信封"
+    "root": "n. 信封",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_228",
+    "legacyId": "u8_8",
+    "category": "core"
   },
   {
     "id": "u8_9",
@@ -2516,7 +3428,11 @@
     "pos": "adv.",
     "meaning": "极其",
     "phrase": "Let me show you an absolutely wonderful stamp of the Palace Museum.",
-    "root": "adv. 极其"
+    "root": "adv. 极其",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_229",
+    "legacyId": "u8_9",
+    "category": "core"
   },
   {
     "id": "u8_10",
@@ -2527,7 +3443,11 @@
     "pos": "v.",
     "meaning": "好像；似乎",
     "phrase": "It may seem impossible, but they built them without using a single nail!\" he explained.",
-    "root": "v. 好像；似乎"
+    "root": "v. 好像；似乎",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_230",
+    "legacyId": "u8_10",
+    "category": "core"
   },
   {
     "id": "u8_11",
@@ -2538,7 +3458,11 @@
     "pos": "adj.",
     "meaning": "不可能的",
     "phrase": "It may seem impossible, but they built them without using a single nail!\" he explained.",
-    "root": "adj. 不可能的"
+    "root": "adj. 不可能的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_231",
+    "legacyId": "u8_11",
+    "category": "core"
   },
   {
     "id": "u8_12",
@@ -2549,7 +3473,11 @@
     "pos": "adj.",
     "meaning": "单个的",
     "phrase": "It may seem impossible, but they built them without using a single nail!\" he explained.",
-    "root": "adj. 单个的"
+    "root": "adj. 单个的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_232",
+    "legacyId": "u8_12",
+    "category": "core"
   },
   {
     "id": "u8_13",
@@ -2560,7 +3488,11 @@
     "pos": "n.",
     "meaning": "钉子",
     "phrase": "It may seem impossible, but they built them without using a single nail!\" he explained.",
-    "root": "n. 钉子"
+    "root": "n. 钉子",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_233",
+    "legacyId": "u8_13",
+    "category": "core"
   },
   {
     "id": "u8_14",
@@ -2571,7 +3503,11 @@
     "pos": "v.",
     "meaning": "解释；说明",
     "phrase": "It may seem impossible, but they built them without using a single nail!\" he explained.",
-    "root": "v. 解释；说明"
+    "root": "v. 解释；说明",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_234",
+    "legacyId": "u8_14",
+    "category": "core"
   },
   {
     "id": "u8_15",
@@ -2582,7 +3518,11 @@
     "pos": "n.",
     "meaning": "一部分",
     "phrase": "My grandpa also shared many other interesting bits of history about the old palace.",
-    "root": "n. 一部分"
+    "root": "n. 一部分",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_235",
+    "legacyId": "u8_15",
+    "category": "core"
   },
   {
     "id": "u8_16",
@@ -2593,7 +3533,11 @@
     "pos": "adj.",
     "meaning": "相像的；类似的",
     "phrase": "Thanks to this stamp, I became interested in traditional Chinese buildings, and I started to collect similar stamps.",
-    "root": "adj. 相像的；类似的"
+    "root": "adj. 相像的；类似的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_236",
+    "legacyId": "u8_16",
+    "category": "core"
   },
   {
     "id": "u8_17",
@@ -2604,7 +3548,11 @@
     "pos": "n.",
     "meaning": "（一枚）硬币",
     "phrase": "课文例词：coin (（一枚）硬币)",
-    "root": "n. （一枚）硬币"
+    "root": "n. （一枚）硬币",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_237",
+    "legacyId": "u8_17",
+    "category": "core"
   },
   {
     "id": "u8_18",
@@ -2615,7 +3563,11 @@
     "pos": "adj.",
     "meaning": "软的",
     "phrase": "课文例词：soft (软的)",
-    "root": "adj. 软的"
+    "root": "adj. 软的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_238",
+    "legacyId": "u8_18",
+    "category": "core"
   },
   {
     "id": "u8_19",
@@ -2626,7 +3578,11 @@
     "pos": "n.",
     "meaning": "贴纸",
     "phrase": "课文例词：sticker (贴纸)",
-    "root": "n. 贴纸"
+    "root": "n. 贴纸",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_239",
+    "legacyId": "u8_19",
+    "category": "core"
   },
   {
     "id": "u8_20",
@@ -2637,7 +3593,11 @@
     "pos": "n.",
     "meaning": "白费；糟蹋",
     "phrase": "课文例词：waste (白费；糟蹋)",
-    "root": "n. 白费；糟蹋"
+    "root": "n. 白费；糟蹋",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_240",
+    "legacyId": "u8_20",
+    "category": "core"
   },
   {
     "id": "u8_21",
@@ -2648,7 +3608,11 @@
     "pos": "n.",
     "meaning": "一件商品（或物品）",
     "phrase": "课文例词：item (一件商品（或物品）)",
-    "root": "n. 一件商品（或物品）"
+    "root": "n. 一件商品（或物品）",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_241",
+    "legacyId": "u8_21",
+    "category": "core"
   },
   {
     "id": "u8_22",
@@ -2659,7 +3623,11 @@
     "pos": "n.",
     "meaning": "后果；结果",
     "phrase": "课文例词：result (后果；结果)",
-    "root": "n. 后果；结果"
+    "root": "n. 后果；结果",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_242",
+    "legacyId": "u8_22",
+    "category": "core"
   },
   {
     "id": "u8_23",
@@ -2670,7 +3638,11 @@
     "pos": "n.",
     "meaning": "包装纸",
     "phrase": "课文例词：wrapper (包装纸)",
-    "root": "n. 包装纸"
+    "root": "n. 包装纸",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_243",
+    "legacyId": "u8_23",
+    "category": "core"
   },
   {
     "id": "u8_24",
@@ -2681,7 +3653,11 @@
     "pos": "n.",
     "meaning": "（长方形）条",
     "phrase": "课文例词：bar (（长方形）条)",
-    "root": "n. （长方形）条"
+    "root": "n. （长方形）条",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_244",
+    "legacyId": "u8_24",
+    "category": "core"
   },
   {
     "id": "u8_25",
@@ -2692,7 +3668,11 @@
     "pos": "v.",
     "meaning": "包括；包含",
     "phrase": "课文例词：include (包括；包含)",
-    "root": "v. 包括；包含"
+    "root": "v. 包括；包含",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_245",
+    "legacyId": "u8_25",
+    "category": "core"
   },
   {
     "id": "u8_26",
@@ -2703,7 +3683,11 @@
     "pos": "n.",
     "meaning": "大小",
     "phrase": "课文例词：size (大小)",
-    "root": "n. 大小"
+    "root": "n. 大小",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_246",
+    "legacyId": "u8_26",
+    "category": "core"
   },
   {
     "id": "u8_27",
@@ -2714,7 +3698,11 @@
     "pos": "n.",
     "meaning": "图案；花样",
     "phrase": "课文例词：pattern (图案；花样)",
-    "root": "n. 图案；花样"
+    "root": "n. 图案；花样",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_247",
+    "legacyId": "u8_27",
+    "category": "core"
   },
   {
     "id": "u8_28",
@@ -2725,7 +3713,11 @@
     "pos": "v.",
     "meaning": "生产；制造",
     "phrase": "课文例词：produce (生产；制造)",
-    "root": "v. 生产；制造"
+    "root": "v. 生产；制造",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_248",
+    "legacyId": "u8_28",
+    "category": "core"
   },
   {
     "id": "u8_29",
@@ -2736,7 +3728,11 @@
     "pos": "v.",
     "meaning": "吸引；招引",
     "phrase": "课文例词：attract (吸引；招引)",
-    "root": "v. 吸引；招引"
+    "root": "v. 吸引；招引",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_249",
+    "legacyId": "u8_29",
+    "category": "core"
   },
   {
     "id": "u8_30",
@@ -2747,7 +3743,11 @@
     "pos": "n.",
     "meaning": "昆虫",
     "phrase": "课文例词：insect (昆虫)",
-    "root": "n. 昆虫"
+    "root": "n. 昆虫",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_250",
+    "legacyId": "u8_30",
+    "category": "core"
   },
   {
     "id": "u8_31",
@@ -2758,7 +3758,11 @@
     "pos": "n.",
     "meaning": "物体；物品",
     "phrase": "课文例词：object (物体；物品)",
-    "root": "n. 物体；物品"
+    "root": "n. 物体；物品",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_251",
+    "legacyId": "u8_31",
+    "category": "core"
   },
   {
     "id": "u8_32",
@@ -2769,7 +3773,11 @@
     "pos": "adj.",
     "meaning": "平滑的",
     "phrase": "课文例词：flat (平滑的)",
-    "root": "adj. 平滑的"
+    "root": "adj. 平滑的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_252",
+    "legacyId": "u8_32",
+    "category": "core"
   },
   {
     "id": "u8_33",
@@ -2780,7 +3788,11 @@
     "pos": "n.",
     "meaning": "语言",
     "phrase": "课文例词：language (语言)",
-    "root": "n. 语言"
+    "root": "n. 语言",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_253",
+    "legacyId": "u8_33",
+    "category": "core"
   },
   {
     "id": "u8_34",
@@ -2791,7 +3803,11 @@
     "pos": "n.",
     "meaning": "珍宝；宝物",
     "phrase": "课文例词：treasure (珍宝；宝物)",
-    "root": "n. 珍宝；宝物"
+    "root": "n. 珍宝；宝物",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_254",
+    "legacyId": "u8_34",
+    "category": "core"
   },
   {
     "id": "u8_35",
@@ -2802,7 +3818,11 @@
     "pos": "v.",
     "meaning": "发现；揭示",
     "phrase": "课文例词：unlock (发现；揭示)",
-    "root": "v. 发现；揭示"
+    "root": "v. 发现；揭示",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_255",
+    "legacyId": "u8_35",
+    "category": "core"
   },
   {
     "id": "u8_36",
@@ -2813,6 +3833,700 @@
     "pos": "adj.",
     "meaning": "真的",
     "phrase": "课文例词：real (真的)",
-    "root": "adj. 真的"
+    "root": "adj. 真的",
+    "book": "7a",
+    "canonicalId": "7a_u8_core_256",
+    "legacyId": "u8_36",
+    "category": "core"
+  },
+  {
+    "id": "7a_u1_exp_1",
+    "canonicalId": "7a_u1_exp_1",
+    "legacyId": "7a_u1_exp_1",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "outgoing",
+    "phonetic": "/ˈaʊtɡəʊɪŋ/",
+    "pos": "adj.",
+    "meaning": "外向开朗的，好交际的",
+    "phrase": "替换 friendly：She is warm and **outgoing**.",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_2",
+    "canonicalId": "7a_u1_exp_2",
+    "legacyId": "7a_u1_exp_2",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "reliable",
+    "phonetic": "/rɪˈlaɪəbl/",
+    "pos": "adj.",
+    "meaning": "可靠的，可信赖的",
+    "phrase": "a **reliable** friend who never breaks promises",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_3",
+    "canonicalId": "7a_u1_exp_3",
+    "legacyId": "7a_u1_exp_3",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "communicate",
+    "phonetic": "/kəˈmjuːnɪkeɪt/",
+    "pos": "v.",
+    "meaning": "交流，沟通",
+    "phrase": "communicate with each other；communication (n.)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_4",
+    "canonicalId": "7a_u1_exp_4",
+    "legacyId": "7a_u1_exp_4",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "companion",
+    "phonetic": "/kəmˈpæniən/",
+    "pos": "n.",
+    "meaning": "伴侣，同伴",
+    "phrase": "Books are our best lifelong **companions**.",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_5",
+    "canonicalId": "7a_u1_exp_5",
+    "legacyId": "7a_u1_exp_5",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "generous",
+    "phonetic": "/ˈdʒenərəs/",
+    "pos": "adj.",
+    "meaning": "慷慨大方的",
+    "phrase": "be **generous** with one's time and help",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_6",
+    "canonicalId": "7a_u1_exp_6",
+    "legacyId": "7a_u1_exp_6",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "trustworthy",
+    "phonetic": "/ˈtrʌstwɜːði/",
+    "pos": "adj.",
+    "meaning": "值得信任的",
+    "phrase": "A **trustworthy** friend is a great treasure.",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_7",
+    "canonicalId": "7a_u1_exp_7",
+    "legacyId": "7a_u1_exp_7",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "buddy",
+    "phonetic": "/ˈbʌdi/",
+    "pos": "n.",
+    "meaning": "好朋友，同伴 (口语)",
+    "phrase": "study **buddy** (学习互助伙伴)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u1_exp_8",
+    "canonicalId": "7a_u1_exp_8",
+    "legacyId": "7a_u1_exp_8",
+    "book": "7a",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "word": "humorous",
+    "phonetic": "/ˈhjuːmərəs/",
+    "pos": "adj.",
+    "meaning": "幽默风趣的",
+    "phrase": "have a **humorous** personality (具有幽默性格)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_1",
+    "canonicalId": "7a_u2_exp_1",
+    "legacyId": "7a_u2_exp_1",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "routine",
+    "phonetic": "/ruːˈtiːn/",
+    "pos": "n.",
+    "meaning": "常规，日常惯例",
+    "phrase": "follow a healthy morning **routine**",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_2",
+    "canonicalId": "7a_u2_exp_2",
+    "legacyId": "7a_u2_exp_2",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "punctual",
+    "phonetic": "/ˈpʌŋktʃuəl/",
+    "pos": "adj.",
+    "meaning": "准时的，守时的",
+    "phrase": "替换 on time：He is always **punctual** for class.",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_3",
+    "canonicalId": "7a_u2_exp_3",
+    "legacyId": "7a_u2_exp_3",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "schedule",
+    "phonetic": "/ˈʃedjuːl/",
+    "pos": "n./v.",
+    "meaning": "时间表，日程安排；安排",
+    "phrase": "on **schedule** (按日程进行)；tight schedule",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_4",
+    "canonicalId": "7a_u2_exp_4",
+    "legacyId": "7a_u2_exp_4",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "timetable",
+    "phonetic": "/ˈtaɪmteɪbl/",
+    "pos": "n.",
+    "meaning": "课程表，时刻表",
+    "phrase": "check the train **timetable**",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_5",
+    "canonicalId": "7a_u2_exp_5",
+    "legacyId": "7a_u2_exp_5",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "balance",
+    "phonetic": "/ˈbæləns/",
+    "pos": "n./v.",
+    "meaning": "平衡；使平衡",
+    "phrase": "**balance** study and relaxation (平衡学业与休闲)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_6",
+    "canonicalId": "7a_u2_exp_6",
+    "legacyId": "7a_u2_exp_6",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "leisure",
+    "phonetic": "/ˈleʒə/",
+    "pos": "n.",
+    "meaning": "空闲，闲暇",
+    "phrase": "**leisure** time activities (业余闲暇活动)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u2_exp_7",
+    "canonicalId": "7a_u2_exp_7",
+    "legacyId": "7a_u2_exp_7",
+    "book": "7a",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "word": "productive",
+    "phonetic": "/prəˈdʌktɪv/",
+    "pos": "adj.",
+    "meaning": "高效的，富有成效的",
+    "phrase": "spend a highly **productive** day (度过充实的一天)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_1",
+    "canonicalId": "7a_u3_exp_1",
+    "legacyId": "7a_u3_exp_1",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "atmosphere",
+    "phonetic": "/ˈætməsfɪə/",
+    "pos": "n.",
+    "meaning": "大气层；气氛",
+    "phrase": "Earth's **atmosphere** (地球大气圈)；relaxing atmosphere",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_2",
+    "canonicalId": "7a_u3_exp_2",
+    "legacyId": "7a_u3_exp_2",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "continent",
+    "phonetic": "/ˈkɒntɪnənt/",
+    "pos": "n.",
+    "meaning": "大陆，大洲",
+    "phrase": "the Asian **continent** (亚洲大陆)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_3",
+    "canonicalId": "7a_u3_exp_3",
+    "legacyId": "7a_u3_exp_3",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "hemisphere",
+    "phonetic": "/ˈhemɪsfɪə/",
+    "pos": "n.",
+    "meaning": "半球 (东/西/南/北半球)",
+    "phrase": "northern **hemisphere** (北半球)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_4",
+    "canonicalId": "7a_u3_exp_4",
+    "legacyId": "7a_u3_exp_4",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "ecosystem",
+    "phonetic": "/ˈiːkəʊsɪstəm/",
+    "pos": "n.",
+    "meaning": "生态系统",
+    "phrase": "damage the marine **ecosystem** (破坏海洋生态系统)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_5",
+    "canonicalId": "7a_u3_exp_5",
+    "legacyId": "7a_u3_exp_5",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "sustainable",
+    "phonetic": "/səˈsteɪnəbl/",
+    "pos": "adj.",
+    "meaning": "可持续的，环保的",
+    "phrase": "**sustainable** development (可持续发展)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u3_exp_6",
+    "canonicalId": "7a_u3_exp_6",
+    "legacyId": "7a_u3_exp_6",
+    "book": "7a",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "word": "global",
+    "phonetic": "/ˈɡləʊbl/",
+    "pos": "adj.",
+    "meaning": "全球的，全世界的",
+    "phrase": "**global** warming (全球气候变暖)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_1",
+    "canonicalId": "7a_u4_exp_1",
+    "legacyId": "7a_u4_exp_1",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "climate",
+    "phonetic": "/ˈklaɪmət/",
+    "pos": "n.",
+    "meaning": "气候，风气",
+    "phrase": "mild **climate** (温和的气候)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_2",
+    "canonicalId": "7a_u4_exp_2",
+    "legacyId": "7a_u4_exp_2",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "temperature",
+    "phonetic": "/ˈtemprətʃə/",
+    "pos": "n.",
+    "meaning": "气温，温度",
+    "phrase": "The **temperature** drops sharply. (气温骤降)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_3",
+    "canonicalId": "7a_u4_exp_3",
+    "legacyId": "7a_u4_exp_3",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "humid",
+    "phonetic": "/ˈhjuːmɪd/",
+    "pos": "adj.",
+    "meaning": "潮湿的，湿热的",
+    "phrase": "hot and **humid** summer",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_4",
+    "canonicalId": "7a_u4_exp_4",
+    "legacyId": "7a_u4_exp_4",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "freeze",
+    "phonetic": "/friːz/",
+    "pos": "v.",
+    "meaning": "结冰，冻结",
+    "phrase": "**freezing** point (冰点)；frozen lake (冰封的湖面)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_5",
+    "canonicalId": "7a_u4_exp_5",
+    "legacyId": "7a_u4_exp_5",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "breeze",
+    "phonetic": "/briːz/",
+    "pos": "n.",
+    "meaning": "微风，轻风",
+    "phrase": "a gentle spring **breeze** (温柔的春风)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u4_exp_6",
+    "canonicalId": "7a_u4_exp_6",
+    "legacyId": "7a_u4_exp_6",
+    "book": "7a",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "word": "harvest",
+    "phonetic": "/ˈhɑːvɪst/",
+    "pos": "n./v.",
+    "meaning": "收获，收割；成果",
+    "phrase": "golden autumn **harvest** (金秋收获)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u5_exp_1",
+    "canonicalId": "7a_u5_exp_1",
+    "legacyId": "7a_u5_exp_1",
+    "book": "7a",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "word": "astronaut",
+    "phonetic": "/ˈæstrənɔːt/",
+    "pos": "n.",
+    "meaning": "宇航员，航天员",
+    "phrase": "Chinese **astronauts** / taikonauts",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u5_exp_2",
+    "canonicalId": "7a_u5_exp_2",
+    "legacyId": "7a_u5_exp_2",
+    "book": "7a",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "word": "satellite",
+    "phonetic": "/ˈsætəlaɪt/",
+    "pos": "n.",
+    "meaning": "人造卫星；天然卫星",
+    "phrase": "launch a communication **satellite** (发射通信卫星)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u5_exp_3",
+    "canonicalId": "7a_u5_exp_3",
+    "legacyId": "7a_u5_exp_3",
+    "book": "7a",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "word": "orbit",
+    "phonetic": "/ˈɔːbɪt/",
+    "pos": "n./v.",
+    "meaning": "轨道；沿轨道运行",
+    "phrase": "in **orbit** around the Earth (环绕地球轨道)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u5_exp_4",
+    "canonicalId": "7a_u5_exp_4",
+    "legacyId": "7a_u5_exp_4",
+    "book": "7a",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "word": "weightless",
+    "phonetic": "/ˈweɪtləs/",
+    "pos": "adj.",
+    "meaning": "失重的",
+    "phrase": "the **weightless** environment in space",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u5_exp_5",
+    "canonicalId": "7a_u5_exp_5",
+    "legacyId": "7a_u5_exp_5",
+    "book": "7a",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "word": "spacecraft",
+    "phonetic": "/ˈspeɪskrɑːft/",
+    "pos": "n.",
+    "meaning": "航天器，宇宙飞船",
+    "phrase": "manned **spacecraft** (载人航天器，单复同形)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u6_exp_1",
+    "canonicalId": "7a_u6_exp_1",
+    "legacyId": "7a_u6_exp_1",
+    "book": "7a",
+    "unit": 6,
+    "unitTitle": "Unit 6",
+    "word": "destination",
+    "phonetic": "/ˌdestɪˈneɪʃn/",
+    "pos": "n.",
+    "meaning": "目的地，终点",
+    "phrase": "a popular tourist **destination** (热门旅游目的地)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u6_exp_2",
+    "canonicalId": "7a_u6_exp_2",
+    "legacyId": "7a_u6_exp_2",
+    "book": "7a",
+    "unit": 6,
+    "unitTitle": "Unit 6",
+    "word": "scenic",
+    "phonetic": "/ˈsiːnɪk/",
+    "pos": "adj.",
+    "meaning": "风景优美的",
+    "phrase": "enjoy the **scenic** beauty along the river",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u6_exp_3",
+    "canonicalId": "7a_u6_exp_3",
+    "legacyId": "7a_u6_exp_3",
+    "book": "7a",
+    "unit": 6,
+    "unitTitle": "Unit 6",
+    "word": "landmark",
+    "phonetic": "/ˈlændmɑːk/",
+    "pos": "n.",
+    "meaning": "地标，里程碑",
+    "phrase": "the famous architectural **landmark**",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u6_exp_4",
+    "canonicalId": "7a_u6_exp_4",
+    "legacyId": "7a_u6_exp_4",
+    "book": "7a",
+    "unit": 6,
+    "unitTitle": "Unit 6",
+    "word": "magnificent",
+    "phonetic": "/mæɡˈnɪfɪsnt/",
+    "pos": "adj.",
+    "meaning": "壮丽的，宏伟的",
+    "phrase": "the **magnificent** Great Wall (雄伟的万里长城)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u6_exp_5",
+    "canonicalId": "7a_u6_exp_5",
+    "legacyId": "7a_u6_exp_5",
+    "book": "7a",
+    "unit": 6,
+    "unitTitle": "Unit 6",
+    "word": "unforgettable",
+    "phonetic": "/ˌʌnfəˈɡetəbl/",
+    "pos": "adj.",
+    "meaning": "令人难忘的",
+    "phrase": "have an **unforgettable** journey (度过难忘的旅程)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u7_exp_1",
+    "canonicalId": "7a_u7_exp_1",
+    "legacyId": "7a_u7_exp_1",
+    "book": "7a",
+    "unit": 7,
+    "unitTitle": "Unit 7",
+    "word": "talent",
+    "phonetic": "/ˈtælənt/",
+    "pos": "n.",
+    "meaning": "天赋，才华",
+    "phrase": "show one's musical **talent** (展现音乐才华)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u7_exp_2",
+    "canonicalId": "7a_u7_exp_2",
+    "legacyId": "7a_u7_exp_2",
+    "book": "7a",
+    "unit": 7,
+    "unitTitle": "Unit 7",
+    "word": "participate",
+    "phonetic": "/pɑːˈtɪsɪpeɪt/",
+    "pos": "v.",
+    "meaning": "参与，参加 (= take part in)",
+    "phrase": "**participate in** various sports competitions",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u7_exp_3",
+    "canonicalId": "7a_u7_exp_3",
+    "legacyId": "7a_u7_exp_3",
+    "book": "7a",
+    "unit": 7,
+    "unitTitle": "Unit 7",
+    "word": "cooperate",
+    "phonetic": "/kəʊˈɒpəreɪt/",
+    "pos": "v.",
+    "meaning": "合作，协作",
+    "phrase": "learn to **cooperate** with teammates；cooperation (n.)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u7_exp_4",
+    "canonicalId": "7a_u7_exp_4",
+    "legacyId": "7a_u7_exp_4",
+    "book": "7a",
+    "unit": 7,
+    "unitTitle": "Unit 7",
+    "word": "enrich",
+    "phonetic": "/ɪnˈrɪtʃ/",
+    "pos": "v.",
+    "meaning": "丰富，充实",
+    "phrase": "**enrich** our campus life (丰富校园生活)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u7_exp_5",
+    "canonicalId": "7a_u7_exp_5",
+    "legacyId": "7a_u7_exp_5",
+    "book": "7a",
+    "unit": 7,
+    "unitTitle": "Unit 7",
+    "word": "potential",
+    "phonetic": "/pəˈtenʃl/",
+    "pos": "n./adj.",
+    "meaning": "潜能，潜力；潜在的",
+    "phrase": "develop students' **potential** (挖掘学生潜能)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u8_exp_1",
+    "canonicalId": "7a_u8_exp_1",
+    "legacyId": "7a_u8_exp_1",
+    "book": "7a",
+    "unit": 8,
+    "unitTitle": "Unit 8",
+    "word": "antique",
+    "phonetic": "/ænˈtiːk/",
+    "pos": "n./adj.",
+    "meaning": "古董；古老的",
+    "phrase": "collect **antiques** (收藏古玩古董)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u8_exp_2",
+    "canonicalId": "7a_u8_exp_2",
+    "legacyId": "7a_u8_exp_2",
+    "book": "7a",
+    "unit": 8,
+    "unitTitle": "Unit 8",
+    "word": "organize",
+    "phonetic": "/ˈɔːɡənaɪz/",
+    "pos": "v.",
+    "meaning": "组织，整理，编排",
+    "phrase": "**organize** items neatly on shelves",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u8_exp_3",
+    "canonicalId": "7a_u8_exp_3",
+    "legacyId": "7a_u8_exp_3",
+    "book": "7a",
+    "unit": 8,
+    "unitTitle": "Unit 8",
+    "word": "passion",
+    "phonetic": "/ˈpæʃn/",
+    "pos": "n.",
+    "meaning": "热情，酷爱",
+    "phrase": "have a great **passion** for art (对艺术充满狂热)",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
+  },
+  {
+    "id": "7a_u8_exp_4",
+    "canonicalId": "7a_u8_exp_4",
+    "legacyId": "7a_u8_exp_4",
+    "book": "7a",
+    "unit": 8,
+    "unitTitle": "Unit 8",
+    "word": "souvenir",
+    "phonetic": "/ˌsuːvəˈnɪə/",
+    "pos": "n.",
+    "meaning": "纪念品，纪念物",
+    "phrase": "buy a **souvenir** while travelling",
+    "root": "课外高分拓展词（阅读 & 写作升级）",
+    "category": "expansion"
   }
 ]

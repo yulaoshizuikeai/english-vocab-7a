@@ -34,8 +34,8 @@ export function downloadFile(content, filename, mimeType = 'text/plain;charset=u
  */
 export function exportBackupJSON() {
   const backup = {
-    version: "2.0",
-    textbook: "沪教牛津版初一英语 7A (2024新课标)",
+    version: "3.0",
+    textbook: "2024新课标沪教版初中英语全学段研习系统 (7A-9全册)",
     exportedAt: new Date().toISOString(),
     stores: {
       progress: loadSM2Store(),
@@ -46,7 +46,7 @@ export function exportBackupJSON() {
   };
   const jsonStr = JSON.stringify(backup, null, 2);
   const dateStr = new Date().toISOString().slice(0, 10);
-  downloadFile(jsonStr, `沪教牛津7A英语_学情备份_${dateStr}.json`, 'application/json;charset=utf-8');
+  downloadFile(jsonStr, `沪教版初中英语_全量学情备份_${dateStr}.json`, 'application/json;charset=utf-8');
 }
 
 /**
@@ -138,18 +138,21 @@ export function buildAIDiagnosticPrompt(vocabList = [], phraseList = []) {
   const dueTodayCards = [];
   const next7DaysDueCount = new Array(7).fill(0);
 
-  // 记录每个单元的掌握情况
+  // 记录每个单元的掌握情况 (动态支持 1~N 单元)
   const unitStats = {};
-  for (let u = 1; u <= 8; u++) {
-    unitStats[u] = {
-      unit: u,
-      title: `Unit ${u}`,
-      total: 0,
-      learned: 0,
-      mastered: 0, // repetitions >= 2 && ef >= 2.2
-      lapses: 0
-    };
-  }
+  allCards.forEach(c => {
+    const u = c.unit || 1;
+    if (!unitStats[u]) {
+      unitStats[u] = {
+        unit: u,
+        title: c.unitTitle || `Unit ${u}`,
+        total: 0,
+        learned: 0,
+        mastered: 0,
+        lapses: 0
+      };
+    }
+  });
 
   // 高频薄弱词与难词列表 (lapses >= 2 或 ef < 2.1)
   const weakCards = [];

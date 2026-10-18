@@ -1,11 +1,12 @@
 {
   "name": "english-vocab-7a",
-  "version": "2.4.0",
-  "description": "沪教牛津版初一英语 7A (2024新课标) SM2 间隔重复背诵工作台",
+  "version": "3.0.0",
+  "description": "2024新课标沪教版初中英语全学段 (7A, 7B, 8A, 8B, 9全册) SM2 间隔重复研习工作台",
   "type": "module",
   "scripts": {
     "test": "node tests/verify_storage.mjs",
-    "check": "node --check js/app.js && node --check js/storage.js && node --check js/audio.js && node --check js/export.js && node --check js/sm2.js"
+    "check": "node --check js/app.js && node --check js/storage.js && node --check js/audio.js && node --check js/export.js && node --check js/sm2.js",
+    "build:vocab": "node scripts/compile_vocab.mjs"
   },
   "keywords": [
     "english-vocabulary",
