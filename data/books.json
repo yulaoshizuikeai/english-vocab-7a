@@ -32,11 +32,19 @@
     "phrasesFile": "data/phrases-8b.json"
   },
   {
-    "id": "9",
-    "title": "九年级全册 (9A/9B)",
-    "shortTitle": "9全册",
+    "id": "9a",
+    "title": "九年级上册 (9A)",
+    "shortTitle": "9A",
+    "units": 8,
+    "vocabFile": "data/vocab-9a.json",
+    "phrasesFile": "data/phrases-9a.json"
+  },
+  {
+    "id": "9b",
+    "title": "九年级下册 (9B)",
+    "shortTitle": "9B",
     "units": 6,
-    "vocabFile": "data/vocab-9.json",
-    "phrasesFile": "data/phrases-9.json"
+    "vocabFile": "data/vocab-9b.json",
+    "phrasesFile": "data/phrases-9b.json"
   }
 ]
